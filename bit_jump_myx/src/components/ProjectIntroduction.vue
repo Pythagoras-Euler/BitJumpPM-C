@@ -1,11 +1,11 @@
-<script setup>
+<script>
   import {reactive} from "vue";
 
   export default {
-      name:'ProjectIntroduction',
+      name: 'ProjectIntroduction',
       setup() {
           let data = reactive({
-              projectUrl:'http://http://rjpy.iq/ikuejpjy',
+              projectUrl:'',
               projectName:'123',
               leaderName:'myx',
               budget:'1000',
@@ -20,10 +20,44 @@
 </script>
 
 <template>
-  <h2>项目名：</h2>
-  <
+    <div class="align-inline align-center">
+        <div style="margin: 50px">
+            <img src="{{data.projectUrl}}" alt="无法加载图片">
+        </div>
+        <div>
+            <div class="align-inline">
+                <h2>&emsp;项目名：</h2>
+                <input readonly v-model="data.projectName">
+            </div>
+            <br>
+            <div class="align-inline">
+                <h2>&emsp;负责人：</h2>
+                <input readonly v-model="data.leaderName">
+            </div>
+            <br>
+            <div class="align-inline">
+                <h2>项目预算：</h2>
+                <input readonly v-model="data.budget">
+            </div>
+            <br>
+            <div class="align-inline">
+                <h2>项目简介：</h2>
+                <input readonly v-model="data.introduction" style="width: 400px; height: 100px">
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <style scoped>
+    .align-inline {
+        display: flex;
+        align-content: center;
+    }
 
+    .align-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
