@@ -253,34 +253,53 @@ export default {
 <style scoped>
 .message-button {
   border-radius: 6px;
+  font-size: 1vw;
 }
 form {
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(9, 1fr);
 
   align-items: center;
-  column-gap: 8px;
+  /* column-gap: 0.8rem; */
+  column-gap: 0.6vw;
 
-  padding: 36px;
-  padding-left: 0;
+  /* padding: 32px; */
+  /* padding-left: 0; */
+
+  /* -------------------------------------------------------------------------- */
+  flex: 7.4 7.4 auto;
+  /* margin: 1.3rem 0; */
+  margin: 0.95vw 0;
+  /* margin-right: 6rem; */
+  margin-right: 4.7vw;
+  /* margin-left: 1.5rem; */
+  margin-left: 1.1vw;
 }
 .icon {
-  width: 24px;
+  /* width: 24px; */
+  width: 1.8vw;
 }
 
 .white-space {
-  height: 32px;
+  /* height: 32px; */
   grid-column: 1/-1;
+  /* -------------------------------------------------------------------------- */
 }
 input {
-  height: 36px;
-  font-size: 14px;
+  /* height: 32px; */
+  /* font-size: 12px; */
+  /* -------------------------------------------------------------------------- */
+  font-size: 0.95vw;
+  height: 82%;
 }
 label {
   justify-self: end;
   display: flex;
   align-items: center;
-  gap: 2px;
+  /* gap: 0.2rem; */
+  gap: 0.2vw;
+  font-size: 1vw;
 }
 .base-button {
   grid-column: 2/-1;
@@ -288,7 +307,9 @@ label {
 
 .error-msg {
   grid-column: 2/-1;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: #e6fcf5;
+  /* -------------------------------------------------------------------------- */
+  margin-bottom: auto;
 }
 </style>

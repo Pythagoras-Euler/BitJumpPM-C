@@ -50,15 +50,18 @@ export default {
   justify-content: left;
   border: 1px solid #aaaaaa;
   align-items: center;
-  padding: 0 12px;
-  gap: 32px;
+  /* padding: 0 12px; */
+  padding: 0 1vw;
+  /* gap: 32px; */
+  gap: 2.5vw;
 }
 
 .project-info {
   display: flex;
   width: 30%;
   align-items: center;
-  gap: 24px;
+  /* gap: 24px; */
+  gap: 1.8vw;
   /* border: 1px solid #aaaaaa; */
 }
 
@@ -69,7 +72,8 @@ export default {
 .name-box {
   border: 1px solid #aaaaaa;
   border-radius: 12px;
-  padding: 12px;
+  /* padding: 12px; */
+  padding: 1vw;
   text-align: left;
   flex: 1 1 auto;
 }
@@ -86,9 +90,11 @@ export default {
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  /* gap: 8px; */
+  gap: 0.6vw;
   width: 15%;
-  padding: 6px 0;
+  /* padding: 6px 0; */
+  padding: 0.5vw 0;
   /*
   border: 1px solid #aaaaaa; */
 }
@@ -99,7 +105,8 @@ export default {
   /* border: 1px solid #aaaaaa; */
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  /* gap: 3px; */
+  gap: 0.2vw;
 }
 
 .button {
@@ -107,8 +114,9 @@ export default {
   background-color: #be4bdb;
   color: #fff;
   border-radius: 8px;
-  padding: 6px;
-  font-size: 10px;
+  padding: 0.7vw;
+  /* font-size: 10px; */
+  font-size: 0.8vw;
 }
 
 .button:active,

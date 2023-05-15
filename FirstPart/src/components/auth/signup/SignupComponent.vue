@@ -31,7 +31,10 @@
       @save-data="saveData"
       :submitSuccess="submitSuccess"
     ></SignupForm>
-    <BaseButton mode="transparent" @click="switchPage('LoginComponent')"
+    <BaseButton
+      class="footer-button"
+      mode="transparent"
+      @click="switchPage('LoginComponent')"
       >已经注册？去登陆</BaseButton
     >
   </BaseCard>
@@ -77,31 +80,46 @@ export default {
 <style scoped>
 .message-button {
   border-radius: 6px;
+  font-size: 1vw;
 }
 .box {
   position: fixed;
   left: 31%;
-  top: 10%;
-
+  top: 11%;
+  /* 
   width: 40%;
-  height: 80%;
+  height: 80%; */
+  width: 40vw;
+  height: 38vw;
 
   background-image: linear-gradient(
     rgba(215, 215, 215, 0.55),
     rgba(215, 215, 215, 0.5)
   );
-
+  border: 1px solid #e3e3e3;
   display: flex;
   flex-direction: column;
 
-  padding: 42px 0;
-  padding-left: 24px;
-  padding-right: 32px;
+  /* padding: 36px 0;
+  padding-left: 20px;
+  padding-right: 28px; */
+  /* -------------------------------------------------------------------------- */
+  overflow: auto;
 }
 
 h1 {
   align-self: center;
-  margin-bottom: 16px;
-  font-size: 3.2rem;
+  /* margin-bottom: 13px; */
+  /* font-size: 2.8rem; */
+  /* -------------------------------------------------------------------------- */
+  flex: 1.6 1.6 16%;
+  display: flex;
+  align-items: center;
+  font-size: 2.05vw;
+  margin-top: 0.5vw;
+}
+
+.footer-button {
+  flex: 1 1 10%;
 }
 </style>

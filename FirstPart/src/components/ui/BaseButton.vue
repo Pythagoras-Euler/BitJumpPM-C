@@ -32,7 +32,8 @@ export default {
 <style scoped>
 button,
 a {
-  font-size: 15px;
+  /* font-size: 14px; */
+  font-size: 1.1vw;
   text-decoration: none;
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -53,7 +54,8 @@ button:active {
 }
 
 .transparent {
-  font-size: 12px;
+  /* font-size: 12px; */
+  font-size: 0.9vw;
   background-color: transparent;
   border: none;
   color: #fff;

@@ -62,6 +62,14 @@ body {
   /* -------------------------------------------------------------------------- */
 }
 
+@media (max-width: 768px) {
+  html {
+    /* Set rem */
+    /* percentage of user-browser setting */
+    font-size: 50%;
+  }
+}
+
 .route-enter-from {
   opacity: 0;
   transform: translateY(-30px);

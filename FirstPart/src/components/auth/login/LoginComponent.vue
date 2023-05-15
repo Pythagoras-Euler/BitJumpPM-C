@@ -12,14 +12,14 @@
     </base-dialog>
     <base-dialog :show="submitSuccess" title="成功" @close="confirmSuccess">
       <template #default>
-        <p>登录成功，前往主页!</p>
+        <p>验证通过，登录成功</p>
       </template>
       <template #action>
         <BaseButton
           mode="outline"
-          class="message-button"
+          class="message-button success-button"
           @click="confirmSuccess"
-          >确定</BaseButton
+          >前往主页!</BaseButton
         >
       </template>
     </base-dialog>
@@ -85,16 +85,16 @@ export default {
 
 <style scoped>
 .box {
-  position: fixed;
+  /* position: fixed;
   left: 32%;
   top: 20%;
 
   width: 57%;
-  height: 60%;
+  height: 60%; */
 
   display: flex;
-  gap: 10px;
-  justify-content: space-between;
+  /* gap: 1rem; */
+  /* justify-content: space-between; */
 
   border: 1px solid #fff;
 
@@ -102,36 +102,70 @@ export default {
     rgba(185, 185, 185, 0.55),
     rgba(157, 157, 157, 0.5)
   );
+
+  /* -------------------------------------------------------------------------- */
+  position: fixed;
+  left: 32%;
+  top: 20%;
+  width: 57vw;
+  height: 30vw;
 }
 
 img {
   border-radius: 12px 0 0 12px;
-  width: 43%;
+
+  /* width: 43%;
+  height: auto; */
+
+  /* -------------------------------------------------------------------------- */
+  flex: 4 4 auto;
+  max-width: 43%;
 }
 .content {
-  flex: 1 1 auto;
+  /* 作为子元素的flex设置 */
+  flex: 6 6 auto;
+  /* 作为父元素的flex设置 */
   display: flex;
   flex-direction: column;
+  /* 
+  padding: 3.2rem;
+  padding-bottom: 2.4rem;
 
-  padding: 36px;
-  padding-bottom: 24px;
-  justify-content: space-between;
-  align-items: stretch;
+  justify-content: space-between; */
+  /* align-items: stretch; */
+
+  /* -------------------------------------------------------------------------- */
+  overflow: auto;
 }
 .footer-button-box {
   display: flex;
 
   justify-content: center;
+
+  align-items: center;
+
+  /* -------------------------------------------------------------------------- */
+  flex: 1 1 20%;
 }
 
 .message-button {
   border-radius: 6px;
+  font-size: 1vw;
 }
+/* .success-button {
+  justify-content: center;
+} */
 
 h1 {
-  font-size: 3rem;
+  /* font-size: 2.6rem; */
   align-self: center;
-  margin-bottom: 32px;
-  margin-top: 12px;
+  /* margin-bottom: 3.5rem;
+  margin-top: 1.2rem; */
+
+  /* -------------------------------------------------------------------------- */
+  flex: 2 2 30%;
+  display: flex;
+  align-items: center;
+  font-size: 2.05vw;
 }
 </style>
