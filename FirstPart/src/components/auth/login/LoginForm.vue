@@ -148,7 +148,7 @@ export default {
 form {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.7fr 1fr 0.7fr 1fr;
   align-items: center;
   /* column-gap: 1rem; */
   column-gap: 0.7vw;

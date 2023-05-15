@@ -258,7 +258,7 @@ export default {
 form {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-rows: 1fr 0.3fr 1fr 0.3fr 1fr 0.3fr 1fr 0.3fr 1fr;
 
   align-items: center;
   /* column-gap: 0.8rem; */
@@ -269,12 +269,13 @@ form {
 
   /* -------------------------------------------------------------------------- */
   flex: 7.4 7.4 auto;
+  max-height: 74%;
   /* margin: 1.3rem 0; */
-  margin: 0.95vw 0;
+  /* padding: 0.95vw 0; */
   /* margin-right: 6rem; */
-  margin-right: 4.7vw;
+  margin-right: 5vw;
   /* margin-left: 1.5rem; */
-  margin-left: 1.1vw;
+  margin-left: 1.5vw;
 }
 .icon {
   /* width: 24px; */
@@ -291,7 +292,7 @@ input {
   /* font-size: 12px; */
   /* -------------------------------------------------------------------------- */
   font-size: 0.95vw;
-  height: 82%;
+  height: 75%;
 }
 label {
   justify-self: end;
@@ -303,6 +304,7 @@ label {
 }
 .base-button {
   grid-column: 2/-1;
+  align-self: end;
 }
 
 .error-msg {
@@ -311,5 +313,6 @@ label {
   color: #e6fcf5;
   /* -------------------------------------------------------------------------- */
   margin-bottom: auto;
+  align-self: start;
 }
 </style>

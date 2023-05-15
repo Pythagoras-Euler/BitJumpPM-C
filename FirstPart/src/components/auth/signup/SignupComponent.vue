@@ -85,12 +85,12 @@ export default {
 .box {
   position: fixed;
   left: 31%;
-  top: 11%;
+  top: 10%;
+  width: 40vw;
+  height: 38vw;
   /* 
   width: 40%;
   height: 80%; */
-  width: 40vw;
-  height: 38vw;
 
   background-image: linear-gradient(
     rgba(215, 215, 215, 0.55),
@@ -117,6 +117,7 @@ h1 {
   align-items: center;
   font-size: 2.05vw;
   margin-top: 0.5vw;
+  /* margin-bottom: 0.5vw; */
 }
 
 .footer-button {
