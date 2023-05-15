@@ -1,12 +1,12 @@
 <script setup>
-import ProjectIntroduction from "@/components/ProjectIntroduction.vue";
-import ProjectProcess from "@/components/ProjectProcess.vue";
+import ProjectDetailManagement from "@/components/ProjectDetailManagement.vue";
+import ProjectDetailInvolved from "@/components/ProjectDetailInvolved.vue";
 </script>
 
 <template>
-  <ProjectIntroduction></ProjectIntroduction>
-    <br>
-  <ProjectProcess></ProjectProcess>
+  <ProjectDetailManagement></ProjectDetailManagement>
+  <h1>————————————————————————————</h1>
+  <ProjectDetailInvolved></ProjectDetailInvolved>
 </template>
 
 <style scoped>

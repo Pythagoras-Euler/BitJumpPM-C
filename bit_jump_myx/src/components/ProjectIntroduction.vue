@@ -1,22 +1,15 @@
 <script>
-  import {reactive} from "vue";
-
-  export default {
-      name: 'ProjectIntroduction',
-      setup() {
-          let data = reactive({
-              projectUrl:'',
-              projectName:'123',
-              leaderName:'myx',
-              budget:'1000',
-              introduction:'dolor nulla do exercitation nostrud',
-          })
-
-          return {
-              data
-          }
-      }
-  }
+export default {
+    props: {
+        data:{
+            projectUrl:String,
+            projectName:String,
+            leaderName:String,
+            budget:String,
+            introduction:String
+        }
+    },
+};
 </script>
 
 <template>
@@ -46,7 +39,6 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <style scoped>

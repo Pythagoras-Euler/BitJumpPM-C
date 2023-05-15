@@ -1,58 +1,12 @@
 <script>
-import {computed, reactive} from "vue";
-
     export default {
-        name:'ProjectProcess',
-        setup() {
-            let data = reactive({
-                processTable: [
-                    {
-                        tableItemId:1,
-                        beginTime:'1:00',
-                        endTime:'2:00',
-                        ownerId:1,
-                        ownerName:'myx',
-                        isFinished:true,
-                        finishTime:'12:00',
-                        description:'123'},
-                    {
-                        tableItemId:2,
-                        beginTime:'2:00',
-                        endTime:'9:00',
-                        ownerId:2,
-                        ownerName:'123',
-                        isFinished:false,
-                        finishTime:'',
-                        description:'123'},
-                    {
-                        tableItemId:3,
-                        beginTime:'0:00',
-                        endTime:'0:00',
-                        ownerId:3,
-                        ownerName:'myx',
-                        isFinished:false,
-                        finishTime:'',
-                        description:'123'},
-                    {
-                        tableItemId:4,
-                        beginTime:'12:00',
-                        endTime:'21:00',
-                        ownerId:4,
-                        ownerName:'123',
-                        isFinished:false,
-                        finishTime:'',
-                        description:'12321312321312321321'}
-                ]
-            })
+        props: {
+            data: Array,
+            isManager:Boolean
+        },
 
-            let processPercentage = computed(() =>
-                100 * data.processTable.filter(tab => tab.isFinished === true).length / data.processTable.length + '%'
-            )
-
-            return {
-                data,
-                processPercentage
-            }
+        mounted() {
+            console.log(this.data)
         }
     }
 </script>
@@ -62,7 +16,7 @@ import {computed, reactive} from "vue";
     <br>
     <div>
         <div class="align-inline">
-            <button style="margin-right: 20px">添加</button>
+            <button v-if="isManager" style="margin-right: 20px">添加</button>
             <select>
                 <option value="optionTimeStart">按照开始时间排序</option>
                 <option value="optionTimeEnd">按照结束时间排序</option>
@@ -83,8 +37,8 @@ import {computed, reactive} from "vue";
                 <td>提交说明</td>
                 <td></td>
             </tr>
-            <tr v-for="(data, index) of data.processTable" :key="index">
-                <td>{{data.tableItemId}}</td>
+            <tr v-for="(data, index) of data" :key="index">
+                <td>{{data.processTable}}</td>
                 <td>{{data.beginTime}}</td>
                 <td>{{data.endTime}}</td>
                 <td>{{data.ownerId}}</td>
@@ -92,15 +46,12 @@ import {computed, reactive} from "vue";
                 <td>{{data.isFinished}}</td>
                 <td>{{data.finishTime}}</td>
                 <td>{{data.description}}</td>
-                <td><button v-if="data.isFinished">驳回</button></td>
+                <td>
+                    <button v-if="isManager && data.isFinished">驳回</button>
+                    <button v-if="!isManager && data.isFinished">提交</button>
+                </td>
             </tr>
         </table>
-    </div>
-    <br>
-    <div>
-        <div class="progress-bar">
-            <div class="progress" :style="{width: processPercentage}"></div>
-        </div>
     </div>
 </template>
 
@@ -113,18 +64,4 @@ import {computed, reactive} from "vue";
     td {
         text-align: center;
     }
-
-    .progress-bar {
-        width: 800px;
-        height: 20px;
-        background-color: #f0f0f0;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .progress {
-        height: 100%;
-        background-color: #009DFF;
-    }
-
 </style>
