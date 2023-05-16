@@ -37,7 +37,6 @@ a {
   text-decoration: none;
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  font-family: inherit;
   background-color: #a5d8ff;
   border: 1px solid #a5d8ff;
   color: #636363;
@@ -79,7 +78,8 @@ button:active {
 }
 
 .flat:hover,
-.flat:active .outline:hover,
+.flat:active,
+.outline:hover,
 .outline:active {
   background-color: #a5d8ff;
 }

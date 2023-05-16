@@ -23,7 +23,7 @@ export default {
       //获取项目列表
       console.log(payload);
       const response = await fetch(
-        "http://127.0.0.1:4523/m1/2693357-0-default/project/1/1"
+        "http://127.0.0.1:4523/m1/2693357-0-default/project/list/1"
       );
       const responseData = await response.json();
 

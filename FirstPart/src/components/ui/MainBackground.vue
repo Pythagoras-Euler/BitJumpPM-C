@@ -1,10 +1,18 @@
 <template>
   <div class="container">
     <nav>
-      <button class="btn-nav">主页</button>
-      <button class="btn-nav">我创建的</button>
-      <button class="btn-nav">我管理的</button>
-      <button class="btn-nav">我加入的</button>
+      <BaseButton link mode="outline" to="/main" class="btn-nav"
+        >主页</BaseButton
+      >
+      <BaseButton link mode="outline" to="/create" class="btn-nav"
+        >我创建的</BaseButton
+      >
+      <BaseButton mode="outline" link to="/manage" class="btn-nav"
+        >我管理的</BaseButton
+      >
+      <BaseButton mode="outline" link to="/joined" class="btn-nav"
+        >我加入的</BaseButton
+      >
     </nav>
     <menu> 萌新1 </menu>
 
@@ -44,9 +52,9 @@ nav {
   flex-direction: column;
 }
 
-button {
+/* button {
   display: inline-block;
-  /* font-size: 12px; */
+  font-size: 12px;
   font-size: 0.9vw;
   font-weight: bold;
 
@@ -54,20 +62,34 @@ button {
   cursor: pointer;
   color: #fff;
 
-  /* padding: 8px 12px; */
+  padding: 8px 12px;
   padding: 0.2vw 0.2vw;
-}
+} */
 .btn-nav {
   /* margin: 0 11px; */
   margin: 0 0.9vw;
-  text-align: center;
-  height: 55px;
-  height: 4vw;
-
+  padding: 0.2vw 0.2vw;
+  /* text-align: center; */
+  /* height: 55px; */
+  height: 3.5vw;
   width: auto;
-  background-color: #868e96;
+  font-size: 1.1vw;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #868e96; */
+
+  border-color: #fff;
+  color: #fff;
+
+  border-radius: 3px;
 }
-.btn-nav:first-child {
-  background-color: #4c6ef5;
+
+.btn-nav:hover,
+.btn-nav:active,
+.btn-nav.router-link-active {
+  background-color: #be4bdb;
+  border: none;
 }
 </style>

@@ -66,6 +66,7 @@
       @blur="validateEmail"
       ref="email"
     />
+
     <p class="error-msg" v-if="!email.isValid">输入不合法，请检查邮箱格式</p>
     <div v-else class="white-space"></div>
 
@@ -301,7 +302,8 @@ label {
   /* margin-bottom: 20px; */
   color: #e6fcf5;
   /* -------------------------------------------------------------------------- */
-  margin-bottom: auto;
+  padding-bottom: auto;
   align-self: start;
+  font-size: 0.05rem;
 }
 </style>
