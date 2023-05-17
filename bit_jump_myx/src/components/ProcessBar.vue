@@ -1,14 +1,14 @@
 <script>
     export default {
         props:{
-            data:String
+            process:Number
         },
     }
 </script>
 
 <template>
     <div class="progress-bar">
-        <div class="progress" :style="{width: data}"></div>
+        <div class="progress" :style="{width: this.process.toString()+'%'}"></div>
     </div>
 </template>
 
@@ -19,6 +19,7 @@
         background-color: #f0f0f0;
         border-radius: 10px;
         overflow: hidden;
+        margin: 20px;
     }
 
     .progress {

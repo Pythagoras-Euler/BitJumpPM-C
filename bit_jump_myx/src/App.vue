@@ -5,7 +5,7 @@ import ProjectDetailInvolved from "@/components/ProjectDetailInvolved.vue";
 
 <template>
   <ProjectDetailManagement></ProjectDetailManagement>
-  <h1>————————————————————————————</h1>
+  <br>
   <ProjectDetailInvolved></ProjectDetailInvolved>
 </template>
 

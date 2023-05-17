@@ -15,7 +15,7 @@ export default {
 <template>
     <div class="align-inline align-center">
         <div style="margin: 50px">
-            <img src="{{data.projectUrl}}" alt="无法加载图片">
+            <img :src=data.projectUrl alt="无法加载图片">
         </div>
         <div>
             <div class="align-inline">
@@ -51,5 +51,9 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    input {
+        border-radius: 0;
     }
 </style>
