@@ -1,0 +1,99 @@
+<script setup>
+    import ProjectIntroduction from "@/components/ProjectIntroduction.vue";
+    import ProjectProcess from "@/components/ProjectProcess.vue";
+    import ProcessBar from "@/components/ProcessBar.vue";
+    import {computed, reactive} from "vue";
+    import ProjectMembers from "@/components/ProjectMembers.vue";
+
+    //方便调试，把项目信息拆为三部分
+    //特定项目信息的第一部分
+    let introductionData = reactive({
+        projectUrl: 'https://via.placeholder.com/300',
+        projectName: '123',
+        leaderName: 'myx',
+        budget: '1000',
+        introduction: 'dolor nulla do exercitation nostrud',
+        process:70
+    });
+
+    //成员部分
+    let membersData = reactive({
+        members: [
+            {
+                userId:1,
+                name:'myx',
+                photoUrl:'https://via.placeholder.com/30',
+                post:'123',
+                process:50
+            },
+            {
+                userId:2,
+                name:'sda',
+                photoUrl:'https://via.placeholder.com/30',
+                post:'42412',
+                process:58
+            },
+            {
+                userId:3,
+                name:'hgf',
+                photoUrl:'https://via.placeholder.com/30',
+                post:'234',
+                process:21
+            }
+        ]
+    })
+    //进展表部分
+    let processData = reactive({
+        processTable: [
+            {
+                tableItemId:1,
+                beginTime:'1:00',
+                endTime:'2:00',
+                ownerId:1,
+                ownerName:'myx',
+                isFinished:true,
+                finishTime:'12:00',
+                description:'123'},
+            {
+                tableItemId:2,
+                beginTime:'2:00',
+                endTime:'9:00',
+                ownerId:2,
+                ownerName:'lll',
+                isFinished:false,
+                finishTime:'',
+                description:'123'},
+            {
+                tableItemId:3,
+                beginTime:'0:00',
+                endTime:'0:00',
+                ownerId:3,
+                ownerName:'myx',
+                isFinished:false,
+                finishTime:'',
+                description:'123'},
+            {
+                tableItemId:4,
+                beginTime:'12:00',
+                endTime:'21:00',
+                ownerId:4,
+                ownerName:'xxx',
+                isFinished:false,
+                finishTime:'',
+                description:'12321312321312321321'}
+        ]
+    })
+</script>
+
+<template>
+    <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
+    <br>
+    <ProjectProcess :processData="processData.processTable" :is-manager="false"></ProjectProcess>
+    <br>
+    <ProcessBar :process="introductionData.process"></ProcessBar>
+    <ProjectMembers :members="membersData.members" :isManager="false"></ProjectMembers>
+</template>
+
+<style scoped>
+
+</style>
