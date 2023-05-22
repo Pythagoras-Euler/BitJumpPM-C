@@ -17,25 +17,25 @@ export default {
         <div style="margin: 50px">
             <img :src=data.projectUrl alt="无法加载图片">
         </div>
-        <div>
+        <div style="width: 800px">
             <div class="align-inline">
                 <h2>&emsp;项目名：</h2>
-                <input readonly v-model="data.projectName">
+                <textarea readonly v-model="data.projectName"></textarea>
             </div>
             <br>
             <div class="align-inline">
                 <h2>&emsp;负责人：</h2>
-                <input readonly v-model="data.leaderName">
+                <textarea readonly v-model="data.leaderName"></textarea>
             </div>
             <br>
             <div class="align-inline">
                 <h2>项目预算：</h2>
-                <input readonly v-model="data.budget">
+                <textarea readonly v-model="data.budget"></textarea>
             </div>
             <br>
             <div class="align-inline">
                 <h2>项目简介：</h2>
-                <input readonly v-model="data.introduction" style="width: 400px; height: 100px">
+                <textarea readonly v-model="data.introduction" style="width: 400px; height: 100px"></textarea>
             </div>
         </div>
     </div>
@@ -53,7 +53,12 @@ export default {
         align-items: center;
     }
 
-    input {
+    textarea {
         border-radius: 0;
+        resize: none;
+        padding: 5px;
+        border: 1px solid #ccc;
+        font-size: 20px;
+        height: 40px;
     }
 </style>

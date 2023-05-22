@@ -1,8 +1,12 @@
 <script>
 
+    import {menuEmits} from "element-plus";
+    import {reactive} from "vue";
+
     export default {
         props: {
-            isPopupOpen:Boolean
+            isPopupOpen:Boolean,
+            member: null
         }
     }
 </script>
@@ -12,15 +16,13 @@
         <div v-if="isPopupOpen" class="modal-overlay">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <h2>驳回</h2>
+                    <h2>调岗</h2>
                     <br>
-                    <div class="container">
-                        <p class="label">驳回理由：</p>
-                        <textarea></textarea>
-                    </div>
+                    <p class="label">请为{{member.name}}（目前岗位是{{member.post}}）选择新岗位</p>
+                    <input placeholder="输入岗位" style="height: 30px">
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button">提交</button>
+                        <button class="submit-button">确定</button>
                     </div>
                 </div>
             </div>

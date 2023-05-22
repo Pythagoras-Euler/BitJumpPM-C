@@ -1,25 +1,28 @@
 <script>
 import {computed, reactive} from "vue";
 import PopupRejection from "@/components/PopupRejection.vue";
+import PopupAddTask from "@/components/PopupAddTask.vue";
 
     export default {
         components: {
+            PopupAddTask,
             PopupRejection
         },
 
         props: {
             processData: Array,
+            membersData: Array,
             isManager:Boolean
         },
 
         setup(props) {
             let data = reactive({
                 sortOrder:0,
-                isPopupRejectionOpen:false
+                isPopupRejectionOpen:false,
+                isPopupAddTask:false
             })
 
             let sortedData = computed(() => {
-                console.log(props.processData)
                 switch (data.sortOrder) {
                     case 0:
                         return props.processData.slice().sort((a, b) => {
@@ -59,14 +62,18 @@ import PopupRejection from "@/components/PopupRejection.vue";
 
             function reject() {
                 data.isPopupRejectionOpen = true
-                console.log(1)
+            }
+
+            function addTask() {
+                data.isPopupAddTask = true
             }
 
             return {
                 data,
                 sortedData,
                 handleSortOrderChange,
-                reject
+                reject,
+                addTask
             }
         }
     }
@@ -77,7 +84,7 @@ import PopupRejection from "@/components/PopupRejection.vue";
     <br>
     <div class="div-style">
         <div class="align-inline">
-            <button v-if="isManager" style="margin-right: 20px">添加</button>
+            <button v-if="isManager" class="create-button" @click="addTask">添加</button>
             <select @change="handleSortOrderChange">
                 <option value="optionTimeStart">按照开始时间排序</option>
                 <option value="optionTimeEnd">按照结束时间排序</option>
@@ -96,7 +103,7 @@ import PopupRejection from "@/components/PopupRejection.vue";
                 <td>是否完成</td>
                 <td>完成时间</td>
                 <td>提交说明</td>
-                <td></td>
+                <td>动作</td>
             </tr>
             <tr v-for="(data, index) of sortedData" :key="index">
                 <td>{{data.tableItemId}}</td>
@@ -108,13 +115,15 @@ import PopupRejection from "@/components/PopupRejection.vue";
                 <td>{{data.finishTime}}</td>
                 <td>{{data.description}}</td>
                 <td>
-                    <button v-if="isManager && data.isFinished" @click="reject">驳回</button>
-                    <button v-if="!isManager && data.isFinished">提交</button>
+                    <button v-if="isManager && data.isFinished" class="reject-button" @click="reject">驳回</button>
+<!--                    这里还应该有个判断条件：责任人必须是自己才显示提交按钮-->
+                    <button v-if="!isManager && data.isFinished" class="submit-button">提交</button>
                 </td>
             </tr>
         </table>
     </div>
-    <PopupRejection :isPopupOpen=data.isPopupRejectionOpen></PopupRejection>
+    <PopupAddTask :is-popup-open="data.isPopupAddTask" @cancel="data.isPopupAddTask=false" :members-data="membersData"></PopupAddTask>
+    <PopupRejection :is-popup-open=data.isPopupRejectionOpen @cancel="data.isPopupRejectionOpen=false"></PopupRejection>
 </template>
 
 <style scoped>
@@ -153,5 +162,38 @@ import PopupRejection from "@/components/PopupRejection.vue";
 
     .tr-bold td {
         font-weight: bold;
+    }
+
+    .create-button {
+        background-color: purple;
+        color: white;
+        padding: 6px 12px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    .reject-button {
+        background-color: darkred;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 50px;
+    }
+
+    .submit-button {
+        background-color: darkblue;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 50px;
     }
 </style>

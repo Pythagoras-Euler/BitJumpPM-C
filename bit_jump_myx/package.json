@@ -8,7 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "element-plus": "^2.3.5",
+    "vue": "^3.2.47",
+    "vue-flatpickr-component": "^11.0.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.1",
