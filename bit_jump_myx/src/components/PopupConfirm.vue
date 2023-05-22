@@ -1,10 +1,10 @@
 <script>
 
-    export default {
-        props: {
-            isPopupOpen:Boolean
-        }
+export default {
+    props: {
+        isPopupOpen:Boolean
     }
+}
 </script>
 
 <template>
@@ -12,12 +12,10 @@
         <div v-if="isPopupOpen" class="modal-overlay">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <h2>驳回</h2>
+                    <h2>提示</h2>
                     <br>
-                    <div class="container">
-                        <p class="label">驳回理由：</p>
-                        <textarea></textarea>
-                    </div>
+                        <p class="label">请输入密码确认操作：</p>
+                        <input placeholder="输入密码">
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
                         <button class="submit-button">提交</button>
@@ -29,11 +27,6 @@
 </template>
 
 <style scoped>
-    .container {
-        display: flex;
-        align-items: start; /* 基线对齐 */
-    }
-
     textarea {
         padding: 5px;
         border: 1px solid #ccc;
@@ -112,6 +105,6 @@
 
     .submit-button:hover {
         background-color: darkblue;
-    }
+}
 
 </style>

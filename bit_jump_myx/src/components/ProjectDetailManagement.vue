@@ -90,10 +90,11 @@
 </script>
 
 <template>
+<!--    返回按钮-->
     <button class="arrow-button"></button>
     <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
     <br>
-    <ProjectProcess :processData="processData.processTable" :is-manager="true"></ProjectProcess>
+    <ProjectProcess :process-data="processData.processTable" :members-data="membersData.members" :is-manager="true"></ProjectProcess>
     <br>
     <ProcessBar :process="introductionData.process"></ProcessBar>
     <ProjectMembers :members="membersData.members" :isManager="true"></ProjectMembers>
@@ -111,10 +112,11 @@
     position: fixed;
     top: 10px;
     left: 10px;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
 }
 
-.arrow-button {
-    /* 其他样式 */
-    z-index: 9999;
+.arrow-button:hover {
+    background-color: darkgray;
 }
 </style>
