@@ -2,11 +2,57 @@
 
     import {menuEmits} from "element-plus";
     import {reactive} from "vue";
+    import PopupConfirm from "@/components/PopupConfirm.vue";
 
     export default {
+        components: {PopupConfirm},
         props: {
+            projectId: Number,
             isPopupOpen:Boolean,
             member: null
+        },
+
+        setup(props, context) {
+            let data = reactive({
+                isPopupConfirmOpen: false,
+                postInput: null
+            })
+
+            function openConfirm() {
+                if (data.postInput === null) {
+                    alert('请输入完整信息！')
+                    return
+                }
+
+                data.isPopupConfirmOpen = true
+                context.emit('cancel')
+            }
+
+            function confirm() {
+                data.isPopupConfirmOpen = false
+                context.emit('cancel')
+                //todo 通信
+                console.log(
+                    //项目id
+                    props.projectId,
+                    //工号
+                    props.member.userId,
+                    //岗位
+                    data.postInput
+                )
+            }
+
+            function notConfirm() {
+                data.isPopupConfirmOpen = false
+                context.emit('open')
+            }
+
+            return {
+                data,
+                openConfirm,
+                confirm,
+                notConfirm
+            }
         }
     }
 </script>
@@ -19,15 +65,16 @@
                     <h2>调岗</h2>
                     <br>
                     <p class="label">请为{{member.name}}（目前岗位是{{member.post}}）选择新岗位</p>
-                    <input placeholder="输入岗位" style="height: 30px">
+                    <input placeholder="输入岗位" style="height: 30px" v-model="data.postInput">
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button">确定</button>
+                        <button class="submit-button" @click="openConfirm">确定</button>
                     </div>
                 </div>
             </div>
         </div>
     </transition>
+    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="notConfirm" @submit="confirm"></PopupConfirm>
 </template>
 
 <style scoped>

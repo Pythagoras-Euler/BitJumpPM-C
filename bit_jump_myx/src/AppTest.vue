@@ -1,5 +1,5 @@
 <script setup>
-    import PopupRejection from "@/components/PopupRejection.vue";
+    import PopupRejection from "@/components/PopupReject.vue";
 </script>
 
 <template>

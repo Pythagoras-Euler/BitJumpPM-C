@@ -2,12 +2,13 @@
     import ProjectIntroduction from "@/components/ProjectIntroduction.vue";
     import ProjectProcess from "@/components/ProjectProcess.vue";
     import ProcessBar from "@/components/ProcessBar.vue";
-    import {computed, reactive} from "vue";
+    import {reactive} from "vue";
     import ProjectMembers from "@/components/ProjectMembers.vue";
 
     //方便调试，把项目信息拆为三部分
     //特定项目信息的第一部分
     let introductionData = reactive({
+        projectId: 1,
         projectUrl: 'https://via.placeholder.com/300',
         projectName: '123',
         leaderName: 'myx',
@@ -86,14 +87,33 @@
 </script>
 
 <template>
+    <!--    返回按钮-->
+    <button class="arrow-button"></button>
     <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
     <br>
-    <ProjectProcess :processData="processData.processTable" :is-manager="false"></ProjectProcess>
+    <ProjectProcess :project-id="introductionData.projectId" :processData="processData.processTable" :members-data="membersData.members" :is-manager="false"></ProjectProcess>
     <br>
     <ProcessBar :process="introductionData.process"></ProcessBar>
     <ProjectMembers :members="membersData.members" :isManager="false"></ProjectMembers>
 </template>
 
 <style scoped>
+    .arrow-button {
+        width: 50px;
+        height: 50px;
+        background-image: url(@/assets/arrow.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        transition: background-color 0.5s ease;
+        cursor: pointer;
+    }
 
+    .arrow-button:hover {
+        background-color: darkgray;
+    }
 </style>

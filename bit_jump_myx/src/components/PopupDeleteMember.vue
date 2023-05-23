@@ -1,9 +1,49 @@
 <script>
 
+import {reactive} from "vue";
+import PopupConfirm from "@/components/PopupConfirm.vue";
+
 export default {
+    components: {PopupConfirm},
     props: {
+        projectId: Number,
         isPopupOpen: Boolean,
         member: null
+    },
+
+    setup(props, context) {
+        let data = reactive({
+            isPopupConfirmOpen: false
+        })
+
+        function openConfirm() {
+            data.isPopupConfirmOpen = true
+            context.emit('cancel')
+        }
+
+        function confirm() {
+            data.isPopupConfirmOpen = false
+            context.emit('cancel')
+            //todo 通信
+            console.log(
+                //项目id
+                props.projectId,
+                //工号
+                props.member.userId,
+            )
+        }
+
+        function notConfirm() {
+            data.isPopupConfirmOpen = false
+            context.emit('open')
+        }
+
+        return {
+            data,
+            openConfirm,
+            confirm,
+            notConfirm
+        }
     }
 }
 </script>
@@ -18,12 +58,13 @@ export default {
                     <p class="label">确定要删除成员{{this.member.name}}?</p>
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button">确定</button>
+                        <button class="submit-button" @click="openConfirm">确定</button>
                     </div>
                 </div>
             </div>
         </div>
     </transition>
+    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="notConfirm" @submit="confirm"></PopupConfirm>
 </template>
 
 <style scoped>

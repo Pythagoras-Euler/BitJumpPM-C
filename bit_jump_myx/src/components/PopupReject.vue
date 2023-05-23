@@ -1,9 +1,37 @@
 <script>
 
+    import {reactive} from "vue";
+
     export default {
         props: {
-            isPopupOpen:Boolean
+            isPopupOpen: Boolean,
+            projectId: Number,
+            item: null
+        },
+
+        setup(props, context) {
+            let data = reactive({
+                reason: null
+            })
+            function submit() {
+                console.log(
+                    //项目id
+                    props.projectId,
+                    //表项id
+                    props.item.tableItemId,
+                    //驳回理由
+                    data.reason
+                )
+                //先发送数据
+                context.emit('cancel')
+            }
+
+            return {
+                data,
+                submit
+            }
         }
+
     }
 </script>
 
@@ -16,11 +44,11 @@
                     <br>
                     <div class="container">
                         <p class="label">驳回理由：</p>
-                        <textarea></textarea>
+                        <textarea v-model="data.reason"></textarea>
                     </div>
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button">提交</button>
+                        <button class="submit-button" @click="submit">提交</button>
                     </div>
                 </div>
             </div>
