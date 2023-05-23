@@ -1,8 +1,33 @@
 <script>
 
+import {reactive} from "vue";
+
 export default {
     props: {
         isPopupOpen:Boolean
+    },
+
+    setup(props, context) {
+        let data = reactive({
+            passwordInput: null
+        })
+        function confirmAgain() {
+            if (data.passwordInput === null) {
+                alert('请输入完整信息！')
+                return
+            }
+
+            //todo 确认密码是否正确
+            //if true
+            context.emit('submit')
+            //if false
+            alert('密码错误！')
+        }
+
+        return {
+            data,
+            confirmAgain
+        }
     }
 }
 </script>
@@ -15,10 +40,10 @@ export default {
                     <h2>提示</h2>
                     <br>
                         <p class="label">请输入密码确认操作：</p>
-                        <input placeholder="输入密码">
+                        <input placeholder="输入密码" type="password" v-model="data.passwordInput">
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button">提交</button>
+                        <button class="submit-button" @click="confirmAgain">提交</button>
                     </div>
                 </div>
             </div>

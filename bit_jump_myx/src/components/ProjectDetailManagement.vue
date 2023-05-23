@@ -4,10 +4,11 @@
     import ProcessBar from "@/components/ProcessBar.vue";
     import ProjectMembers from "@/components/ProjectMembers.vue";
 
-    import {computed, reactive} from "vue";
+    import {reactive} from "vue";
     //方便调试，把项目信息拆为三部分
     //特定项目信息的第一部分
     let introductionData = reactive({
+        projectId: 1,
         projectUrl: 'https://via.placeholder.com/300',
         projectName: '123',
         leaderName: 'myx',
@@ -94,10 +95,10 @@
     <button class="arrow-button"></button>
     <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
     <br>
-    <ProjectProcess :process-data="processData.processTable" :members-data="membersData.members" :is-manager="true"></ProjectProcess>
+    <ProjectProcess :project-id="introductionData.projectId" :process-data="processData.processTable" :members-data="membersData.members" :is-manager="true"></ProjectProcess>
     <br>
     <ProcessBar :process="introductionData.process"></ProcessBar>
-    <ProjectMembers :members="membersData.members" :isManager="true"></ProjectMembers>
+    <ProjectMembers :project-id="introductionData.projectId" :members="membersData.members" :isManager="true"></ProjectMembers>
 </template>
 
 <style scoped>

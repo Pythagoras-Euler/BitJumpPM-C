@@ -6,13 +6,14 @@
         components: {PopupConfirm},
 
         props: {
+            projectId: Number,
             isPopupOpen:Boolean
         },
 
         setup(props, context) {
             let data = reactive({
-                //测试的members数据，来自于获取所有人员列表
-                members: [
+                //todo 测试的members数据，来自于获取所有人员列表
+                membersEG: [
                     {
                         userId: 112233,
                         name: '韦斯利福法纳',
@@ -40,7 +41,10 @@
 
                 //下面是需要保留的部分
                 memberClicked: null,
-                isPopupConfirmOpen: false
+                isPopupConfirmOpen: false,
+                members: null,
+                searchName: null,
+                postInput: null
             })
 
             function cardClicked(member) {
@@ -51,15 +55,58 @@
                 }
             }
 
-            function confirm() {
+            function openConfirm() {
+                if (data.memberClicked === null) {
+                    alert('请选择成员！')
+                    return
+                }
+
+                if (data.postInput=== null) {
+                    alert('请输入完整信息！')
+                    return
+                }
+
                 data.isPopupConfirmOpen = true
                 context.emit('cancel')
+            }
+
+            function confirm() {
+                data.isPopupConfirmOpen = false
+                context.emit('cancel')
+                //todo 通信
+                console.log(
+                    //项目id
+                    props.projectId,
+                    //账号
+                    data.memberClicked.userId,
+                    //岗位
+                    data.postInput
+                )
+            }
+
+            function notConfirm() {
+                data.isPopupConfirmOpen = false
+                context.emit('open')
+            }
+
+            function search() {
+                if (data.searchName) {
+                    alert('请输入信息后搜索！')
+                    return
+                }
+
+                //todo 搜索字符串
+                console.log(data.searchName)
+                //返回值填入members
             }
 
             return {
                 data,
                 cardClicked,
-                confirm
+                openConfirm,
+                confirm,
+                notConfirm,
+                search,
             }
         }
     }
@@ -74,10 +121,10 @@
                     <br>
                     <div class="container">
                         <p style="margin-right: 20px">员工姓名</p>
-                        <input style="margin-right: 20px; height: 30px" type="text" placeholder="搜索...">
-                        <button class="search-button">搜索</button>
+                        <input style="margin-right: 20px; height: 30px" type="text" placeholder="搜索..." v-model="data.searchName">
+                        <button class="search-button" @click="search">搜索</button>
                     </div>
-                    <div class="card" :class="{'card-dark': data.memberClicked === member, 'card-light': data.memberClicked !== member}" v-for="member of data.members" @click="cardClicked(member)">
+                    <div class="card" :class="{'card-dark': data.memberClicked === member, 'card-light': data.memberClicked !== member}" v-for="member of data.membersEG" @click="cardClicked(member)">
                         <div class="align-inline">
                             <img :src="member.photoUrl" style="border-radius: 50%; margin: 5px" alt="crack">
                             <div>
@@ -87,18 +134,18 @@
                         </div>
                         <div class="container" style="margin: 5px" v-if="data.memberClicked === member">
                             <p style="margin-right: 20px">请输入岗位</p>
-                            <input style="margin-right: 20px; height: 30px" type="text" placeholder="岗位">
+                            <input style="margin-right: 20px; height: 30px" type="text" placeholder="岗位" @click.stop v-model="data.postInputS">
                         </div>
                     </div>
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button" @click="confirm">确定</button>
+                        <button class="submit-button" @click="openConfirm">确定</button>
                     </div>
                 </div>
             </div>
         </div>
     </transition>
-    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="data.isPopupConfirmOpen = false"></PopupConfirm>
+    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="notConfirm" @submit="confirm"></PopupConfirm>
 </template>
 
 <style scoped>

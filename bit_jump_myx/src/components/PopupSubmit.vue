@@ -2,51 +2,43 @@
 
 import FlatPickr from 'vue-flatpickr-component';
 import {reactive} from "vue";
+import PopupConfirm from "@/components/PopupConfirm.vue";
 export default {
     components: {
+        PopupConfirm,
         FlatPickr
     },
 
     props: {
         projectId: Number,
         isPopupOpen: Boolean,
-        membersData: Array
+        membersData: Array,
+        item: null
     },
 
     setup(props, context) {
         let data = reactive({
-            startTime: null,
-            endTime: null,
+            finishTime: null,
             flatpickrConfig: {
                 enableTime: true, // Enable time picker
                 dateFormat: 'Y-m-d H:i', // Date and time format
             },
 
-            owner: null,
             description: null
         })
 
         function submit() {
-            if (data.startTime === null || data.endTime === null || data.owner === null || data.description === null) {
-                alert('请输入完整信息！')
-                return
-            }
             //todo 通信
             console.log(
                 //项目id
                 props.projectId,
-                //开始时间
-                data.startTime,
-                //结束时间
-                data.endTime,
-                //负责人名字
-                data.owner.userId,
-                //负责人名字
-                data.owner.name,
+                //表项id
+                props.item.tableItemId,
+                //提交时间
+                data.finishTime,
                 //说明
                 data.description
             )
-
             context.emit('cancel')
         }
 
@@ -64,27 +56,17 @@ export default {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="container">
-                        <h2 style="margin-right: 100px; margin-left: 50px">添加任务</h2>
+                        <h2 style="margin-right: 100px; margin-left: 50px">完成任务</h2>
                         <h3 style="color: #cccccc">填写辅助信息</h3>
                     </div>
                     <div class="divider"></div>
                     <div>
                         <div class="align-inline">
-                            <h3>开始时间：</h3>
-                            <flat-pickr v-model="data.startTime" :config="data.flatpickrConfig"></flat-pickr>
+                            <h3>完成时间：</h3>
+                            <flat-pickr v-model="data.finishTime" :config="data.flatpickrConfig"></flat-pickr>
                         </div>
                         <div class="align-inline">
-                            <h3>结束时间：</h3>
-                            <flat-pickr v-model="data.endTime" :config="data.flatpickrConfig"></flat-pickr>
-                        </div>
-                        <div class="align-inline">
-                            <h3>&emsp;责任人：</h3>
-                            <select v-model="data.owner" style="min-height: 30px; min-width: 80px">
-                                <option v-for="member in membersData" :value="member">{{member.name}}</option>
-                            </select>
-                        </div>
-                        <div class="align-inline">
-                            <h3>任务内容：</h3>
+                            <h3>提交说明：</h3>
                             <textarea style="width: 400px; height: 200px" v-model="data.description"></textarea>
                         </div>
                     </div>
@@ -96,6 +78,7 @@ export default {
             </div>
         </div>
     </transition>
+    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="notConfirm" @submit="confirm"></PopupConfirm>
 </template>
 
 <style scoped>

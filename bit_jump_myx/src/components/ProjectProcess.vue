@@ -1,15 +1,18 @@
 <script>
 import {computed, reactive} from "vue";
-import PopupRejection from "@/components/PopupRejection.vue";
 import PopupAddTask from "@/components/PopupAddTask.vue";
+import PopupReject from "@/components/PopupReject.vue";
+import PopupSubmit from "@/components/PopupSubmit.vue";
 
     export default {
         components: {
+            PopupSubmit,
+            PopupReject,
             PopupAddTask,
-            PopupRejection
         },
 
         props: {
+            projectId: Number,
             processData: Array,
             membersData: Array,
             isManager:Boolean
@@ -17,9 +20,11 @@ import PopupAddTask from "@/components/PopupAddTask.vue";
 
         setup(props) {
             let data = reactive({
-                sortOrder:0,
-                isPopupRejectionOpen:false,
-                isPopupAddTask:false
+                sortOrder: 0,
+                isPopupRejectOpen: false,
+                isPopupAddTask: false,
+                isPopupSubmitOpen: false,
+                itemClicked: null
             })
 
             let sortedData = computed(() => {
@@ -60,8 +65,14 @@ import PopupAddTask from "@/components/PopupAddTask.vue";
                 }
             }
 
-            function reject() {
-                data.isPopupRejectionOpen = true
+            function reject(item) {
+                data.itemClicked = item
+                data.isPopupRejectOpen = true
+            }
+
+            function submit(item) {
+                data.itemClicked = item
+                data.isPopupSubmitOpen = true
             }
 
             function addTask() {
@@ -73,6 +84,7 @@ import PopupAddTask from "@/components/PopupAddTask.vue";
                 sortedData,
                 handleSortOrderChange,
                 reject,
+                submit,
                 addTask
             }
         }
@@ -115,15 +127,16 @@ import PopupAddTask from "@/components/PopupAddTask.vue";
                 <td>{{data.finishTime}}</td>
                 <td>{{data.description}}</td>
                 <td>
-                    <button v-if="isManager && data.isFinished" class="reject-button" @click="reject">驳回</button>
-<!--                    这里还应该有个判断条件：责任人必须是自己才显示提交按钮-->
-                    <button v-if="!isManager && data.isFinished" class="submit-button">提交</button>
+                    <button v-if="isManager && data.isFinished" class="reject-button" @click="reject(data)">驳回</button>
+<!--                    todo 这里还应该有个判断条件：责任人必须是自己才显示提交按钮-->
+                    <button v-if="!isManager && data.isFinished" class="submit-button" @click="submit(data)">提交</button>
                 </td>
             </tr>
         </table>
     </div>
-    <PopupAddTask :is-popup-open="data.isPopupAddTask" @cancel="data.isPopupAddTask=false" :members-data="membersData"></PopupAddTask>
-    <PopupRejection :is-popup-open=data.isPopupRejectionOpen @cancel="data.isPopupRejectionOpen=false"></PopupRejection>
+    <PopupAddTask :is-popup-open="data.isPopupAddTask" :project-id="this.projectId" @cancel="data.isPopupAddTask=false" :members-data="membersData"></PopupAddTask>
+    <PopupReject :is-popup-open="data.isPopupRejectOpen" :project-id="this.projectId" :item="data.itemClicked" @cancel="data.isPopupRejectOpen=false" @open="data.isPopupRejectOpen=true"></PopupReject>
+    <PopupSubmit :is-popup-open="data.isPopupSubmitOpen" :project-id="this.projectId" :item="data.itemClicked" @cancel="data.isPopupSubmitOpen=false" @open="data.isPopupSubmitOpen=true"></PopupSubmit>
 </template>
 
 <style scoped>

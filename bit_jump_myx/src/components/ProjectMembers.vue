@@ -2,7 +2,7 @@
     import {reactive} from "vue";
     import PopupAddTask from "@/components/PopupAddTask.vue";
     import PopupDeleteMember from "@/components/PopupDeleteMember.vue";
-    import PopupRejection from "@/components/PopupRejection.vue";
+    import PopupRejection from "@/components/PopupReject.vue";
     import PopupAddMember from "@/components/PopupAddMember.vue";
     import PopupChangePost from "@/components/PopupChangePost.vue";
 
@@ -10,6 +10,7 @@
         components: {PopupChangePost, PopupAddMember, PopupRejection, PopupDeleteMember, PopupAddTask},
 
         props: {
+            projectId: Number,
             members: Array,
             isManager:Boolean
         },
@@ -77,17 +78,17 @@
                 <div style="height: 1px; background-color: #cccccc"></div>
                 <p>岗位：{{member.post}}</p>
                 <p>进度：{{member.process}}%</p>
-                <img class="img-button" src="@/assets/minus.svg" alt="减" title="点击删除成员" @click="deleteMember(member)" @cancel="data.isPopupDeleteMemberOpen=false">
-                <img class="img-button" src="@/assets/pencil.svg" alt="改" title="点击调岗" @click="changePost(member)" @cancel="data.isPopupChangePostOpen=false">
+                <img v-if="this.isManager" class="img-button" src="@/assets/minus.svg" alt="减" title="点击删除成员" @click="deleteMember(member)" @cancel="data.isPopupDeleteMemberOpen=false">
+                <img v-if="this.isManager" class="img-button" src="@/assets/pencil.svg" alt="改" title="点击调岗" @click="changePost(member)" @cancel="data.isPopupChangePostOpen=false">
             </div>
         </div>
         <div class="align-inline" v-if="isManager">
-            <img class="img-button" src="@/assets/plus.svg" alt="加" title="点击增加成员" @click="addMember">
+            <img class="img-button" src="@/assets/plus.svg" alt="加" title="点击增加成员" @click="addMember" @open="data.isPopupAddMemberOpen=true">
         </div>
     </div>
-    <PopupAddMember :is-popup-open="data.isPopupAddMemberOpen" @cancel="data.isPopupAddMemberOpen=false"></PopupAddMember>
-    <PopupDeleteMember :is-popup-open="data.isPopupDeleteMemberOpen" :member="data.memberDeleted" @cancel="data.isPopupDeleteMemberOpen=false"></PopupDeleteMember>
-    <PopupChangePost :is-popup-open="data.isPopupChangePostOpen" :member="data.memberChanged" @cancel="data.isPopupChangePostOpen=false"></PopupChangePost>
+    <PopupAddMember :is-popup-open="data.isPopupAddMemberOpen" :project-id="this.projectId" @cancel="data.isPopupAddMemberOpen=false" @open="data.isPopupAddMemberOpen=true"></PopupAddMember>
+    <PopupDeleteMember :is-popup-open="data.isPopupDeleteMemberOpen" :project-id="this.projectId" :member="data.memberDeleted" @cancel="data.isPopupDeleteMemberOpen=false" @open="data.isPopupDeleteMemberOpen=true"></PopupDeleteMember>
+    <PopupChangePost :is-popup-open="data.isPopupChangePostOpen" :project-id="this.projectId" :member="data.memberChanged" @cancel="data.isPopupChangePostOpen=false" @open="data.isPopupChangePostOpen=true"></PopupChangePost>
 </template>
 
 <style scoped>
@@ -124,7 +125,7 @@
         position: relative;
         left: -180px; /* 初始化时将浮窗移到卡片左边以外 */
         top: 50%;
-        transform: translateY(-110px);
+        transform: translateY(-95px);
         background-color: #f0f0f0;
         padding: 10px;
         border-radius: 4px;
