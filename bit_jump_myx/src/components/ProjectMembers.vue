@@ -34,7 +34,9 @@
             }
 
             //前往项目成员
-            function gotoProjectMembers() {}
+            function gotoProjectMembers() {
+                //todo 跳转到项目人员页面
+            }
 
             function addMember() {
                 data.isPopupAddMemberOpen = true

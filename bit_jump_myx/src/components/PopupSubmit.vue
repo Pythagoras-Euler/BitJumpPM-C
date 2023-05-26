@@ -2,10 +2,8 @@
 
 import FlatPickr from 'vue-flatpickr-component';
 import {reactive} from "vue";
-import PopupConfirm from "@/components/PopupConfirm.vue";
 export default {
     components: {
-        PopupConfirm,
         FlatPickr
     },
 
@@ -78,7 +76,6 @@ export default {
             </div>
         </div>
     </transition>
-    <PopupConfirm :is-popup-open="data.isPopupConfirmOpen" @cancel="notConfirm" @submit="confirm"></PopupConfirm>
 </template>
 
 <style scoped>

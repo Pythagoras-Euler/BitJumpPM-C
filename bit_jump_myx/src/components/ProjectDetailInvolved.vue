@@ -5,6 +5,7 @@
     import {reactive} from "vue";
     import ProjectMembers from "@/components/ProjectMembers.vue";
 
+    //todo 通信，这部分需要替换为通信取到的特定项目信息
     //方便调试，把项目信息拆为三部分
     //特定项目信息的第一部分
     let introductionData = reactive({
@@ -84,11 +85,15 @@
                 description:'12321312321312321321'}
         ]
     })
+
+    function returnArrow() {
+        //todo 返回项目预览页
+    }
 </script>
 
 <template>
     <!--    返回按钮-->
-    <button class="arrow-button"></button>
+    <button class="arrow-button" @click="returnArrow"></button>
     <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
     <br>
     <ProjectProcess :project-id="introductionData.projectId" :processData="processData.processTable" :members-data="membersData.members" :is-manager="false"></ProjectProcess>
