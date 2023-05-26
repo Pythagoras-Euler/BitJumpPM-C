@@ -1,49 +1,49 @@
 
 class User {
-    constructor(address, age, birthDate,
-        bloodType, censusRegister, createdProId,
-        department,education, email, entryTime,
-        gender, jobTitle, joinedProId, limitation,
-        major, managedProId, marriage, name,
-        nationality, phoneNumber, photoUrl,
-        politicalStatus, post, previousCompany,
-        priv, projectTeam, qqNumber, school,
-        seniority, userId, wechatNumber) {
-        this.address = address
-        this.age = age
-        this.birthDate = birthDate
-        this.bloodType = bloodType
-        this.censusRegister = censusRegister
-        this.createdProId = createdProId // list[number]
-        this.department = department //enum
-        this.education = education //enum
-        this.email = email
-        this.entryTime = entryTime
-        this.gender = gender //enum
-        this.jobTitle = jobTitle
-        this.joinedProId = joinedProId //list[number]
-        this.limitation = limitation
-        this.major = major
-        this.managedProId = managedProId //list[number]
-        this.marriage = marriage
-        this.name = name
-        this.nationality = nationality
-        this.phoneNumber = phoneNumber
-        this.photoUrl = photoUrl
-        this.politicalStatus = politicalStatus
-        this.post = post //enum
-        this.previousCompany = previousCompany
-        this.priv = priv
-        this.projectTeam = projectTeam //enum
-        this.qqNumber = qqNumber
-        this.school = school
-        this.seniority = seniority
-        this.userId = userId
-        this.wechatNumber = wechatNumber
+    // Using
+    constructor(userId, name, gender, phoneNumber, entryTime,
+        department, projectTeam, priv, education, censusRegister,
+        nationality, marriage, birthDate, age, bloodType,
+        politicalStatus, qqNumber, wechatNumber, email, post,
+        address, school, major, previousCompany, jobTitle,
+        limitation, photoUrl, seniority, createdProId, managedProId,
+        joinedProId) {
+            this.userId = userId
+            this.name = name
+            this.gender = gender //enum
+            this.phoneNumber = phoneNumber
+            this.entryTime = entryTime
+            this.department = department //enum
+            this.projectTeam = projectTeam //enum
+            this.priv = priv
+            this.education = education //enum
+            this.censusRegister = censusRegister
+            this.nationality = nationality
+            this.marriage = marriage
+            this.birthDate = birthDate
+            this.age = age
+            this.bloodType = bloodType
+            this.politicalStatus = politicalStatus
+            this.qqNumber = qqNumber
+            this.wechatNumber = wechatNumber
+            this.email = email
+            this.post = post //enum
+            this.address = address
+            this.school = school
+            this.major = major
+            this.previousCompany = previousCompany
+            this.jobTitle = jobTitle
+            this.limitation = limitation
+            this.photoUrl = photoUrl
+            this.seniority = seniority
+            this.createdProId = createdProId // list[number]
+            this.managedProId = managedProId //list[number]
+            this.joinedProId = joinedProId //list[number]
     }
 }
 
 class TableItem {
+    // Using
     constructor(beginTime, description, endTime,
         finishTime, isFinish, ownerId, ownerName,
         tableItemId) {
@@ -59,31 +59,37 @@ class TableItem {
 }
 
 class Member {
-    constructor(name, photoUrl, userId) {
+    // Using
+    constructor(userId, name, photoUrl, post, process) {
+        this.userId = userId
         this.name = name
         this.photoUrl = photoUrl
-        this.userId = userId
+        this.post = post
+        this.process = process
     }
 }
 
 class Project {
-    constructor(budget, department, introduction,
-        leaderName, members, process, projectId,
-        projectName, projectUrl, table) {
-        this.budget = budget
-        this.department = department
-        this.introduction = introduction
-        this.leaderName = leaderName
-        this.members = members
-        this.process = process
+    // Using
+    constructor(projectId, projectName, projectUrl,
+        process, department, introduction,
+        budget, leaderId, leaderName, members, table) {
         this.projectId = projectId
         this.projectName = projectName
         this.projectUrl = projectUrl
-        this.table = table
+        this.process = process
+        this.department = department
+        this.introduction = introduction
+        this.budget = budget
+        this.leaderId = leaderId
+        this.leaderName = leaderName
+        this.members = members//list[Member]
+        this.table = table//list[TableItem]
     }
 }
 
 class BaseResponse {
+    // Using
     constructor(code, message, data) {
         this.code = code
         this.message = message
@@ -95,6 +101,7 @@ export {
 }
 
 class ModProjIntro {
+    // Using
     constructor(projectId, projectName, projectUrl,
         process, department, introduction, budget,
         leaderId, leaderName) {
@@ -110,6 +117,7 @@ class ModProjIntro {
         }
 }
 class AddProjItem {
+    // Deprecated
     constructor(tableItemId, beginTime, endTime,
         ownerId, ownerName, description) {
             this.tableItemId = tableItemId
@@ -120,7 +128,32 @@ class AddProjItem {
             this.description = description
         }
 }
+class AddTableItem {
+    // Using
+    constructor(beginTime, endTime,
+        ownerId, ownerName, description) {
+            this.beginTime = beginTime
+            this.endTime = endTime
+            this.ownerId = ownerId
+            this.ownerName = ownerName
+            this.description = description
+        }
+}
+class ModifyTableItem {
+    // Using
+    constructor(beginTime, description, endTime,
+        finishTime, isFinish, ownerId, ownerName) {
+        this.beginTime = beginTime
+        this.endTime = endTime
+        this.ownerId = ownerId
+        this.ownerName = ownerName
+        this.isFinish = isFinish
+        this.finishTime = finishTime
+        this.description = description
+    }
+}
 class BriefProject {
+    // Using
     constructor(projectId, projectName, projectUrl,
         process, leaderId, leaderName) {
             this.projectId = projectId
@@ -131,6 +164,61 @@ class BriefProject {
             this.leaderName = leaderName
         }
 }
+class BriefMember {
+    // Using
+    constructor(userId, name, post, seniority) {
+        this.userId = userId
+        this.name = name
+        this.post = post
+        this.seniority = seniority
+    }
+}
+class BriefPersonInfo {
+    // Using
+    constructor(userId, name, photoUrl) {
+        this.userId = userId
+        this.name = name
+        this.photoUrl = photoUrl
+    }
+}
+class ModPersonInfo {
+    // Using
+    constructor(name, gender, phoneNumber, entryTime,
+        department, projectTeam, priv, education, censusRegister,
+        nationality, marriage, birthDate, age, bloodType,
+        politicalStatus, qqNumber, wechatNumber, email, post,
+        address, school, major, previousCompany, jobTitle,
+        limitation, photoUrl, seniority) {
+            this.name = name
+            this.gender = gender //enum
+            this.phoneNumber = phoneNumber
+            this.entryTime = entryTime
+            this.department = department //enum
+            this.projectTeam = projectTeam //enum
+            this.priv = priv
+            this.education = education //enum
+            this.censusRegister = censusRegister
+            this.nationality = nationality
+            this.marriage = marriage
+            this.birthDate = birthDate
+            this.age = age
+            this.bloodType = bloodType
+            this.politicalStatus = politicalStatus
+            this.qqNumber = qqNumber
+            this.wechatNumber = wechatNumber
+            this.email = email
+            this.post = post //enum
+            this.address = address
+            this.school = school
+            this.major = major
+            this.previousCompany = previousCompany
+            this.jobTitle = jobTitle
+            this.limitation = limitation
+            this.photoUrl = photoUrl
+            this.seniority = seniority
+    }
+}
 export {
-    ModProjIntro, AddProjItem, BriefProject
+    ModProjIntro, AddProjItem, AddTableItem, ModifyTableItem,
+    BriefProject, BriefMember, BriefPersonInfo, ModPersonInfo
 }
