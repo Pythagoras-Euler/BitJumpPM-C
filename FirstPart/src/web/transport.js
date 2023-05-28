@@ -23,9 +23,9 @@ class WebAction {
     // }
     constructor() {
         this.init()
-        if (auth.state().token) {
+        if (auth.getters.token()) {
             this.headers({
-                'token': auth.state().token
+                'token': auth.getters.token()
             })
         }
     }
@@ -35,10 +35,10 @@ class WebAction {
     //     this.setUrl = true
     // }
     // 可以重复地调用url()来添加路径，或一次性添加
-    // 似乎不用考虑get-query参数。。。
+    // 注意：get-query已经在Get类中实现
     url(...paths) {
         paths.map((path) => {
-            this._generalUrl += '/' + path
+            this._generalUrl += '/' + String(path)
         })
         this.setUrl = true
         return this
@@ -126,12 +126,14 @@ class WebAction {
     }
     async sendWith(doWithResp, ...optional) {
         const responseData = await this.send()
+        let retVal
         if (optional) {
-            doWithResp(responseData, optional)
+            retVal = doWithResp(responseData, optional)
         }
         else {
-            doWithResp(responseData)
+            retVal = doWithResp(responseData)
         }
+        return retVal ? retVal : null
     }
 }
 
@@ -140,6 +142,8 @@ class Get extends WebAction {
         super()
         super.method('GET')
         super.bodyObject(null)
+        this.queryUrl = ""
+        this.queryAdded = false
     }
     method(method) {
         method = 'GET'
@@ -148,6 +152,25 @@ class Get extends WebAction {
     bodyObject(rawBody) {
         rawBody = null
         super.bodyObject(rawBody)
+    }
+    // 注意：get-query已实现如下
+    // addQuery是保存操作，但不检查url是否已填写完成
+    // 虽然实现上可以在addQurey后再添加再保存，但...
+    query(name, value) {
+        queryPairStr = String(name) + "=" + String(value)
+        if (this.queryUrl || this.queryAdded) {
+            this.queryUrl += "&"
+        } else {
+            this.queryUrl = "?"
+        }
+        this.queryUrl += queryPairStr
+        return this
+    }
+    addQuery() {
+        super.url(this.queryUrl)
+        this.queryUrl = ""
+        this.queryAdded = true
+        return this
     }
 }
 class Post extends WebAction {
