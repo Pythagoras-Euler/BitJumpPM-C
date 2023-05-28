@@ -16,8 +16,15 @@
           <ProgressBar :process="process"></ProgressBar>
         </div>
         <div class="button-box">
-          <BaseButton class="button">详情</BaseButton>
-          <BaseButton class="button">删除</BaseButton>
+          <BaseButton
+            class="button"
+            v-for="button in buttons"
+            :key="button"
+            :link="isButtonRouter(button)"
+            :to="routerPath"
+            @click="setButtonAction(button)"
+            >{{ button }}</BaseButton
+          >
         </div>
       </div>
     </BaseCard>
@@ -25,9 +32,6 @@
 </template>
 
 <script>
-import BaseButton from "../ui/BaseButton.vue";
-import BaseCard from "../ui/BaseCard.vue";
-
 export default {
   props: [
     "projectId",
@@ -36,11 +40,33 @@ export default {
     "leaderName",
     "projectName",
     "process",
+    "buttons",
   ],
   data() {
     return {};
   },
-  components: { BaseButton, BaseCard },
+
+  computed: {
+    routerPath() {
+      return this.$route.path + "/" + this.projectId;
+    },
+  },
+  methods: {
+    isButtonRouter(button) {
+      if (button === "详情") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    setButtonAction(button) {
+      if (button === "管理") {
+        alert("管理");
+      } else if (button === "删除") {
+        alert("删除");
+      }
+    },
+  },
 };
 </script>
 
