@@ -4,9 +4,9 @@ import ProjectDetailInvolved from "@/components/ProjectDetailInvolved.vue";
 </script>
 
 <template>
-  <ProjectDetailManagement></ProjectDetailManagement>
+<!--  <ProjectDetailManagement></ProjectDetailManagement>-->
   <br>
-<!--  <ProjectDetailInvolved></ProjectDetailInvolved>-->
+  <ProjectDetailInvolved></ProjectDetailInvolved>
 </template>
 
 <style scoped>
