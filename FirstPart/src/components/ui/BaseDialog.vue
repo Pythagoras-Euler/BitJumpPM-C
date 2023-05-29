@@ -1,19 +1,38 @@
 <template>
   <teleport to="body">
     <transition name="back">
-      <div v-if="show" @click="tryClose" class="backdrop"></div>
+      <div
+        v-if="show"
+        @click="tryClose"
+        class="backdrop"
+        :class="{ 'form-backdrop': setFormBackdrop }"
+      ></div>
     </transition>
     <transition name="dialog">
-      <dialog open v-if="show">
-        <header>
+      <dialog
+        open
+        v-if="show"
+        :class="{ dialog: setDefaultBoxStyle, 'form-style': setFormStyle }"
+      >
+        <header
+          :class="{
+            header: setDefaultHeaderStyle,
+            'form-header': setFormStyle,
+          }"
+        >
           <slot name="header">
             <h2>{{ title }}</h2>
           </slot>
         </header>
-        <section class="text">
+        <section
+          :class="{ text: setDefaultBodyStyle, 'form-body': setFormStyle }"
+        >
           <slot></slot>
         </section>
-        <menu v-if="!fixed">
+        <menu
+          v-if="!fixed"
+          :class="{ menu: setDefaultMenuStyle, 'form-bottom': setFormStyle }"
+        >
           <slot name="action">
             <BaseButton @click="tryClose">关闭</BaseButton>
           </slot>
@@ -38,6 +57,36 @@ export default {
     },
     //fixed为真时，窗口无法手动关闭
     fixed: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    setDefaultBoxStyle: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    setFormStyle: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    setDefaultHeaderStyle: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    setDefaultBodyStyle: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    setDefaultMenuStyle: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    setFormBackdrop: {
       type: Boolean,
       required: false,
       default: false,
@@ -102,15 +151,52 @@ export default {
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 10;
 }
+.form-backdrop {
+  z-index: 150;
+}
+.form-style {
+  position: fixed;
+  /* padding: 1vw; */
+  top: 8vh;
+  left: 18%;
+  width: 65vw;
+  height: 38vw;
+
+  z-index: 100;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  /* gap: 1vw; */
+}
+
+.form-header {
+  flex: 1 1 10%;
+
+  border-bottom: 3px solid #a5d8ff;
+}
+
+.form-body {
+  flex: 8 8 80%;
+
+  overflow: auto;
+}
+
+.form-bottom {
+  flex: 1 1 10%;
+}
 /* 其他正常设置 */
-dialog {
+.dialog {
   position: fixed;
   padding: 1vw;
   top: 32vh;
   left: 38%;
   width: 26vw;
 
-  z-index: 100;
+  z-index: 200;
   border-radius: 6px;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -130,7 +216,7 @@ dialog {
   gap: 0.8vw;
   color: #495057;
 }
-header {
+.header {
   color: #000;
   font-size: 11px;
   font-size: 0.9vw;
@@ -142,7 +228,7 @@ header {
   border-bottom: 3px solid #a5d8ff;
 }
 
-menu {
+.menu {
   display: flex;
   justify-content: flex-end;
 }

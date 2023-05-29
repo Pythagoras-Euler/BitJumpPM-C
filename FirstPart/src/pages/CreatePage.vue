@@ -10,10 +10,16 @@
         >
       </template>
     </base-dialog>
+    <AddProject :isAdding="isAdding"></AddProject>
+    <ApplyPior :isApplying="isApplying"></ApplyPior>
     <div class="content-box">
       <div class="button-box">
         <BaseButton class="add-button" @click="addProject">添加项目</BaseButton>
+
         <BaseButton class="add-button" @click="refresh">刷新</BaseButton>
+        <BaseButton class="apply-button" @click="applyPior"
+          >还没有权限？去申请</BaseButton
+        >
       </div>
       <transition name="projects" mode="out-in">
         <div v-if="isLoading" class="spinner">
@@ -43,16 +49,28 @@
 
 <script>
 import ProjectItem from "../components/project/ProjectItem.vue";
+import AddProject from "../components/project/projectCreate/AddProject.vue";
+import ApplyPior from "../components/project/projectCreate/ApplyPior.vue";
 export default {
   data() {
     return {
       isLoading: false,
       error: null,
       buttons: ["管理", "删除"],
+      isApplying: false,
+      isAdding: false,
+    };
+  },
+  provide() {
+    return {
+      cancelAdd: this.cancelAdd,
+      cancelApply: this.cancelApply,
     };
   },
   components: {
     ProjectItem,
+    AddProject,
+    ApplyPior,
   },
 
   computed: {
@@ -68,8 +86,17 @@ export default {
   },
 
   methods: {
+    applyPior() {
+      this.isApplying = true;
+    },
     addProject() {
-      alert("添加项目");
+      this.isAdding = true;
+    },
+    cancelAdd() {
+      this.isAdding = false;
+    },
+    cancelApply() {
+      this.isApplying = false;
     },
     async loadProjects(mode) {
       //获取项目列表的函数
@@ -106,6 +133,23 @@ export default {
 .prompt {
   /* padding: 2.4rem; */
   padding: 2vw;
+}
+
+.apply-button {
+  color: #eebefa;
+  align-self: flex-start;
+  padding: 0.2vw 0.6vw;
+  font-size: 0.8vw;
+  background-color: transparent;
+  border: none;
+  align-self: center;
+}
+
+.apply-button:active,
+.apply-button:hover {
+  color: #da77f2;
+  background-color: transparent;
+  border: none;
 }
 .add-button {
   border-color: #be4bdb;
