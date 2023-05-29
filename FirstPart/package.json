@@ -12,7 +12,9 @@
     "jsencrypt": "^3.3.2",
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vue-flatpickr-component": "^11.0.3",
+    "element-plus": "^2.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

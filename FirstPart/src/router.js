@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage.vue";
 import CreatePage from "./pages/CreatePage.vue";
 import ManagePage from "./pages/ManagePage.vue";
 import JoinedPage from "./pages/JoinedPage.vue";
+import ProjectDetailPage from "./pages/ProjectDetailPage.vue";
 import NotFound from "./pages/NotFound.vue";
 import store from "./store/index.js";
 const router = createRouter({
@@ -42,11 +43,22 @@ const router = createRouter({
       },
     },
     {
+      path: "/manage/:id",
+      component: ProjectDetailPage,
+      props: true,
+    },
+
+    {
       path: "/joined",
       component: JoinedPage,
       meta: {
         requiredAuth: true,
       },
+    },
+    {
+      path: "/joined/:id",
+      component: ProjectDetailPage,
+      props: true,
     },
 
     {

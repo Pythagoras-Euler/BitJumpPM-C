@@ -25,6 +25,10 @@ export default {
       required: false,
       default: "/",
     },
+    clickHandler: {
+      type: Function,
+      required: false,
+    },
   },
 };
 </script>
