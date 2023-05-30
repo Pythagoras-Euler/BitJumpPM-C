@@ -42,6 +42,7 @@ export default {
     "process",
     "buttons",
   ],
+  emits: ["manage-project", "delete-project"],
   data() {
     return {};
   },
@@ -61,9 +62,9 @@ export default {
     },
     setButtonAction(button) {
       if (button === "管理") {
-        alert("管理");
+        this.$emit("manage-project", this.projectId);
       } else if (button === "删除") {
-        alert("删除");
+        this.$emit("delete-project", this.projectId);
       }
     },
   },

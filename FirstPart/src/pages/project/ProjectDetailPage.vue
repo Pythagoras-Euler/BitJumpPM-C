@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import ProjectDetailManagement from "../components/project/projectDetail/ProjectDetailManagement.vue";
-import ProjectDetailInvolved from "../components/project/projectDetail/ProjectDetailInvolved.vue";
+import ProjectDetailManagement from "../../components/project/projectDetail/ProjectDetailManagement.vue";
+import ProjectDetailInvolved from "../../components/project/projectDetail/ProjectDetailInvolved.vue";
 
 export default {
   components: {
@@ -33,7 +33,11 @@ export default {
 
 <style scoped>
 .container {
-  overflow: scroll;
+  position: fixed;
+  overflow: auto;
   height: 100vh;
+  width: 100vw;
+
+  background-color: white;
 }
 </style>

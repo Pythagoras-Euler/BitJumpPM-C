@@ -1,5 +1,5 @@
 <template>
-  <MainBackground>
+  <div class="container">
     <base-dialog :show="!!error" title="加载错误" @close="confirmError">
       <template #default>
         <p>{{ error }}</p>
@@ -10,6 +10,27 @@
         >
       </template>
     </base-dialog>
+
+    <base-dialog :show="isDeleting" title="提示">
+      <template #default>
+        <p>确认删除项目？</p>
+      </template>
+      <template #action>
+        <div class="btn-box">
+          <BaseButton
+            mode="outline"
+            class="message-button"
+            @click="cancelDelete"
+            >取消</BaseButton
+          >
+          <BaseButton class="message-button" @click="confirmDelete"
+            >确定</BaseButton
+          >
+        </div>
+      </template>
+    </base-dialog>
+    <ManageProject :isManaging="isManaging"></ManageProject>
+    <CheckDelete :checkDelete="checkDelete"></CheckDelete>
     <AddProject :isAdding="isAdding"></AddProject>
     <ApplyPior :isApplying="isApplying"></ApplyPior>
     <div class="content-box">
@@ -37,6 +58,8 @@
             :projectUrl="project.projectUrl"
             :process="project.process"
             :buttons="buttons"
+            @delete-project="handleDelete"
+            @manage-project="handleManage"
           ></ProjectItem>
         </ul>
         <BaseCard v-else class="prompt"
@@ -44,13 +67,15 @@
         >
       </transition>
     </div>
-  </MainBackground>
+  </div>
 </template>
 
 <script>
-import ProjectItem from "../components/project/ProjectItem.vue";
-import AddProject from "../components/project/projectCreate/AddProject.vue";
-import ApplyPior from "../components/project/projectCreate/ApplyPior.vue";
+import ProjectItem from "../../components/project/ProjectItem.vue";
+import AddProject from "../../components/project/projectCreate/AddProject.vue";
+import ApplyPior from "../../components/project/projectCreate/ApplyPior.vue";
+import CheckDelete from "../../components/project/projectCreate/CheckDelete.vue";
+import ManageProject from "../../components/project/projectCreate/ManageProject.vue";
 export default {
   data() {
     return {
@@ -59,18 +84,25 @@ export default {
       buttons: ["管理", "删除"],
       isApplying: false,
       isAdding: false,
+      isDeleting: false,
+      isManaging: false,
+      checkDelete: false,
     };
   },
   provide() {
     return {
       cancelAdd: this.cancelAdd,
       cancelApply: this.cancelApply,
+      cancel2Delete: this.cancel2Delete,
+      cancelManage: this.cancelManage,
     };
   },
   components: {
     ProjectItem,
     AddProject,
     ApplyPior,
+    CheckDelete,
+    ManageProject,
   },
 
   computed: {
@@ -91,6 +123,28 @@ export default {
     },
     addProject() {
       this.isAdding = true;
+    },
+
+    handleDelete(projectId) {
+      console.log(projectId);
+      this.isDeleting = true;
+    },
+    handleManage(projectId) {
+      console.log(projectId);
+      this.isManaging = true;
+    },
+    cancelManage() {
+      this.isManaging = false;
+    },
+    confirmDelete() {
+      this.isDeleting = false;
+      this.checkDelete = true;
+    },
+    cancelDelete() {
+      this.isDeleting = false;
+    },
+    cancel2Delete() {
+      this.checkDelete = false;
     },
     cancelAdd() {
       this.isAdding = false;
@@ -125,6 +179,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  overflow: auto;
+}
 .button-box {
   display: flex;
   /* gap: 0.8rem; */
@@ -184,7 +241,6 @@ export default {
   margin-right: 4.2vw;
   /* gap: 1.2rem; */
   gap: 1vw;
-  overflow: auto;
 }
 .spinner {
   /* margin-top: 3.2rem; */
@@ -212,5 +268,13 @@ export default {
 
 .projects-leave-active {
   transition: all 0.3s ease-in;
+}
+.btn-box {
+  display: flex;
+  gap: 1vw;
+}
+.message-button {
+  border-radius: 8px;
+  font-size: 1vw;
 }
 </style>

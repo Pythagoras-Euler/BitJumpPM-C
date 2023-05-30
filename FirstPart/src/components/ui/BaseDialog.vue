@@ -5,19 +5,28 @@
         v-if="show"
         @click="tryClose"
         class="backdrop"
-        :class="{ 'form-backdrop': setFormBackdrop }"
+        :class="{
+          'form-backdrop': setFormBackdrop,
+          'dialog-backdrop': setDialogBackdrop,
+        }"
       ></div>
     </transition>
     <transition name="dialog">
       <dialog
         open
         v-if="show"
-        :class="{ dialog: setDefaultBoxStyle, 'form-style': setFormStyle }"
+        :class="{
+          dialog: setDefaultBoxStyle,
+          'form-style': setFormStyle,
+          'form-style2': setFormStyle2,
+          'higher-z': setHigherZ,
+        }"
       >
         <header
           :class="{
             header: setDefaultHeaderStyle,
             'form-header': setFormStyle,
+            'form-header2': setFormStyle2,
           }"
         >
           <slot name="header">
@@ -25,13 +34,21 @@
           </slot>
         </header>
         <section
-          :class="{ text: setDefaultBodyStyle, 'form-body': setFormStyle }"
+          :class="{
+            text: setDefaultBodyStyle,
+            'form-body': setFormStyle,
+            'form-body2': setFormStyle2,
+          }"
         >
           <slot></slot>
         </section>
         <menu
           v-if="!fixed"
-          :class="{ menu: setDefaultMenuStyle, 'form-bottom': setFormStyle }"
+          :class="{
+            menu: setDefaultMenuStyle,
+            'form-bottom': setFormStyle,
+            'form-bottom2': setFormStyle2,
+          }"
         >
           <slot name="action">
             <BaseButton @click="tryClose">关闭</BaseButton>
@@ -71,6 +88,11 @@ export default {
       required: false,
       default: false,
     },
+    setFormStyle2: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     setDefaultHeaderStyle: {
       type: Boolean,
       required: false,
@@ -87,6 +109,16 @@ export default {
       default: true,
     },
     setFormBackdrop: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    setDialogBackdrop: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    setHigherZ: {
       type: Boolean,
       required: false,
       default: false,
@@ -154,6 +186,7 @@ export default {
 .form-backdrop {
   z-index: 150;
 }
+
 .form-style {
   position: fixed;
   /* padding: 1vw; */
@@ -161,6 +194,25 @@ export default {
   left: 18%;
   width: 65vw;
   height: 38vw;
+
+  z-index: 100;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  /* gap: 1vw; */
+}
+
+.form-style2 {
+  position: fixed;
+  /* padding: 1vw; */
+  top: 25svh;
+  left: 35%;
+  width: 30vw;
+  height: 20vw;
 
   z-index: 100;
   border-radius: 3px;
@@ -188,6 +240,22 @@ export default {
 .form-bottom {
   flex: 1 1 10%;
 }
+
+.form-header2 {
+  flex: 2 2 20%;
+
+  border-bottom: 3px solid #a5d8ff;
+}
+
+.form-body2 {
+  flex: 6 6 60%;
+
+  overflow: auto;
+}
+.form-bottom2 {
+  flex: 2 2 20%;
+}
+
 /* 其他正常设置 */
 .dialog {
   position: fixed;
@@ -206,10 +274,15 @@ export default {
   flex-direction: column;
   gap: 1vw;
 }
-
+.higher-z {
+  z-index: 400;
+}
+.dialog-backdrop {
+  z-index: 400;
+}
 .text {
   /* font-size: 10px; */
-  font-size: 0.8vw;
+  font-size: 1vw;
   display: flex;
   flex-direction: column;
   /* gap: 8px; */

@@ -1,5 +1,5 @@
 <template>
-  <MainBackground>
+  <div class="container">
     <base-dialog :show="!!error" title="加载错误" @close="confirmError">
       <template #default>
         <p>{{ error }}</p>
@@ -37,11 +37,11 @@
         >
       </transition>
     </div>
-  </MainBackground>
+  </div>
 </template>
 
 <script>
-import ProjectItem from "../components/project/ProjectItem.vue";
+import ProjectItem from "../../components/project/ProjectItem.vue";
 export default {
   data() {
     return {
@@ -94,6 +94,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  overflow: auto;
+}
 .button-box {
   display: flex;
   /* gap: 0.8rem; */
@@ -136,7 +139,6 @@ export default {
   margin-right: 4.2vw;
   /* gap: 1.2rem; */
   gap: 1vw;
-  overflow: auto;
 }
 .spinner {
   /* margin-top: 3.2rem; */

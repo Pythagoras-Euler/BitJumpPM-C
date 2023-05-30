@@ -11,7 +11,7 @@
 <script>
 import LoginComponent from "../components/auth/login/LoginComponent.vue";
 import SignupComponent from "../components/auth/signup/SignupComponent.vue";
-import ChangePasswordComponent from "@/components/auth/changePassword/ChangePasswordComponent.vue";
+import ChangePasswordComponent from "../components/auth/changePassword/ChangePasswordComponent.vue";
 
 export default {
   components: { LoginComponent, SignupComponent, ChangePasswordComponent },

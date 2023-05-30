@@ -1,39 +1,47 @@
 <template>
+  <ConfirmManage
+    :fromData="fromData"
+    :confirmPassword="confirmPassword"
+  ></ConfirmManage>
   <BaseDialog
     class="container"
-    :show="isApplying"
+    :show="isManaging"
     :setDefaultHeaderStyle="false"
     :setDefaultBodyStyle="false"
     :setDefaultBoxStyle="false"
     :setDefaultMenuStyle="false"
-    :setFormStyle="true"
+    :setFormStyle2="true"
   >
     <template #header>
       <div class="header-box">
-        <span class="mainheader">申请称为Boss</span>
-        <span class="subheader">辅助信息填写</span>
+        <span class="mainheader">增删管理员</span>
       </div>
     </template>
     <template #default>
       <form class="form-box" @submit.prevent="submitData">
-        <label for="id">用户账号</label>
-        <input id="id" name="id" class="input-id-box" v-model.trim="userId" />
-        <label for="description" class="des-label">申请说明</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="5"
-          class="input-des-box"
-          v-model.trim="description"
+        <label for="name">姓名</label>
+        <input
+          id="name"
+          name="name"
+          class="input-name-box"
+          v-model.trim="name"
         />
+        <label for="id">工号</label>
+        <input id="id" name="id" class="input-id-box" v-model.trim="userId" />
       </form>
     </template>
     <template #action>
       <div class="button-box">
-        <BaseButton class="btn" mode="outline" @click="cancelApply"
+        <BaseButton class="btn" mode="outline" @click="cancelManage"
           >取消</BaseButton
         >
-        <BaseButton class="btn" @click="submitData">提交</BaseButton>
+        <div class="right-btn-box">
+          <BaseButton class="btn delete-btn" @click="submitDeleteData()"
+            >删除</BaseButton
+          >
+
+          <BaseButton class="btn" @click="submitSetData()">增加</BaseButton>
+        </div>
       </div>
     </template>
   </BaseDialog>
@@ -56,35 +64,56 @@
 </template>
 
 <script>
+import ConfirmManage from "./ConfirmManage.vue";
 export default {
-  props: ["isApplying"],
-  data() {
+  props: ["isManaging"],
+  components: {
+    ConfirmManage,
+  },
+  provide() {
     return {
-      userId: "",
-      description: "",
-
-      formIsValid: true,
+      cancelConfirm: this.cancelConfirm,
     };
   },
-  inject: ["cancelApply"],
+  data() {
+    return {
+      name: "",
+      userId: "",
+      fromData: null,
+      formIsValid: true,
+      confirmPassword: false,
+    };
+  },
+  inject: ["cancelManage"],
   methods: {
-    submitData() {
+    submitData(isUp) {
       if (this.validateForm()) {
         const fromData = {
+          name: this.name,
           userId: this.userId,
-          description: this.description,
+          isUp: isUp,
         };
-        //todo: 通信
-        alert(fromData);
+        this.fromData = fromData;
+        this.confirmPassword = true;
         this.clearData();
+        this.cancelManage();
       }
+    },
+    cancelConfirm() {
+      this.confirmPassword = false;
+    },
+    submitSetData() {
+      this.submitData(true);
+    },
+    submitDeleteData() {
+      this.submitData(false);
     },
     clearData() {
       this.userId = "";
-      this.description = "";
+      this.name = "";
     },
     validateForm() {
-      if (this.validateId() && this.validateDes()) {
+      if (this.validateId() && this.validateName()) {
         return true;
       } else {
         this.formIsValid = false;
@@ -97,8 +126,8 @@ export default {
     validateId() {
       return this.userId.length > 0;
     },
-    validateDes() {
-      return this.description.length > 0;
+    validateName() {
+      return this.name.length > 0;
     },
   },
 };
@@ -111,51 +140,37 @@ export default {
   align-items: center;
   height: 100%;
   margin: 0 1vw;
+  padding-top: 0.5vw;
 }
 
 .mainheader {
-  font-size: 1.3vw;
-  margin-top: 0.5vw;
+  font-size: 1.2vw;
+  /* margin-top: 0.5vw; */
   color: #555;
-}
-
-.subheader {
-  font-size: 1vw;
-  color: #999;
-  align-self: end;
-  margin-bottom: 2px;
 }
 
 .form-box {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 10% auto;
-  row-gap: 3vw;
+
+  row-gap: 1.5vw;
   column-gap: 1vw;
 
   /* border: 1px solid #ccc; */
   height: 100%;
   margin: 0 2vw;
-  padding-top: 3vw;
-  padding-bottom: 5vw;
+  padding-top: 2.5vw;
+  padding-bottom: 2.5vw;
 }
 
-.des-label {
-  align-self: start;
-  margin-top: 0.3vw;
-}
-.input-id-box {
-  width: 30%;
-  border: 1px solid #bbb; /* 设置边框样式和颜色 */
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-}
-
-.input-des-box {
+.input-id-box,
+.input-name-box {
+  width: 90%;
   height: 100%;
-  width: 80%;
   border: 1px solid #bbb; /* 设置边框样式和颜色 */
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 label {
   justify-self: end;
   font-size: 1vw;
@@ -163,26 +178,40 @@ label {
   align-self: center;
 }
 
-.icon-img {
-  width: 24px;
-  stroke: #a5d8ff;
-}
-
 .button-box {
   height: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   gap: 12px;
-  padding-right: 1vw;
+  padding: 0 1vw;
+}
+
+.right-btn-box {
+  display: flex;
+  gap: 12px;
 }
 
 .btn {
   border-radius: 6px;
   height: 80%;
+  display: flex;
+  align-items: center;
 }
 
 .message-button {
   border-radius: 8px;
   font-size: 1vw;
+}
+
+.delete-btn {
+  background-color: #ffc9c9;
+  border-color: #ffc9c9;
+}
+
+.delete-btn:hover,
+.delete-btn:active {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
+  color: #fff;
 }
 </style>
