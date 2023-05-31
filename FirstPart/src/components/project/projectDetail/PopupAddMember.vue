@@ -50,6 +50,7 @@ export default {
     function cardClicked(member) {
       if (data.memberClicked !== member) {
         data.memberClicked = member;
+          data.postInput = null
       } else {
         data.memberClicked = null;
       }
@@ -146,7 +147,7 @@ export default {
                 alt="crack"
               />
               <div>
-                <p>工号：{{ member.userId }}</p>
+                <p style="margin-bottom: 5px; margin-top: 5px">工号：{{ member.userId }}</p>
                 <p>姓名：{{ member.name }}</p>
               </div>
             </div>
@@ -161,7 +162,7 @@ export default {
                 type="text"
                 placeholder="岗位"
                 @click.stop
-                v-model="data.postInputS"
+                v-model="data.postInput"
               />
             </div>
           </div>
@@ -185,6 +186,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 textarea {
@@ -206,6 +208,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+    transition: opacity 0.7s;
 }
 
 .modal-dialog {
@@ -291,9 +294,10 @@ button {
   border-radius: 8px;
   border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
   transition: background-color 0.5s ease;
   cursor: pointer;
+    box-shadow: 3px 3px 3px #888888
 }
 
 .card-light {
