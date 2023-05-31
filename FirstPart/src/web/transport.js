@@ -98,9 +98,7 @@ class WebAction {
             )
             throw error
         }
-        else {
-            return responseData
-        }
+        return responseData
         // fetch(this._generalUrl, fetchArgs)
         //     .then(response => {
         //         const responseData = response.json()
@@ -125,6 +123,7 @@ class WebAction {
         //     })
     }
     async sendWith(doWithResp, ...optional) {
+    // Deprecated
         const responseData = await this.send()
         let retVal
         if (optional) {
@@ -133,7 +132,7 @@ class WebAction {
         else {
             retVal = doWithResp(responseData)
         }
-        return retVal ? retVal : null
+        return retVal
     }
 }
 

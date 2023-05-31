@@ -97,6 +97,7 @@ export default {
   border-radius: 12px;
 }
 .name-box {
+  font-size: 0.9vw;
   border: 1px solid #aaaaaa;
   border-radius: 12px;
   /* padding: 12px; */
@@ -111,6 +112,7 @@ export default {
   text-align: left;
   display: flex;
   align-items: center;
+  font-size: 0.9vw;
 }
 
 .end-box {
@@ -143,7 +145,7 @@ export default {
   border-radius: 8px;
   padding: 0.7vw;
   /* font-size: 10px; */
-  font-size: 0.8vw;
+  font-size: 0.9vw;
 }
 
 .button:active,

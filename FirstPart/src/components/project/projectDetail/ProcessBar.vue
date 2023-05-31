@@ -18,7 +18,9 @@
         background-color: #f0f0f0;
         border-radius: 10px;
         overflow: hidden;
-        margin: 20px;
+        margin-top: 20px;
+        width: 80%;
+        box-shadow: 3px 3px 3px #888888;
     }
 
     .progress {

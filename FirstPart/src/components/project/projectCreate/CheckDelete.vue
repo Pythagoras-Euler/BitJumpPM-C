@@ -58,6 +58,7 @@ export default {
         //todo: 通信
         alert(fromData);
         this.clearData();
+        this.cancel2Delete();
       }
     },
     clearData() {

@@ -60,6 +60,7 @@ export default {
         //TODO: 通信
         alert(fromData);
         this.clearData();
+        this.cancelConfirm();
       }
     },
     clearData() {

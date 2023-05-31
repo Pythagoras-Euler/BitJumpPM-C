@@ -94,7 +94,7 @@ export default {
 </script>
 
 <template>
-  <h2>项目进展</h2>
+  <h1>项目进展</h1>
   <br />
   <div class="div-style">
     <div class="align-inline">
@@ -186,11 +186,15 @@ td {
   border: 2px solid lightgray;
   border-radius: 10px;
   padding: 10px;
+    max-width: 80%;
+    background-color: #dbffff;
+    box-shadow: 2px 2px 2px #888888;
 }
 
 .table-style {
   border-collapse: collapse;
   width: 100%;
+    max-width: 100%;
 }
 
 .table-style tr:nth-child(even) {

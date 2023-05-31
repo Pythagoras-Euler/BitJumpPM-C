@@ -105,6 +105,7 @@ export default {
 .prompt {
   /* padding: 2.4rem; */
   padding: 2vw;
+  font-size: 1vw;
 }
 .add-button {
   border-color: #be4bdb;

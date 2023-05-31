@@ -126,6 +126,7 @@ export default {
         //todo: 通信
         alert(fromData);
         this.clearData();
+        this.cancelAdd();
       }
     },
     clearData() {
