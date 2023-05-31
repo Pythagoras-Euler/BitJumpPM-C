@@ -65,6 +65,7 @@ export default {
           <p class="label">
             请为{{ member.name }}（目前岗位是{{ member.post }}）选择新岗位
           </p>
+            <br>
           <input
             placeholder="输入岗位"
             style="height: 30px"

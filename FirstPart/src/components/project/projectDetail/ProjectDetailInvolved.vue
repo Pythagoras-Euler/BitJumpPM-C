@@ -96,22 +96,26 @@ let processData = reactive({
 </script>
 
 <template>
-  <!--    返回按钮-->
-  <router-link class="arrow-button" to="/project/joined"></router-link>
-  <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
-  <br />
-  <ProjectProcess
-    :project-id="introductionData.projectId"
-    :processData="processData.processTable"
-    :members-data="membersData.members"
-    :is-manager="false"
-  ></ProjectProcess>
-  <br />
-  <ProcessBar :process="introductionData.process"></ProcessBar>
-  <ProjectMembers
-    :members="membersData.members"
-    :isManager="false"
-  ></ProjectMembers>
+
+  <div style="margin: 50px">
+      <!--    返回按钮-->
+      <router-link class="arrow-button" to="/project/joined"></router-link>
+      <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
+      <br />
+      <ProjectProcess
+              :project-id="introductionData.projectId"
+              :processData="processData.processTable"
+              :members-data="membersData.members"
+              :is-manager="false"
+      ></ProjectProcess>
+      <br />
+      <ProcessBar :process="introductionData.process"></ProcessBar>
+      <ProjectMembers
+              :members="membersData.members"
+              :isManager="false"
+      ></ProjectMembers>
+  </div>
+
 </template>
 
 <style scoped>

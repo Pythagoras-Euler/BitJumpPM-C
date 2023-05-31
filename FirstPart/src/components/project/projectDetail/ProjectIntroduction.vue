@@ -16,11 +16,11 @@ export default {
 </script>
 
 <template>
-  <div class="align-inline align-center">
+  <div class="align-inline align-center div-style">
     <div style="margin: 50px">
-      <img :src="data.projectUrl" alt="无法加载图片" />
+      <img class="img-round" :src="data.projectUrl" alt="无法加载图片" />
     </div>
-    <div style="width: 800px">
+    <div class="div-style" style="background-color: rgba(109,192,192,0.82)">
       <div class="align-inline">
         <h2>&emsp;项目名：</h2>
         <textarea readonly v-model="data.projectName"></textarea>
@@ -49,15 +49,19 @@ export default {
 </template>
 
 <style scoped>
+.img-round {
+    border: 2px solid #beffff; /* 添加圆形边框 */
+    box-shadow: 1px 1px 1px #888888;
+}
+
 .align-inline {
   display: flex;
-  align-content: center;
 }
 
 .align-center {
   display: flex;
-  justify-content: center;
   align-items: center;
+    width: fit-content;
 }
 
 textarea {
@@ -67,5 +71,27 @@ textarea {
   border: 1px solid #ccc;
   font-size: 20px;
   height: 40px;
+    overflow-y: auto;
 }
+
+textarea::-webkit-scrollbar {
+    width: 0; /* 隐藏滚动条的宽度 */
+    height: 0; /* 隐藏滚动条的高度 */
+}
+
+.div-style {
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 80%;
+    background-color: #dbffff;
+    box-shadow: 2px 2px 2px #888888;
+    padding: 20px;
+}
+
+h2 {
+    color: white;
+}
+
+
 </style>
