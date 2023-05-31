@@ -1,20 +1,20 @@
 import { Delete, Post, Put } from "@/web/transport";
 
 function addMember(proid, userId) {
-    new Post()
+    return new Post()
         .url("project", String(proid))
         .url("user")
         .bodyObject({userId: userId})
         .send()
 }
 function deleteMember(proid, userId) {
-    new Delete()
+    return new Delete()
         .url("project", String(proid))
         .url("user?userId=" + String(userId))//为啥这不用body啊...
         .send()
 }
 function modifyManager(proid, userId, name, isUp) {
-    new Put()
+    return new Put()
         .url("project", String(proid))
         .url("manager")
         .bodyObject({
@@ -25,7 +25,7 @@ function modifyManager(proid, userId, name, isUp) {
         .send()
 }
 function removeMember(proid, userId, name) {
-    new Post()
+    return new Post()
         .url("project", String(proid))
         .url("change")
         .bodyObject({
@@ -34,4 +34,4 @@ function removeMember(proid, userId, name) {
         })
         .send()
 }
-export {addMember, deleteMember, modifyManager, changePost}
+export {addMember, deleteMember, modifyManager, removeMember}

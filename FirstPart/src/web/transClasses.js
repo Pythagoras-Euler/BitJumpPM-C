@@ -6,7 +6,7 @@ class User {
         nationality, marriage, birthDate, age, bloodType,
         politicalStatus, qqNumber, wechatNumber, email, post,
         address, school, major, previousCompany, jobTitle,
-        limitation, photoUrl, seniority, createdProId, managedProId,
+        limitation, photo, seniority, createdProId, managedProId,
         joinedProId) {
             this.userId = userId
             this.name = name
@@ -34,7 +34,7 @@ class User {
             this.previousCompany = previousCompany
             this.jobTitle = jobTitle
             this.limitation = limitation
-            this.photoUrl = photoUrl
+            this.photo = photo
             this.seniority = seniority
             this.createdProId = createdProId // list[number]
             this.managedProId = managedProId //list[number]
@@ -60,10 +60,10 @@ class TableItem {
 
 class Member {
     // Using
-    constructor(userId, name, photoUrl, post, process) {
+    constructor(userId, name, photo, post, process) {
         this.userId = userId
         this.name = name
-        this.photoUrl = photoUrl
+        this.photo = photo
         this.post = post
         this.process = process
     }
@@ -71,12 +71,12 @@ class Member {
 
 class Project {
     // Using
-    constructor(projectId, projectName, projectUrl,
+    constructor(projectId, projectName, projectPhoto,
         process, department, introduction,
         budget, leaderId, leaderName, members, table) {
         this.projectId = projectId
         this.projectName = projectName
-        this.projectUrl = projectUrl
+        this.projectPhoto = projectPhoto
         this.process = process
         this.department = department
         this.introduction = introduction
@@ -102,12 +102,12 @@ export {
 
 class ModProjIntro {
     // Using
-    constructor(projectId, projectName, projectUrl,
+    constructor(projectId, projectName, projectPhoto,
         process, department, introduction, budget,
         leaderId, leaderName) {
             this.projectId = projectId
             this.projectName = projectName
-            this.projectUrl = projectUrl
+            this.projectPhoto = projectPhoto
             this.process = process
             this.department = department
             this.introduction = introduction
@@ -154,11 +154,11 @@ class ModifyTableItem {
 }
 class BriefProject {
     // Using
-    constructor(projectId, projectName, projectUrl,
+    constructor(projectId, projectName, projectPhoto,
         process, leaderId, leaderName) {
             this.projectId = projectId
             this.projectName = projectName
-            this.projectUrl = projectUrl
+            this.projectPhoto = projectPhoto
             this.process = process
             this.leaderId = leaderId
             this.leaderName = leaderName
@@ -175,10 +175,10 @@ class BriefMember {
 }
 class BriefPersonInfo {
     // Using
-    constructor(userId, name, photoUrl) {
+    constructor(userId, name, photo) {
         this.userId = userId
         this.name = name
-        this.photoUrl = photoUrl
+        this.photo = photo
     }
 }
 class ModPersonInfo {
@@ -188,7 +188,7 @@ class ModPersonInfo {
         nationality, marriage, birthDate, age, bloodType,
         politicalStatus, qqNumber, wechatNumber, email, post,
         address, school, major, previousCompany, jobTitle,
-        limitation, photoUrl, seniority) {
+        limitation, photo, seniority) {
             this.name = name
             this.gender = gender //enum
             this.phoneNumber = phoneNumber
@@ -214,7 +214,7 @@ class ModPersonInfo {
             this.previousCompany = previousCompany
             this.jobTitle = jobTitle
             this.limitation = limitation
-            this.photoUrl = photoUrl
+            this.photo = photo
             this.seniority = seniority
     }
 }

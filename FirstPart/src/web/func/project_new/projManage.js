@@ -2,16 +2,17 @@ import auth from "@/store/modules/auth";
 import { Delete, Get, Post } from "@/web/transport";
 
 function getProjList(type) {
-    new Get()
+    return new Get()
         .url("project", "list")
         .query("type", type).addQuery()
-        .sendWith((resData) => {
-            // TODO: to use these data
-            return resData // transClasses.BriefProject
-        })
+        // .sendWith((resData) => {
+        //     // TODO: to use these data
+        //     return resData // transClasses.BriefProject
+        // })
+        .send()// transClasses.BriefProject
 }
 function createNewProject(projName, projUrl, projIntro) {
-    new Post()
+    return new Post()
         .url("project", "create")
         .bodyObject({
             projectName: projName,
@@ -21,7 +22,7 @@ function createNewProject(projName, projUrl, projIntro) {
         .send()
 }
 function applyCreatePerm(description) {
-    new Post()
+    return new Post()
         .url("project", "apply")
         .bodyObject({
             userId: String(auth.getters.userId()),
@@ -30,7 +31,7 @@ function applyCreatePerm(description) {
         .send()
 }
 function deleteProject(proid) {
-    new Delete()
+    return new Delete()
         .url("project", String(proid))
         .bodyObject(null)
         .send()
@@ -44,10 +45,11 @@ function getProjInfo(proid, order=null) {
         getMethod.query("order", order)
     }
     getMethod.addQuery()
-    getMethod.sendWith((resData) => {
-            // TODO: to use these data
-            return resData // transClasses.Project
-        })
+    // getMethod.sendWith((resData) => {
+    //         // TODO: to use these data
+    //         return resData // transClasses.Project
+    //     })
+    return getMethod.send()// transClasses.Project
 }
 function getProjMember(proid,
     pageNum=null, pageSize=null, name=null,
@@ -72,9 +74,10 @@ function getProjMember(proid,
             getMethod.query("post", post)
         }
         getMethod.addQuery()
-        getMethod.sendWith((resData) => {
-            // TODO: to use these data
-            return resData//transClasses.BriefMember
-        })
+        // getMethod.sendWith((resData) => {
+        //     // TODO: to use these data
+        //     return resData//transClasses.BriefMember
+        // })
+        return getMethod.send()//transClasses.BriefMember
 }
 export { getProjInfo, getProjMember }

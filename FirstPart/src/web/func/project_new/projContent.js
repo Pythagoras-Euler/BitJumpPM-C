@@ -1,7 +1,7 @@
 import { Post, Put } from "@/web/transport";
 
 function rejectItem(proid, itemid, reason) {
-    new Post()
+    return new Post()
         .url("project", String(proid))
         .url("tableitem", String(itemid))
         .url("delete")
@@ -10,7 +10,7 @@ function rejectItem(proid, itemid, reason) {
 }
 function modifyItem(proid, itemid, modTableItem) {
     // modTableItem为transClasses.ModifyTableItem类
-    new Put()
+    return new Put()
         .url("project", String(proid))
         .url("tableitem", String(itemid))
         .bodyObject(modTableItem)
@@ -18,14 +18,14 @@ function modifyItem(proid, itemid, modTableItem) {
 }
 function addItem(proid, addTableItem) {
     // addTableItem为transClasses.AddTableItem类
-    new Post()
+    return new Post()
         .url("project", String(proid))
         .url("tableitem")
         .bodyObject(addTableItem)
         .send()
 }
 function submitItem(proid, itemid, submitTime, description) {
-    new Post()
+    return new Post()
         .url("project", String(proid))
         .url("tableitem", String(itemid))
         .bodyObject({
@@ -36,7 +36,7 @@ function submitItem(proid, itemid, submitTime, description) {
 }
 function modifyProjIntroduction(proid, modProjIntro) {
     // modProjIntro为transClasses.ModProjIntro类
-    new Put()
+    return new Put()
         .url("project", String(proid))
         .bodyObject(modProjIntro)
         .send()
