@@ -2,6 +2,7 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import ChangeInfo from './components/ChangeInfo.vue'
+import ChangeWork from "@/components/ChangeWork.vue";
 // import InfoCards from "@/components/InfoCards.vue";
 
 </script>
@@ -15,6 +16,7 @@ import ChangeInfo from './components/ChangeInfo.vue'
 <!--<info-cards/>-->
 <!--        <el-button> My Button </el-button>-->
 <!--        <change-info />-->
+        <change-work/>
     </div>
   </header>
 

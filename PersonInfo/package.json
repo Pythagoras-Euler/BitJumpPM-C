@@ -9,14 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@element-plus/components": "^0.0.5",
-    "unplugin-auto-import": "^0.16.2",
-    "unplugin-vue-components": "^0.24.1",
-    "vue": "^3.2.47",
-    "vue-image-crop-upload": "^3.0.3"
+    "element-plus": "^2.3.5",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.1",
+    "unplugin-auto-import": "^0.16.2",
+    "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.4"
   }
 }
