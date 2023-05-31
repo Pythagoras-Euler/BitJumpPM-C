@@ -1,26 +1,15 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import ChangeInfo from './components/ChangeInfo.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import TheWelcome from "./components/TheWelcome.vue";
+import ChangeInfo from "./components/ChangeInfo.vue";
+import ChangeWork from "@/components/ChangeWork.vue";
 // import InfoCards from "@/components/InfoCards.vue";
-
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div>
-<!--      <HelloWorld msg="You did it!" />-->
-<!--<info-cards/>-->
-<!--        <el-button> My Button </el-button>-->
-<!--        <change-info />-->
-    </div>
-  </header>
-
   <main>
-<!--    <TheWelcome />-->
-      <change-info />
+    <!--    <TheWelcome />-->
+    <change-info />
   </main>
 </template>
 

@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import ElementPlus from "element-plus";
 import App from "./App.vue";
 import router from "./router.js";
 import store from "./store/index.js";
@@ -13,6 +14,7 @@ const app = createApp(App);
 
 app.use(store);
 app.use(router);
+app.use(ElementPlus);
 app.component("BaseButton", BaseButton);
 app.component("BaseCard", BaseCard);
 app.component("BaseDialog", BaseDialog);

@@ -126,9 +126,10 @@ let processData = reactive({
 </script>
 
 <template>
+
   <div style="margin: 50px">
       <!--    返回按钮-->
-      <router-link class="arrow-button" to="/manage"></router-link>
+      <router-link class="arrow-button" to="/project/manage"></router-link>
       <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
       <br />
       <ProjectProcess
@@ -145,6 +146,7 @@ let processData = reactive({
               :isManager="true"
       ></ProjectMembers>
   </div>
+
 </template>
 
 <style scoped>

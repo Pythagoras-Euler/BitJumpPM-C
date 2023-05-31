@@ -96,9 +96,10 @@ let processData = reactive({
 </script>
 
 <template>
+
   <div style="margin: 50px">
       <!--    返回按钮-->
-      <router-link class="arrow-button" to="/joined"></router-link>
+      <router-link class="arrow-button" to="/project/joined"></router-link>
       <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
       <br />
       <ProjectProcess
