@@ -68,7 +68,8 @@ bodyObject方法会直接将参数作为body的json结构体。
 数组类型（包括各js文件中和该文档中）都是用list\[\]表示的，这可能是错误的或有误导性的，但暂时不打算改正  
 实际上就是数组类型
 
-注意：**Member类被Project.members使用，但其中的photoUrl按照api修改文档被修改为photo，虽然apifox中并未修改**
+~~注意：**Member类被Project.members使用，但其中的photoUrl按照api修改文档被修改为photo，虽然apifox中并未修改**~~  
+已修改
 
 ## 3 rsa.js
 
