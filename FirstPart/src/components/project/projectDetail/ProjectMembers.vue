@@ -1,6 +1,7 @@
 <script>
 import { reactive } from "vue";
-
+import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import PopupDeleteMember from "./PopupDeleteMember.vue";
 
 import PopupAddMember from "./PopupAddMember.vue";
@@ -21,6 +22,8 @@ export default {
   },
 
   setup() {
+    const router = useRouter("router");
+    const route = useRoute("router");
     let data = reactive({
       visibleTooltip: null,
       isPopupAddMemberOpen: false,
@@ -34,10 +37,12 @@ export default {
       data.visibleTooltip = cardId;
     }
 
-    function hideTooltip() {
+    function hideTooltip(userId) {
       data.visibleTooltip = null;
-    }
 
+      const rpath = route.path + `/${userId}`;
+      router.push(rpath);
+    }
     //前往项目成员
     function gotoProjectMembers() {
       //todo 跳转到项目人员页面
@@ -83,7 +88,7 @@ export default {
       <div
         class="tooltip"
         v-if="data.visibleTooltip === member.userId"
-        @click="hideTooltip"
+        @click="hideTooltip(member.userId)"
       >
         <h4 style="font-weight: bold">项目角色</h4>
         <div style="height: 1px; background-color: #cccccc"></div>

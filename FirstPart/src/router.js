@@ -6,6 +6,7 @@ import CreatePage from "./pages/project/CreatePage.vue";
 import ManagePage from "./pages/project/ManagePage.vue";
 import JoinedPage from "./pages/project/JoinedPage.vue";
 import ProjectDetailPage from "./pages/project/ProjectDetailPage.vue";
+import ChangeInfoPage from "./pages/project/ChangeInfoPage.vue";
 import NotFound from "./pages/NotFound.vue";
 import store from "./store/index.js";
 const router = createRouter({
@@ -49,8 +50,13 @@ const router = createRouter({
           },
         },
         {
-          path: "manage/:id",
+          path: "manage/:projectId",
           component: ProjectDetailPage,
+          props: true,
+        },
+        {
+          path: "manage/:projectId/:userId",
+          component: ChangeInfoPage,
           props: true,
         },
 
@@ -62,8 +68,13 @@ const router = createRouter({
           },
         },
         {
-          path: "joined/:id",
+          path: "joined/:projectId",
           component: ProjectDetailPage,
+          props: true,
+        },
+        {
+          path: "joined/:projectId/:userId",
+          component: ChangeInfoPage,
           props: true,
         },
       ],
