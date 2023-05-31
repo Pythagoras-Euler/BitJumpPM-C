@@ -6,7 +6,7 @@ function signup(userid, password, email) {
     let userid = String(userid)
     let password = String(password)
     let cipherPw = encrypt(password)
-    new Post()
+    return new Post()
         .url("register", userid, cipherPw)
         .headers(null)
         .bodyObject({email: email})
@@ -16,28 +16,29 @@ function login(userid, password) {
     let userid = String(userid)
     let password = String(password)
     let cipherPw = encrypt(password)
-    new Post()
+    return new Post()
         .url("login", userid, cipherPw)
         .headers(null)
         .bodyObject(null)
-        .sendWith((respData, optional) => {
-            token = respData //? not sure
-            userid = optional[0]
-            // TODO: to use these data
-        }, userid)
+        // .sendWith((respData, optional) => {
+        //     token = respData //? not sure
+        //     userid = optional[0]
+        //     // TODO: to use these data
+        // }, userid)
+        .send()
 }
 function logout() {
-    new Post()
+    return new Post()
         .url("logout")
         .bodyObject(null)
         .send()
-    // TODO:在这里删除token
+    // // TODO:在这里删除token
 }
 function newPassword(oldpw, newpw) {
     let userid = String(auth.getters.userId())
     let cipherOldPw = encrypt(oldpw)
     let cipherNewPw = encrypt(newpw)
-    new Put()
+    return new Put()
         .url("password", userid, cipherOldPw, cipherNewPw)
         .bodyObject(null)
         .send()
