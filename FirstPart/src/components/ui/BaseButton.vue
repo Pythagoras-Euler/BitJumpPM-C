@@ -25,6 +25,10 @@ export default {
       required: false,
       default: "/",
     },
+    clickHandler: {
+      type: Function,
+      required: false,
+    },
   },
 };
 </script>
@@ -82,5 +86,6 @@ button:active {
 .outline:hover,
 .outline:active {
   background-color: #a5d8ff;
+  border: none;
 }
 </style>

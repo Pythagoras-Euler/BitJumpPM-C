@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import InitialPage from "./pages/InitialPage.vue";
-import MainPage from "./pages/MainPage.vue";
-import CreatePage from "./pages/CreatePage.vue";
-import ManagePage from "./pages/ManagePage.vue";
-import JoinedPage from "./pages/JoinedPage.vue";
+import ProjectPage from "./pages/ProjectPage.vue";
+import MainPage from "./pages/project/MainPage.vue";
+import CreatePage from "./pages/project/CreatePage.vue";
+import ManagePage from "./pages/project/ManagePage.vue";
+import JoinedPage from "./pages/project/JoinedPage.vue";
+import ProjectDetailPage from "./pages/project/ProjectDetailPage.vue";
+import ChangeInfoPage from "./pages/project/ChangeInfoPage.vue";
 import NotFound from "./pages/NotFound.vue";
 import store from "./store/index.js";
 const router = createRouter({
@@ -21,32 +24,60 @@ const router = createRouter({
       },
     },
     {
-      path: "/main",
-      component: MainPage,
+      path: "/project",
+      redirect: "/project/main",
+      component: ProjectPage,
       meta: {
-        requiredAuth: true,
+        requiredUnAuth: false,
       },
-    },
-    {
-      path: "/create",
-      component: CreatePage,
-      meta: {
-        requiredAuth: true,
-      },
-    },
-    {
-      path: "/manage",
-      component: ManagePage,
-      meta: {
-        requiredAuth: true,
-      },
-    },
-    {
-      path: "/joined",
-      component: JoinedPage,
-      meta: {
-        requiredAuth: true,
-      },
+      children: [
+        {
+          path: "main",
+          component: MainPage,
+        },
+        {
+          path: "create",
+          component: CreatePage,
+          meta: {
+            requiredAuth: true,
+          },
+        },
+        {
+          path: "manage",
+          component: ManagePage,
+          meta: {
+            requiredAuth: true,
+          },
+        },
+        {
+          path: "manage/:projectId",
+          component: ProjectDetailPage,
+          props: true,
+        },
+        {
+          path: "manage/:projectId/:userId",
+          component: ChangeInfoPage,
+          props: true,
+        },
+
+        {
+          path: "joined",
+          component: JoinedPage,
+          meta: {
+            requiredAuth: true,
+          },
+        },
+        {
+          path: "joined/:projectId",
+          component: ProjectDetailPage,
+          props: true,
+        },
+        {
+          path: "joined/:projectId/:userId",
+          component: ChangeInfoPage,
+          props: true,
+        },
+      ],
     },
 
     {
@@ -60,7 +91,7 @@ router.beforeEach(function (to, from, next) {
   if (to.meta.requiredAuth && !store.getters.isLoggedin) {
     next("/auth");
   } else if (to.meta.requiredUnAuth && store.getters.isLoggedin) {
-    next("/main");
+    next("/project");
   } else {
     console.log(store.getters.userId);
     next();
