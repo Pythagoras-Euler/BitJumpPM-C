@@ -43,6 +43,34 @@ let membersData = reactive({
       post: "234",
       process: 21,
     },
+      {
+          userId: 4,
+          name: "hgf",
+          photoUrl: "https://via.placeholder.com/30",
+          post: "234",
+          process: 21,
+      },
+      {
+          userId: 5,
+          name: "hgf",
+          photoUrl: "https://via.placeholder.com/30",
+          post: "234",
+          process: 21,
+      },
+      {
+          userId: 6,
+          name: "hgf",
+          photoUrl: "https://via.placeholder.com/30",
+          post: "234",
+          process: 21,
+      },
+      {
+          userId: 7,
+          name: "hgf",
+          photoUrl: "https://via.placeholder.com/30",
+          post: "234",
+          process: 21,
+      },
   ],
 });
 //进展表部分
@@ -98,23 +126,27 @@ let processData = reactive({
 </script>
 
 <template>
-  <!--    返回按钮-->
-  <router-link class="arrow-button" to="/project/manage"></router-link>
-  <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
-  <br />
-  <ProjectProcess
-    :project-id="introductionData.projectId"
-    :process-data="processData.processTable"
-    :members-data="membersData.members"
-    :is-manager="true"
-  ></ProjectProcess>
-  <br />
-  <ProcessBar :process="introductionData.process"></ProcessBar>
-  <ProjectMembers
-    :project-id="introductionData.projectId"
-    :members="membersData.members"
-    :isManager="true"
-  ></ProjectMembers>
+
+  <div style="margin: 50px">
+      <!--    返回按钮-->
+      <router-link class="arrow-button" to="/project/manage"></router-link>
+      <ProjectIntroduction :data="introductionData"></ProjectIntroduction>
+      <br />
+      <ProjectProcess
+              :project-id="introductionData.projectId"
+              :process-data="processData.processTable"
+              :members-data="membersData.members"
+              :is-manager="true"
+      ></ProjectProcess>
+      <br />
+      <ProcessBar :process="introductionData.process"></ProcessBar>
+      <ProjectMembers
+              :project-id="introductionData.projectId"
+              :members="membersData.members"
+              :isManager="true"
+      ></ProjectMembers>
+  </div>
+
 </template>
 
 <style scoped>
