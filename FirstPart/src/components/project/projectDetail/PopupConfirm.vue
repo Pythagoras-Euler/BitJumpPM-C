@@ -40,6 +40,7 @@ export default {
                     <h2>提示</h2>
                     <br>
                         <p class="label">请输入密码确认操作：</p>
+                    <br>
                         <input placeholder="输入密码" type="password" v-model="data.passwordInput">
                     <div class="modal-actions">
                         <button class="cancel-button" @click="$emit('cancel')">取消</button>
