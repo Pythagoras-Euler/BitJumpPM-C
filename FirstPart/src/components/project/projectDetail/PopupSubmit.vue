@@ -1,5 +1,5 @@
 <script>
-
+import 'flatpickr/dist/flatpickr.css'
 import FlatPickr from 'vue-flatpickr-component';
 import {reactive} from "vue";
 export default {
