@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <nav>
-      <BaseButton link mode="outline" to="/main" class="btn-nav"
+      <BaseButton link mode="outline" to="/project/main" class="btn-nav"
         >主页</BaseButton
       >
-      <BaseButton link mode="outline" to="/create" class="btn-nav"
+      <BaseButton link mode="outline" to="/project/create" class="btn-nav"
         >我创建的</BaseButton
       >
-      <BaseButton mode="outline" link to="/manage" class="btn-nav"
+      <BaseButton mode="outline" link to="/project/manage" class="btn-nav"
         >我管理的</BaseButton
       >
-      <BaseButton mode="outline" link to="/joined" class="btn-nav"
+      <BaseButton mode="outline" link to="/project/joined" class="btn-nav"
         >我加入的</BaseButton
       >
     </nav>

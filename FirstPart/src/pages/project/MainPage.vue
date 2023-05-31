@@ -1,14 +1,12 @@
 <template>
-  <MainBackground>
-    <BaseCard class="card">
-      <h1>页面正在开发中</h1>
-      <p>
-        抱歉，页面正在开发中，可以先访问我们的<router-link to="/manage"
-          >管理页面</router-link
-        >
-      </p>
-    </BaseCard>
-  </MainBackground>
+  <BaseCard class="card">
+    <h1>页面正在开发中</h1>
+    <p>
+      抱歉，页面正在开发中，可以先访问我们的<router-link to="/project/create"
+        >创建页面</router-link
+      >
+    </p>
+  </BaseCard>
 </template>
 <style scoped>
 .card {
