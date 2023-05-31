@@ -3,7 +3,9 @@ import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import ChangeInfo from './components/ChangeInfo.vue'
 import ChangeWork from "@/components/ChangeWork.vue";
+import MainDatePage from "@/components/mainDatePage.vue";
 // import InfoCards from "@/components/InfoCards.vue";
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 
 </script>
 
@@ -16,13 +18,15 @@ import ChangeWork from "@/components/ChangeWork.vue";
 <!--<info-cards/>-->
 <!--        <el-button> My Button </el-button>-->
 <!--        <change-info />-->
-        <change-work/>
+<!--        <change-work/>?-->
+
     </div>
   </header>
 
   <main>
 <!--    <TheWelcome />-->
-      <change-info />
+<!--      <change-info />-->
+      <main-date-page/>
   </main>
 </template>
 
