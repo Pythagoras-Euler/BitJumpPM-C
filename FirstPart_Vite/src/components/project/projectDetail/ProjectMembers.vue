@@ -44,16 +44,17 @@ export default {
       }
     }
 
-    function hideTooltip(userId) {
+    function hideTooltip() {
       data.visibleTooltip = null;
-
-      const rpath = "/project/personalInfo" + `/${userId}`;
-      router.push(rpath);
+    }
+    function gotoProjectMembers() {
+      //前往项目成员
     }
 
-    //前往项目成员
-    function gotoProjectMembers() {
+    function gotoProjectMember(userId) {
       //todo 跳转到项目人员页面
+      const rpath = "/project/personalInfo" + `/${userId}`;
+      router.push(rpath);
     }
 
     function addMember() {
@@ -78,6 +79,7 @@ export default {
       addMember,
       deleteMember,
       changePost,
+      gotoProjectMember,
     };
   },
 };
@@ -85,13 +87,7 @@ export default {
 
 <template>
   <div class="card-container">
-    <button
-      class="card"
-      style="height: 50px; color: white"
-      @click="gotoProjectMembers"
-    >
-      项目成员
-    </button>
+    <button class="card" style="height: 50px; color: white">项目成员</button>
     <div class="divider"></div>
     <div class="card-list">
       <div
@@ -107,10 +103,15 @@ export default {
         <div
           class="tooltip"
           v-if="data.visibleTooltip === member.userId"
-          @click="hideTooltip(member.userId)"
           :style="{ top: data.tooltipTop + 'px' }"
         >
-          <h4 style="font-weight: bold">项目角色</h4>
+          <button
+            class="user-btn"
+            style="font-weight: bold"
+            @click="gotoProjectMember(member.userId)"
+          >
+            项目角色
+          </button>
           <div
             style="height: 1px; background-color: #cccccc; margin: 5px"
           ></div>
@@ -244,5 +245,15 @@ export default {
 
 h3 {
   color: white;
+}
+
+.user-btn {
+  border: none;
+}
+
+.user-btn:active,
+.user-btn:hover {
+  cursor: pointer;
+  background-color: #ccc;
 }
 </style>
