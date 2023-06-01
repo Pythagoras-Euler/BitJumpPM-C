@@ -8,6 +8,10 @@
   </MainBackground>
 </template>
 
+<script>
+export default {};
+</script>
+
 <style scoped>
 .project-enter-from {
   opacity: 0;

@@ -178,6 +178,8 @@ export default {
       messageBoxStyle: {},
       isUserBoxVisible: false,
       userBoxStyle: {},
+      error: "",
+      isLoading: false,
     };
   },
   computed: {

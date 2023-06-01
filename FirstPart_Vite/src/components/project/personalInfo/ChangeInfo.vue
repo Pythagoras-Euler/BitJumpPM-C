@@ -41,6 +41,45 @@
           >确认</el-button
         >
       </div>
+      <el-divider content-position="left" class="divider"
+        >组织内信息</el-divider
+      >
+      <div class="form-group">
+        <label for="entryTime">入职时间:</label>
+        <input
+          type="text"
+          id="entryTime"
+          v-model="entryTime"
+          placeholder="请输入入职时间"
+        />
+      </div>
+      <div class="form-group">
+        <label for="department">当前部门:</label>
+        <input
+          type="text"
+          id="department"
+          v-model="department"
+          placeholder="请输入当前部门"
+        />
+      </div>
+      <div class="form-group">
+        <label for="entryTime">当前项目组:</label>
+        <input
+          type="text"
+          id="projectTeam"
+          v-model="projectTeam"
+          placeholder="请输入当前项目组"
+        />
+      </div>
+      <div class="form-group">
+        <label for="entryTime">权限角色:</label>
+        <input
+          type="number"
+          id="priv"
+          v-model="priv"
+          placeholder="当前权限角色"
+        />
+      </div>
       <el-divider content-position="left" class="divider">详细信息</el-divider>
       <div class="form-group">
         <label for="education">学历:</label>
@@ -224,23 +263,25 @@
         />
       </div>
       <div class="form-group">
-        <label for="workLmt">竞业限制:</label>
+        <label for="seniority ">工龄:</label>
         <input
-          type="tecxt"
-          id="workLmt"
-          v-model="workLmt"
-          placeholder="请输入受竞业限制"
+          type="number"
+          id="seniority"
+          v-model="seniority"
+          placeholder="请输入工龄"
         />
       </div>
       <div class="form-group">
-        <label for="others">其他:</label>
-        <input
-          type="text"
-          id="others"
-          v-model="others"
+        <label for="workLmt">竞业限制:</label>
+        <textarea
+          rows="3"
+          id="workLmt"
+          v-model="workLmt"
           placeholder="请输入受竞业限制"
+          style="width: 100%"
         />
       </div>
+
       <button type="button" class="btn" @click="submitFullForm">修改</button>
     </form>
   </div>
@@ -251,32 +292,41 @@
 // import { getToken } from '@/utils/auth'
 // import store from '@/store'
 // import Avatar from '@/assets/images/avatar.png'
-import { ref } from "vue";
 
-import { ElConfigProvider } from "element-plus";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const userData = store.getters["projects/personalData"];
+console.log(userData);
 let size = ref<"default" | "large" | "small">("default");
-let UserName: string = "";
-let birthday = "";
-let workID: string = "";
-let age: string = "";
-let email: string = "example@example.com";
-let phone: string = "";
-let education: string = "";
-let major: string = "";
-let graduation: string = "";
-let local: string = "";
-let nation: string = "";
-let marriage = ref<"保密" | "未婚" | "已婚" | "离异">("保密");
-let blood = ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密");
-let QQNum: string = "";
-let WeiXin: string = "";
-let PersonEmail: string = "";
-let address: string = "";
-let workExp: string = "";
-let Exp = ref<"无职称" | "初级" | "中级" | "高级">("无职称");
-let workLmt: string = "";
-let others: string = "";
-let politicStatus: string = "";
+let UserName: string = !userData ? "" : userData.name;
+let birthday = !userData ? "" : userData.birthDate;
+let workID: string = !userData ? "" : userData.userId;
+let age: string = !userData ? "" : userData.age;
+let email: string = !userData ? "" : userData.email;
+let phone: string = !userData ? "" : userData.phoneNumber;
+let education: string = !userData ? "" : userData.education;
+let major: string = !userData ? "" : userData.major;
+let graduation: string = !userData ? "" : userData.school;
+let local: string = !userData ? "" : userData.censusRegister;
+let nation: string = !userData ? "" : userData.nationality;
+let marriage = !userData ? "" : userData.marriage;
+let blood = !userData ? "" : userData.bloodType;
+let QQNum: string = !userData ? "" : userData.qqNumber;
+let WeiXin: string = !userData ? "" : userData.wechatNumber;
+let PersonEmail: string = !userData ? "" : userData.email;
+let address: string = !userData ? "" : userData.address;
+let workExp: string = !userData ? "" : userData.previousCompany;
+let Exp = !userData ? "" : userData.jobTitle;
+let workLmt: string = !userData ? "" : userData.limitation;
+let seniority: number | string = !userData ? "" : userData.seniority;
+let politicStatus: string = !userData ? "" : userData.politicalStatus;
+
+let entryTime: string = !userData ? "" : userData.entryTime;
+let department: string = !userData ? "" : userData.department;
+let projectTeam: string = !userData ? "" : userData.projectTeam;
+let priv: number | string = !userData ? "" : userData.priv;
 
 const marriageOpts = [
   {
@@ -393,32 +443,35 @@ const eduOpts = [
     label: "保密",
   },
 ];
-//可以给所有项目赋个初值
-function Init() {
-  size = ref<"default" | "large" | "small">("default");
-  UserName = "";
-  birthday = "";
-  workID = "";
-  age = "";
-  email = "example@example.com";
-  phone = "";
-  education = "";
-  major = "";
-  graduation = "";
-  local = "";
-  nation = "";
-  marriage = ref<"保密" | "未婚" | "已婚" | "离异">("保密");
-  blood = ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密");
-  QQNum = "";
-  WeiXin = "";
-  PersonEmail = "";
-  address = "";
-  workExp = "";
-  Exp = ref<"无职称" | "初级" | "中级" | "高级">("无职称");
-  workLmt = "";
-  others = "";
-  politicStatus = "";
-}
+
+// //可以给所有项目赋个初值
+// function Init(userData) {
+//   if (userData) {
+//     size = ref<"default" | "large" | "small">("default");
+//     UserName = userData.name;
+//     birthday = userData.birthDate;
+//     workID = userData.userId;
+//     age = userData.age;
+//     email = userData.email;
+//     phone = "";
+//     education = "";
+//     major = "";
+//     graduation = "";
+//     local = "";
+//     nation = "";
+//     marriage = ref<"保密" | "未婚" | "已婚" | "离异">("保密");
+//     blood = ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密");
+//     QQNum = "";
+//     WeiXin = "";
+//     PersonEmail = "";
+//     address = "";
+//     workExp = "";
+//     Exp = ref<"无职称" | "初级" | "中级" | "高级">("无职称");
+//     workLmt = "";
+//     others = "";
+//     politicStatus = "";
+//   }
+// }
 
 function cancelSub() {
   UserName = "";
@@ -451,7 +504,7 @@ function submitSimpleForm() {
     workExp,
     Exp,
     workLmt,
-    others
+    seniority
   );
   // 清空表单
   UserName = "";
@@ -468,6 +521,8 @@ function submitFullForm() {
   email = "";
   phone = "";
 }
+
+/* -------------------------------------------------------------------------- */
 </script>
 
 <style scoped>

@@ -4,6 +4,7 @@ export default {
     projects: [],
     messages: [],
     greeting: [],
+    personalData: null,
   },
   getters: {
     projects(state) {
@@ -18,6 +19,9 @@ export default {
     messages(state) {
       return state.messages;
     },
+    personalData(state) {
+      return state.personalData;
+    },
   },
 
   mutations: {
@@ -29,6 +33,9 @@ export default {
     },
     setMessages(state, payload) {
       state.messages = payload;
+    },
+    setPersonalData(state, payload) {
+      state.personalData = payload;
     },
   },
 
@@ -77,6 +84,23 @@ export default {
         });
         //console.log(messages);
         context.commit("setMessages", messages);
+      }
+    },
+    async loadPersonalData(context, payload) {
+      //获取个人信息列表
+      console.log(payload);
+      const response = await fetch(
+        "http://127.0.0.1:4523/m1/2693357-0-default/user/1/info"
+      );
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        const error = new Error(responseData.message || "Failed to fetch");
+        throw error;
+      } else {
+        const info = responseData.data;
+
+        context.commit("setPersonalData", info);
       }
     },
   },

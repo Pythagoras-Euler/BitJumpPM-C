@@ -1,6 +1,7 @@
 <template>
   <div class="form-container">
     <h2 class="title">信息录入</h2>
+
     <form>
       <div class="form-group">
         <label for="name">姓名:</label>
@@ -568,5 +569,9 @@ button:hover {
 .divider {
   border: 2px solid rgb(109, 192, 192);
   margin-top: 4vw;
+}
+.btn-router {
+  width: 20px;
+  height: 20px;
 }
 </style>
