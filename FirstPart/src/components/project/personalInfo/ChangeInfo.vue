@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <h2>信息录入</h2>
+    <h2 class="title">信息录入</h2>
     <form>
       <div class="form-group">
         <label for="name">姓名:</label>
@@ -12,11 +12,11 @@
         />
       </div>
       <div class="form-group">
-        <label for="age">工号:</label>
+        <label for="workID">工号:</label>
         <input
           type="text"
-          id="age"
-          v-model.number="workID"
+          id="workID"
+          v-model="workID"
           placeholder="请输入工号"
         />
       </div>
@@ -41,32 +41,37 @@
           >确认</el-button
         >
       </div>
-      <el-divider content-position="left">详细信息</el-divider>
+      <el-divider content-position="left" class="divider">详细信息</el-divider>
       <div class="form-group">
-        <label for="email">学历:</label>
+        <label for="education">学历:</label>
         <input
-          type="email"
-          id="email"
+          type="text"
+          id="education"
           v-model="education"
           placeholder="请输入学历"
         />
       </div>
       <div class="form-group">
-        <label for="phone">籍贯:</label>
-        <input type="tel" id="phone" v-model="local" placeholder="请输入籍贯" />
+        <label for="local">籍贯:</label>
+        <input
+          type="text"
+          id="local"
+          v-model="local"
+          placeholder="请输入籍贯"
+        />
       </div>
       <div class="form-group">
-        <label for="phone">民族:</label>
+        <label for="nation">民族:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="nation"
           v-model="nation"
           placeholder="请输入民族"
         />
       </div>
       <!--            TODO 下拉框-->
       <div class="form-group">
-        <label for="phone">婚姻状况:</label>
+        <label>婚姻状况:</label>
         <!--                <input type="tel" id="phone" v-model="marrige" placeholder="已婚/未婚/离异">-->
         <el-select v-model="marriage" placeholder="请选择婚姻状态">
           <el-option
@@ -79,7 +84,7 @@
         </el-select>
       </div>
       <div class="form-group">
-        <label for="phone">生日:</label>
+        <label>生日:</label>
         <div class="demo-date-picker">
           <el-date-picker
             v-model="birthday"
@@ -90,11 +95,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="phone">年龄:</label>
-        <input type="tel" id="phone" v-model="age" placeholder="请输入年龄" />
+        <label for="age">年龄:</label>
+        <input type="text" id="age" v-model="age" placeholder="请输入年龄" />
       </div>
       <div class="form-group">
-        <label for="phone">血型:</label>
+        <label>血型:</label>
         <el-select v-model="blood" placeholder="请选择血型">
           <el-option
             v-for="item in bloodOpts"
@@ -106,7 +111,7 @@
         </el-select>
       </div>
       <div class="form-group">
-        <label for="phone">政治面貌:</label>
+        <label>政治面貌:</label>
         <el-dropdown>
           <el-select v-model="politicStatus" placeholder="请选政治面貌">
             <el-option
@@ -119,46 +124,51 @@
           </el-select>
         </el-dropdown>
       </div>
-      <el-divider content-position="left">通讯信息</el-divider>
+      <el-divider content-position="left" class="divider">通讯信息</el-divider>
       <div class="form-group">
-        <label for="phone">QQ:</label>
-        <input type="tel" id="phone" v-model="QQNum" placeholder="请输入QQ号" />
+        <label for="QQNum">QQ:</label>
+        <input
+          type="text"
+          id="QQNum"
+          v-model="QQNum"
+          placeholder="请输入QQ号"
+        />
       </div>
       <div class="form-group">
-        <label for="phone">微信:</label>
+        <label for="WeiXin">微信:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="WeiXin"
           v-model="WeiXin"
           placeholder="请输入微信ID"
         />
       </div>
       <!--            TODO 多邮箱-->
       <div class="form-group">
-        <label for="phone">常用邮箱:</label>
+        <label for="PersonEmail">常用邮箱:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="PersonEmail"
           v-model="PersonEmail"
           placeholder="请输入常用邮箱"
         />
       </div>
       <div class="form-group">
-        <label for="phone">通讯地址:</label>
+        <label for="address">通讯地址:</label>
         <input
           type="address"
-          id="phone"
+          id="address"
           v-model="address"
           placeholder="请输入通讯地址"
         />
       </div>
       <!--            TODO 长学历-->
-      <el-divider content-position="left">教育信息</el-divider>
+      <el-divider content-position="left" class="divider">教育信息</el-divider>
       <div class="form-group">
-        <label for="phone">最高学历:</label>
+        <label for="education">最高学历:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="education"
           v-model="education"
           placeholder="请输入最高学历"
         />
@@ -175,58 +185,58 @@
         </el-dropdown>
       </div>
       <div class="form-group">
-        <label for="phone">毕业院校:</label>
+        <label for="graduation">毕业院校:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="graduation"
           v-model="graduation"
           placeholder="请输入毕业院校"
         />
       </div>
       <div class="form-group">
-        <label for="phone">所学专业:</label>
+        <label for="major">所学专业:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="major"
           v-model="major"
           placeholder="请输入所学专业"
         />
       </div>
       <!--            TODO 多经历-->
-      <el-divider content-position="left">从业信息</el-divider>
+      <el-divider content-position="left" class="divider">从业信息</el-divider>
       <div class="form-group">
-        <label for="phone">从业经历:</label>
+        <label for="workExp">从业经历:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="workExp"
           v-model="workExp"
           placeholder="请输入从业经历"
         />
       </div>
       <!--            TODO 多职称-->
       <div class="form-group">
-        <label for="phone">职称:</label>
+        <label for="Exp">职称:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="Exp"
           v-model="Exp"
           placeholder="请输入最高职称"
         />
       </div>
       <div class="form-group">
-        <label for="phone">竞业限制:</label>
+        <label for="workLmt">竞业限制:</label>
         <input
-          type="tel"
-          id="phone"
+          type="tecxt"
+          id="workLmt"
           v-model="workLmt"
           placeholder="请输入受竞业限制"
         />
       </div>
       <div class="form-group">
-        <label for="phone">其他:</label>
+        <label for="others">其他:</label>
         <input
-          type="tel"
-          id="phone"
+          type="text"
+          id="others"
           v-model="others"
           placeholder="请输入受竞业限制"
         />
@@ -463,21 +473,32 @@ function submitFullForm() {
 
 <style scoped>
 .form-container {
-  max-width: 500px;
+  max-width: 60vw;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
+
   border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 12px;
 }
 
 .form-group {
   margin-bottom: 10px;
+  /* -------------------------------------------------------------------------- */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1vw;
 }
 
 label {
-  display: inline-block;
   width: 80px;
   font-weight: bold;
+  text-align: left;
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
 }
 
 input {
@@ -486,6 +507,7 @@ input {
   border-radius: 3px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 1.1vw;
 }
 
 button {
@@ -493,6 +515,7 @@ button {
   width: 100%;
   padding: 10px;
   background-color: #2d8cf0;
+
   color: #fff;
   border: none;
   border-radius: 3px;
@@ -529,5 +552,21 @@ button:hover {
   color: var(--el-text-color-secondary);
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* beffff */
+
+.title {
+  font-size: 2vw;
+  margin: 1vw;
+  margin-left: 0;
+  margin-bottom: 2vw;
+  text-align: left;
+}
+
+.divider {
+  border: 2px solid rgb(109, 192, 192);
+  margin-top: 4vw;
 }
 </style>
