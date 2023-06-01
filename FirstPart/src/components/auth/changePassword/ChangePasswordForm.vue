@@ -131,7 +131,7 @@
     </p>
     <div v-else class="white-space"></div>
 
-    <BaseButton class="base-button">注册</BaseButton>
+    <BaseButton class="base-button">修改</BaseButton>
   </form>
 </template>
 

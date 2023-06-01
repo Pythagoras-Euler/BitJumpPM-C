@@ -7,6 +7,7 @@ import ManagePage from "./pages/project/ManagePage.vue";
 import JoinedPage from "./pages/project/JoinedPage.vue";
 import ProjectDetailPage from "./pages/project/ProjectDetailPage.vue";
 import ChangeInfoPage from "./pages/project/ChangeInfoPage.vue";
+import ChangePasswrodPage from "./pages/project/ChangePasswordPage.vue";
 import NotFound from "./pages/NotFound.vue";
 import store from "./store/index.js";
 const router = createRouter({
@@ -28,7 +29,7 @@ const router = createRouter({
       redirect: "/project/main",
       component: ProjectPage,
       meta: {
-        requiredUnAuth: false,
+        requiredAuth: true,
       },
       children: [
         {
@@ -38,46 +39,37 @@ const router = createRouter({
         {
           path: "create",
           component: CreatePage,
-          meta: {
-            requiredAuth: true,
-          },
         },
         {
           path: "manage",
           component: ManagePage,
-          meta: {
-            requiredAuth: true,
-          },
         },
         {
           path: "manage/:projectId",
           component: ProjectDetailPage,
           props: true,
         },
-        {
-          path: "manage/:projectId/:userId",
-          component: ChangeInfoPage,
-          props: true,
-        },
 
         {
           path: "joined",
           component: JoinedPage,
-          meta: {
-            requiredAuth: true,
-          },
         },
         {
           path: "joined/:projectId",
           component: ProjectDetailPage,
           props: true,
         },
+
         {
-          path: "joined/:projectId/:userId",
+          path: "personalInfo/:userId",
           component: ChangeInfoPage,
           props: true,
         },
       ],
+    },
+    {
+      path: "/changePassword",
+      component: ChangePasswrodPage,
     },
 
     {
@@ -88,7 +80,10 @@ const router = createRouter({
 });
 
 router.beforeEach(function (to, from, next) {
-  if (to.meta.requiredAuth && !store.getters.isLoggedin) {
+  const requiredAuth = to.matched.some((record) => record.meta.requiredAuth);
+  // console.log(requiredAuth);
+  // console.log(store.getters.isLoggedin);
+  if (requiredAuth && !store.getters.isLoggedin) {
     next("/auth");
   } else if (to.meta.requiredUnAuth && store.getters.isLoggedin) {
     next("/project");

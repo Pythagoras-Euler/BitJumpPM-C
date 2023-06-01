@@ -27,6 +27,14 @@ export default {
     },
   },
   actions: {
+    logout(context) {
+      console.log("!!!");
+      context.commit("setUser", {
+        userId: null,
+        token: null,
+      });
+      console.log(context.getters.userId);
+    },
     async changePassword(_context, payload) {
       //TODO:修改密码的通信
       console.log(payload);
