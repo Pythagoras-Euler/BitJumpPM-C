@@ -1,13 +1,14 @@
 import { Get, Put } from "../transport";
 
 function getPersonInfo(userid) {
-    new Get()
+    return new Get()
         .url("user", String(userid))
         .url("info")
-        .sendWith((resData) => {
-            // TODO: to use these data
-            return resData//transClasses.User
-        })
+        // .sendWith((resData) => {
+        //     // TODO: to use these data
+        //     return resData//transClasses.User
+        // })
+        .send()//transClasses.User
 }
 function getAllPersonInfo(name=null) {
     let getMethod = new Get()
@@ -15,14 +16,15 @@ function getAllPersonInfo(name=null) {
     if (name) {
         getMethod.query("name", name).addQuery()
     }
-    getMethod.sendWith((resData) => {
-        // TODO: to use these data
-        return resData//list[transClasses.BriefPersonMember]
-    })
+    // getMethod.sendWith((resData) => {
+    //     // TODO: to use these data
+    //     return resData//list[transClasses.BriefPersonInfo]
+    // })
+    return getMethod.send()//list[transClasses.BriefPersonInfo]
 }
 function modifyPersonInfo(userid, modPersonInfo) {
     // modPersonInfo是transClasses.ModPersonInfo类
-    new Put()
+    return new Put()
         .url("user", String(userid))
         .url("info")
         .bodyObject(modPersonInfo)
