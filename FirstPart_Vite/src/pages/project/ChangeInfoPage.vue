@@ -3,24 +3,24 @@
     <BaseButton link mode="flat" to="/project" class="btn-router"
       >返回主页</BaseButton
     >
-    <component :is="activePage"></component>
+    <ChangeInfo :isDisabled="isDisabled"></ChangeInfo>
   </div>
 </template>
 
 <script>
 import ChangeInfo from "@/components/project/personalInfo/ChangeInfo.vue";
-import ViewInfo from "@/components/project/personalInfo/ViewInfo.vue";
+
 export default {
   props: ["userId"],
   components: {
     ChangeInfo,
-    ViewInfo,
   },
 
   data() {
     return {
       isLoading: false,
       error: "",
+      isDisabled: true,
     };
   },
   computed: {
@@ -30,20 +30,13 @@ export default {
     currentUserId() {
       return this.$store.getters["userId"];
     },
-    activePage() {
-      const viewedId = this.userId;
-      const userId = this.currentUserId;
-      if (viewedId === userId) {
-        return "ChangeInfo";
-      } else {
-        return "ViewInfo";
-      }
-    },
+
     personalData() {
       this.$store.getters["projects/personalData"];
     },
   },
   methods: {
+    // TODO: 这里有通信代码，获取个人详情的
     async loadPersonalData() {
       //获取项目列表的函数
       this.isLoading = true;
@@ -57,9 +50,19 @@ export default {
       }
       this.isLoading = false;
     },
+    setReadMode() {
+      const viewedId = this.userId;
+      const userId = this.currentUserId;
+      if (viewedId === userId) {
+        this.isDisabled = false;
+      } else {
+        this.isDisabled = true;
+      }
+    },
   },
   created() {
     this.loadPersonalData();
+    this.setReadMode();
     //   console.log(this.personalData);
   },
 };

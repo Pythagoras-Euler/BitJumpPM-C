@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <h2 class="title">信息录入</h2>
+    <h2 class="title">{{ props.isDisabled ? "个人详情" : "本人详情" }}</h2>
     <form>
       <div class="form-group">
         <label for="name">姓名:</label>
@@ -9,6 +9,7 @@
           id="name"
           v-model="UserName"
           placeholder="请输入姓名"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -18,11 +19,18 @@
           id="workID"
           v-model="workID"
           placeholder="请输入工号"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
         <label for="email">邮箱:</label>
-        <input type="email" id="email" v-model="email" placeholder="email" />
+        <input
+          type="email"
+          id="email"
+          v-model="email"
+          placeholder="email"
+          :disabled="props.isDisabled"
+        />
       </div>
       <div class="form-group">
         <label for="phone">电话:</label>
@@ -31,13 +39,22 @@
           id="phone"
           v-model="phone"
           placeholder="请输入手机号码"
+          :disabled="props.isDisabled"
         />
       </div>
       <div id="buttons">
-        <el-button type="default" class="celBtn" @click="cancelSub"
+        <el-button
+          type="default"
+          class="celBtn"
+          @click="cancelSub"
+          v-if="!props.isDisabled"
           >取消</el-button
         >
-        <el-button type="default" class="btn" @click="submitSimpleForm"
+        <el-button
+          type="default"
+          class="btn"
+          @click="submitSimpleForm"
+          v-if="!props.isDisabled"
           >确认</el-button
         >
       </div>
@@ -51,6 +68,7 @@
           id="entryTime"
           v-model="entryTime"
           placeholder="请输入入职时间"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -60,6 +78,7 @@
           id="department"
           v-model="department"
           placeholder="请输入当前部门"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -69,6 +88,7 @@
           id="projectTeam"
           v-model="projectTeam"
           placeholder="请输入当前项目组"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -78,6 +98,7 @@
           id="priv"
           v-model="priv"
           placeholder="当前权限角色"
+          :disabled="props.isDisabled"
         />
       </div>
       <el-divider content-position="left" class="divider">详细信息</el-divider>
@@ -88,6 +109,7 @@
           id="education"
           v-model="education"
           placeholder="请输入学历"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -97,6 +119,7 @@
           id="local"
           v-model="local"
           placeholder="请输入籍贯"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -106,13 +129,18 @@
           id="nation"
           v-model="nation"
           placeholder="请输入民族"
+          :disabled="props.isDisabled"
         />
       </div>
       <!--            TODO 下拉框-->
       <div class="form-group">
         <label>婚姻状况:</label>
         <!--                <input type="tel" id="phone" v-model="marrige" placeholder="已婚/未婚/离异">-->
-        <el-select v-model="marriage" placeholder="请选择婚姻状态">
+        <el-select
+          v-model="marriage"
+          placeholder="请选择婚姻状态"
+          :disabled="props.isDisabled"
+        >
           <el-option
             v-for="item in marriageOpts"
             :key="item.value"
@@ -130,19 +158,30 @@
             type="date"
             placeholder="Pick a day"
             :size="size"
+            :disabled="props.isDisabled"
           />
         </div>
       </div>
       <div class="form-group">
         <label for="age">年龄:</label>
-        <input type="text" id="age" v-model="age" placeholder="请输入年龄" />
+        <input
+          type="text"
+          id="age"
+          v-model="age"
+          placeholder="请输入年龄"
+          :disabled="props.isDisabled"
+        />
       </div>
       <div class="form-group">
         <label>血型:</label>
-        <el-select v-model="blood" placeholder="请选择血型">
+        <el-select
+          v-model="blood"
+          placeholder="请选择血型"
+          :disabled="props.isDisabled"
+        >
           <el-option
             v-for="item in bloodOpts"
-            :key="item.value"
+            :key="item.label"
             :label="item.label"
             :value="item.value"
           >
@@ -152,7 +191,11 @@
       <div class="form-group">
         <label>政治面貌:</label>
         <el-dropdown>
-          <el-select v-model="politicStatus" placeholder="请选政治面貌">
+          <el-select
+            v-model="politicStatus"
+            placeholder="请选政治面貌"
+            :disabled="props.isDisabled"
+          >
             <el-option
               v-for="item in politicsOpts"
               :key="item.value"
@@ -171,6 +214,7 @@
           id="QQNum"
           v-model="QQNum"
           placeholder="请输入QQ号"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -180,6 +224,7 @@
           id="WeiXin"
           v-model="WeiXin"
           placeholder="请输入微信ID"
+          :disabled="props.isDisabled"
         />
       </div>
       <!--            TODO 多邮箱-->
@@ -190,6 +235,7 @@
           id="PersonEmail"
           v-model="PersonEmail"
           placeholder="请输入常用邮箱"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -199,6 +245,7 @@
           id="address"
           v-model="address"
           placeholder="请输入通讯地址"
+          :disabled="props.isDisabled"
         />
       </div>
       <!--            TODO 长学历-->
@@ -210,9 +257,14 @@
           id="education"
           v-model="education"
           placeholder="请输入最高学历"
+          :disabled="props.isDisabled"
         />
         <el-dropdown>
-          <el-select v-model="education" placeholder="请选择学历">
+          <el-select
+            v-model="education"
+            placeholder="请选择学历"
+            :disabled="props.isDisabled"
+          >
             <el-option
               v-for="item in eduOpts"
               :key="item.value"
@@ -230,6 +282,7 @@
           id="graduation"
           v-model="graduation"
           placeholder="请输入毕业院校"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -239,6 +292,7 @@
           id="major"
           v-model="major"
           placeholder="请输入所学专业"
+          :disabled="props.isDisabled"
         />
       </div>
       <!--            TODO 多经历-->
@@ -250,6 +304,7 @@
           id="workExp"
           v-model="workExp"
           placeholder="请输入从业经历"
+          :disabled="props.isDisabled"
         />
       </div>
       <!--            TODO 多职称-->
@@ -260,6 +315,7 @@
           id="Exp"
           v-model="Exp"
           placeholder="请输入最高职称"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -269,6 +325,7 @@
           id="seniority"
           v-model="seniority"
           placeholder="请输入工龄"
+          :disabled="props.isDisabled"
         />
       </div>
       <div class="form-group">
@@ -279,10 +336,18 @@
           v-model="workLmt"
           placeholder="请输入受竞业限制"
           style="width: 100%"
+          :disabled="props.isDisabled"
         />
       </div>
 
-      <button type="button" class="btn" @click="submitFullForm">修改</button>
+      <button
+        type="button"
+        class="btn"
+        @click="submitFullForm"
+        v-if="!props.isDisabled"
+      >
+        修改
+      </button>
     </form>
   </div>
 </template>
@@ -296,8 +361,17 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
+const props = defineProps({
+  // 声明父组件传递的参数
+  isDisabled: {
+    type: Boolean,
+    required: true,
+  },
+});
+
 const store = useStore();
 const userData = store.getters["projects/personalData"];
+
 console.log(userData);
 let size = ref<"default" | "large" | "small">("default");
 let UserName: string = !userData ? "" : userData.name;
@@ -311,14 +385,20 @@ let major: string = !userData ? "" : userData.major;
 let graduation: string = !userData ? "" : userData.school;
 let local: string = !userData ? "" : userData.censusRegister;
 let nation: string = !userData ? "" : userData.nationality;
-let marriage = !userData ? "" : userData.marriage;
-let blood = !userData ? "" : userData.bloodType;
+let marriage = !userData
+  ? ref<"保密" | "未婚" | "已婚" | "离异">("保密")
+  : userData.marriage;
+let blood = !userData
+  ? ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密")
+  : userData.bloodType;
 let QQNum: string = !userData ? "" : userData.qqNumber;
 let WeiXin: string = !userData ? "" : userData.wechatNumber;
 let PersonEmail: string = !userData ? "" : userData.email;
 let address: string = !userData ? "" : userData.address;
 let workExp: string = !userData ? "" : userData.previousCompany;
-let Exp = !userData ? "" : userData.jobTitle;
+let Exp = !userData
+  ? ref<"无职称" | "初级" | "中级" | "高级">("无职称")
+  : userData.jobTitle;
 let workLmt: string = !userData ? "" : userData.limitation;
 let seniority: number | string = !userData ? "" : userData.seniority;
 let politicStatus: string = !userData ? "" : userData.politicalStatus;
@@ -521,6 +601,8 @@ function submitFullForm() {
   email = "";
   phone = "";
 }
+
+return {};
 
 /* -------------------------------------------------------------------------- */
 </script>
