@@ -1,18 +1,12 @@
 <script>
 export default {
-  props: ["projectUrl", "projectName", "leaderName", "budget", "introduction"],
-  data() {
-    return {
+  props: {
       data: {
-        projectUrl: this.projectUrl,
-        projectName: this.projectName,
-        leaderName: this.leaderName,
-        introduction: this.introduction,
-        budget: this.budget,
-      },
-    };
-  },
-};
+          type: Object,
+          required: true
+      }
+  }
+}
 </script>
 
 <template>
@@ -52,6 +46,8 @@ export default {
 .img-round {
     border: 2px solid #beffff; /* 添加圆形边框 */
     box-shadow: 1px 1px 1px #888888;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .align-inline {

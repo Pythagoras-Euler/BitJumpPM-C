@@ -12,34 +12,6 @@ export default {
 
   setup(props, context) {
     let data = reactive({
-      //todo 通信，测试的members数据，来自于获取所有人员列表
-      membersEG: [
-        {
-          userId: 112233,
-          name: "韦斯利福法纳",
-          photoUrl: "https://via.placeholder.com/30",
-        },
-
-        {
-          userId: 112244,
-          name: "赛科福法纳",
-          photoUrl: "https://via.placeholder.com/30",
-        },
-
-        {
-          userId: 112255,
-          name: "戴维福法纳",
-          photoUrl: "https://via.placeholder.com/30",
-        },
-
-        {
-          userId: 112266,
-          name: "尤素福福法纳",
-          photoUrl: "https://via.placeholder.com/30",
-        },
-      ],
-
-      //下面是需要保留的部分
       memberClicked: null,
       isPopupConfirmOpen: false,
       members: null,
@@ -90,15 +62,31 @@ export default {
       context.emit("open");
     }
 
-    function search() {
-      if (data.searchName) {
+    async function search() {
+      if (data.searchName === null) {
         alert("请输入信息后搜索！");
         return;
       }
+        //todo 通信
+        //query参数
+        const name = data.searchName
+//无payload参数
+        try {
+            const response = await fetch(
+                "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
+            );
+            const responseData = await response.json();
 
-      //todo 通信，搜索字符串
-      console.log(data.searchName);
-      //返回值填入members
+            if (!response.ok) {
+                const error = new Error( "Failed to fetch");
+                throw error;
+            } else {
+                console.log(responseData)
+                data.members = responseData.data
+            }
+        } catch {
+            this.error = "抱歉，加载出错，请重试";
+        }
     }
 
     return {
@@ -136,14 +124,14 @@ export default {
               'card-dark': data.memberClicked === member,
               'card-light': data.memberClicked !== member,
             }"
-            v-for="member of data.membersEG"
+            v-for="member of data.members"
             :key="member.userId"
             @click="cardClicked(member)"
           >
             <div class="align-inline">
               <img
-                :src="member.photoUrl"
-                style="border-radius: 50%; margin: 5px"
+                :src="member.photo"
+                style="border-radius: 50%; margin: 5px; max-height: 30px; max-width: 30px"
                 alt="crack"
               />
               <div>
