@@ -45,17 +45,18 @@
       <div id="buttons">
         <el-button
           type="default"
-          class="celBtn"
-          @click="cancelSub"
+          @click.prevent="cancelSub"
           v-if="!props.isDisabled"
-          >取消</el-button
+          color="#1098ad"
+          >清空</el-button
         >
         <el-button
           type="default"
           class="btn"
           @click="submitSimpleForm"
+          color="#1098ad"
           v-if="!props.isDisabled"
-          >确认</el-button
+          >提交修改</el-button
         >
       </div>
       <el-divider content-position="left" class="divider"
@@ -340,14 +341,15 @@
         />
       </div>
 
-      <button
+      <el-button
         type="button"
         class="btn"
+        color="#1098ad"
         @click="submitFullForm"
         v-if="!props.isDisabled"
       >
-        修改
-      </button>
+        提交修改
+      </el-button>
     </form>
   </div>
 </template>
@@ -558,52 +560,48 @@ const eduOpts = [
 // }
 
 function cancelSub() {
-  UserName = "";
-  workID = "";
-  email = "";
-  phone = "";
+  UserName.value = "";
+  workID.value = "";
+  email.value = "";
+  phone.value = "";
 }
 function submitSimpleForm() {
   // 处理表单提交逻辑
   console.log(
     "提交表单",
-    UserName,
-    workID,
-    email,
-    phone,
-    age,
-    birthday,
-    education,
-    major,
-    graduation,
-    local,
-    graduation,
-    politicStatus,
-    marriage,
-    blood,
-    QQNum,
-    WeiXin,
-    PersonEmail,
-    address,
-    workExp,
-    Exp,
-    workLmt,
-    seniority
+    UserName.value,
+    workID.value,
+    email.value,
+    phone.value,
+    age.value,
+    birthday.value,
+    education.value,
+    major.value,
+    graduation.value,
+    local.value,
+    graduation.value,
+    politicStatus.value,
+    marriage.value,
+    blood.value,
+    QQNum.value,
+    WeiXin.value,
+    PersonEmail.value,
+    address.value,
+    workExp.value,
+    Exp.value,
+    workLmt.value,
+    seniority.value
   );
-  // 清空表单
-  UserName = "";
-  workID = "";
-  email = "";
-  phone = "";
 }
 function submitFullForm() {
   // 处理表单提交逻辑
-  console.log("提交表单", UserName, workID, email, phone);
-  // 清空表单
-  UserName = "";
-  age = "";
-  email = "";
-  phone = "";
+  console.log(
+    "提交表单",
+    UserName.value,
+    workID.value,
+    email.value,
+    phone.value
+  );
 }
 
 /* -------------------------------------------------------------------------- */
@@ -652,19 +650,19 @@ button {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #2d8cf0;
 
   color: #fff;
   border: none;
   border-radius: 3px;
   cursor: pointer;
 }
+/* button:active,
+button:hover {
+  color: #fff;
+} */
 #buttons {
   display: flex;
   justify-content: center;
-}
-button:hover {
-  background-color: #1c7ed6;
 }
 
 .demo-date-picker {

@@ -1,5 +1,18 @@
 <template>
   <div class="container">
+    <div v-if="isLoading" class="spinner">
+      <BaseSpinner></BaseSpinner>
+    </div>
+    <base-dialog :show="!!error" title="加载错误" @close="confirmError">
+      <template #default>
+        <p>{{ error }}</p>
+      </template>
+      <template #action>
+        <BaseButton mode="outline" class="message-button" @click="confirmError"
+          >确定</BaseButton
+        >
+      </template>
+    </base-dialog>
     <BaseButton link mode="flat" to="/project" class="btn-router"
       >返回主页</BaseButton
     >
@@ -58,6 +71,9 @@ export default {
       } else {
         this.isDisabled = true;
       }
+    },
+    confirmError() {
+      this.error = null;
     },
   },
   created() {
