@@ -371,42 +371,46 @@ const props = defineProps({
 
 const store = useStore();
 const userData = store.getters["projects/personalData"];
-
 console.log(userData);
-let size = ref<"default" | "large" | "small">("default");
-let UserName: string = !userData ? "" : userData.name;
-let birthday = !userData ? "" : userData.birthDate;
-let workID: string = !userData ? "" : userData.userId;
-let age: string = !userData ? "" : userData.age;
-let email: string = !userData ? "" : userData.email;
-let phone: string = !userData ? "" : userData.phoneNumber;
-let education: string = !userData ? "" : userData.education;
-let major: string = !userData ? "" : userData.major;
-let graduation: string = !userData ? "" : userData.school;
-let local: string = !userData ? "" : userData.censusRegister;
-let nation: string = !userData ? "" : userData.nationality;
-let marriage = !userData
-  ? ref<"保密" | "未婚" | "已婚" | "离异">("保密")
-  : userData.marriage;
-let blood = !userData
-  ? ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密")
-  : userData.bloodType;
-let QQNum: string = !userData ? "" : userData.qqNumber;
-let WeiXin: string = !userData ? "" : userData.wechatNumber;
-let PersonEmail: string = !userData ? "" : userData.email;
-let address: string = !userData ? "" : userData.address;
-let workExp: string = !userData ? "" : userData.previousCompany;
-let Exp = !userData
-  ? ref<"无职称" | "初级" | "中级" | "高级">("无职称")
-  : userData.jobTitle;
-let workLmt: string = !userData ? "" : userData.limitation;
-let seniority: number | string = !userData ? "" : userData.seniority;
-let politicStatus: string = !userData ? "" : userData.politicalStatus;
 
-let entryTime: string = !userData ? "" : userData.entryTime;
-let department: string = !userData ? "" : userData.department;
-let projectTeam: string = !userData ? "" : userData.projectTeam;
-let priv: number | string = !userData ? "" : userData.priv;
+let size = ref<"default" | "large" | "small">("default");
+let UserName = ref(!userData ? "" : userData.name);
+let birthday = ref(!userData ? "" : userData.birthDate);
+let workID = ref(!userData ? "" : userData.userId);
+let age = ref(!userData ? "" : userData.age);
+let email = ref(!userData ? "" : userData.email);
+let phone = ref(!userData ? "" : userData.phoneNumber);
+let education = ref(!userData ? "" : userData.education);
+let major = ref(!userData ? "" : userData.major);
+let graduation = ref(!userData ? "" : userData.school);
+let local = ref(!userData ? "" : userData.censusRegister);
+let nation = ref(!userData ? "" : userData.nationality);
+let marriage = ref(
+  !userData ? ref<"保密" | "未婚" | "已婚" | "离异">("保密") : userData.marriage
+);
+let blood = ref(
+  !userData
+    ? ref<"A型" | "B型" | "AB型" | "O型" | "保密">("保密")
+    : userData.bloodType
+);
+let QQNum = ref(!userData ? "" : userData.qqNumber);
+let WeiXin = ref(!userData ? "" : userData.wechatNumber);
+let PersonEmail = ref(!userData ? "" : userData.email);
+let address = ref(!userData ? "" : userData.address);
+let workExp = ref(!userData ? "" : userData.previousCompany);
+let Exp = ref(
+  !userData
+    ? ref<"无职称" | "初级" | "中级" | "高级">("无职称")
+    : userData.jobTitle
+);
+let workLmt = ref(!userData ? "" : userData.limitation);
+let seniority = ref(!userData ? "" : userData.seniority);
+let politicStatus = ref(!userData ? "" : userData.politicalStatus);
+
+let entryTime = ref(!userData ? "" : userData.entryTime);
+let department = ref(!userData ? "" : userData.department);
+let projectTeam = ref(!userData ? "" : userData.projectTeam);
+let priv = ref(!userData ? "" : userData.priv);
 
 const marriageOpts = [
   {
@@ -601,8 +605,6 @@ function submitFullForm() {
   email = "";
   phone = "";
 }
-
-return {};
 
 /* -------------------------------------------------------------------------- */
 </script>
