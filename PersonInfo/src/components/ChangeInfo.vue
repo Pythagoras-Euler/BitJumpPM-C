@@ -235,7 +235,6 @@
     </form>
   </div>
 </template>
-
 <script lang="ts" setup>
 // import myUpload from 'vue-image-crop-upload'
 // import { mapGetters } from 'vuex'
