@@ -7,48 +7,48 @@ import ProjectMembers from "./ProjectMembers.vue";
 
 //todo 通信，这部分需要替换为通信取到的特定项目信息
 let data = reactive({
-    introductionData: null,
-    processData: null,
-    membersData: null
-})
+  introductionData: null,
+  processData: null,
+  membersData: null,
+});
 //path参数
-const proid = 0
+const proid = 0;
 //todo 通信
 //query参数
-const order = 0
+const order = 0;
 //无payload参数
 try {
-    const response = await fetch(
-        "http://127.0.0.1:4523/m1/2693357-0-default/project/1"
-    );
-    const responseData = await response.json();
+  const response = await fetch(
+    "http://127.0.0.1:4523/m1/2693357-0-default/project/1"
+  );
+  const responseData = await response.json();
 
-    if (!response.ok) {
-        const error = new Error(responseData.message || "Failed to fetch");
-        throw error;
-    } else {
-        console.log(responseData)
-        //接到了数据，这里替换掉你原来直接硬编码进去的数据
-        data.introductionData = {
-            budget: responseData.data.budget,
-            introduction: responseData.data.introduction,
-            leaderName: responseData.data.leaderName,
-            process: responseData.data.process,
-            projectId: responseData.data.projectId,
-            projectName: responseData.data.projectName,
-            projectUrl: responseData.data.projectPhoto,
-        }
+  if (!response.ok) {
+    const error = new Error(responseData.message || "Failed to fetch");
+    throw error;
+  } else {
+    console.log(responseData);
+    //接到了数据，这里替换掉你原来直接硬编码进去的数据
+    data.introductionData = {
+      budget: responseData.data.budget,
+      introduction: responseData.data.introduction,
+      leaderName: responseData.data.leaderName,
+      process: responseData.data.process,
+      projectId: responseData.data.projectId,
+      projectName: responseData.data.projectName,
+      projectUrl: responseData.data.projectPhoto,
+    };
 
-        data.processData = responseData.data.table
+    data.processData = responseData.data.table;
 
-        data.membersData = responseData.data.members
+    data.membersData = responseData.data.members;
 
-        console.log(data.introductionData)
-        console.log(data.processData)
-        console.log(data.membersData)
-    }
+    console.log(data.introductionData);
+    console.log(data.processData);
+    console.log(data.membersData);
+  }
 } catch {
-    this.error = "抱歉，加载出错，请重试";
+  this.error = "抱歉，加载出错，请重试";
 }
 
 // function returnArrow() {
@@ -57,26 +57,24 @@ try {
 </script>
 
 <template>
-
   <div style="margin: 50px">
-      <!--    返回按钮-->
-      <router-link class="arrow-button" to="/project/joined"></router-link>
-      <ProjectIntroduction :data="data.introductionData"></ProjectIntroduction>
-      <br />
-      <ProjectProcess
-              :project-id="data.introductionData.projectId"
-              :processData="data.processData"
-              :members-data="data.membersData"
-              :is-manager="false"
-      ></ProjectProcess>
-      <br />
-      <ProcessBar :process="data.introductionData.process"></ProcessBar>
-      <ProjectMembers
-              :members="data.membersData"
-              :isManager="false"
-      ></ProjectMembers>
+    <!--    返回按钮-->
+    <router-link class="arrow-button" to="/project/joined"></router-link>
+    <ProjectIntroduction :data="data.introductionData"></ProjectIntroduction>
+    <br />
+    <ProjectProcess
+      :project-id="data.introductionData.projectId"
+      :processData="data.processData"
+      :members-data="data.membersData"
+      :is-manager="false"
+    ></ProjectProcess>
+    <br />
+    <ProcessBar :process="data.introductionData.process"></ProcessBar>
+    <ProjectMembers
+      :members="data.membersData"
+      :isManager="false"
+    ></ProjectMembers>
   </div>
-
 </template>
 
 <style scoped>

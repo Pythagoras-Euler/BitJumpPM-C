@@ -3,7 +3,7 @@ export default {
   state: {
     projects: [],
     messages: [],
-    greeting: [],
+    greeting: null,
     personalData: null,
   },
   getters: {
@@ -83,6 +83,7 @@ export default {
           });
         });
         //console.log(messages);
+
         context.commit("setMessages", messages);
       }
     },

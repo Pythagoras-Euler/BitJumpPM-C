@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <component :is="activePage"></component>
+    <Suspense>
+      <component :is="activePage"></component>
+    </Suspense>
   </div>
 </template>
 

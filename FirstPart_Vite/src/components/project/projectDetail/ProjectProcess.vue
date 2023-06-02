@@ -127,12 +127,12 @@ export default {
         <td>{{ data.beginTime }}</td>
         <td>{{ data.endTime }}</td>
         <td>{{ data.ownerName }}</td>
-        <td>{{ data.isFinished }}</td>
+        <td>{{ data.isFinish }}</td>
         <td>{{ data.finishTime }}</td>
         <td>{{ data.description }}</td>
         <td>
           <button
-            v-if="isManager && data.isFinished"
+            v-if="isManager && data.isFinish"
             class="reject-button"
             @click="reject(data)"
           >
@@ -140,7 +140,7 @@ export default {
           </button>
           <!--                    todo 这里还应该有个判断条件：责任人必须是自己才显示提交按钮-->
           <button
-            v-if="!isManager && data.isFinished"
+            v-if="!isManager && data.isFinish"
             class="submit-button"
             @click="submit(data)"
           >
@@ -186,15 +186,15 @@ td {
   border: 2px solid lightgray;
   border-radius: 10px;
   padding: 10px;
-    max-width: 80%;
-    background-color: #dbffff;
-    box-shadow: 2px 2px 2px #888888;
+  max-width: 80%;
+  background-color: #dbffff;
+  box-shadow: 2px 2px 2px #888888;
 }
 
 .table-style {
   border-collapse: collapse;
   width: 100%;
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .table-style tr:nth-child(even) {
