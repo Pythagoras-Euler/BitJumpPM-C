@@ -49,11 +49,11 @@
                   >{{ getMsgTitle(data.day, data.date.getDay()) }}
                 </span>
                 <div class="msg-content">
-                  <div v-for="message in messages" :key="message.name">
+                  <template v-for="message in messages" :key="message.name">
                     <span v-if="showMsg(message.endTime, data.day)">
                       {{ message.name }}
                     </span>
-                  </div>
+                  </template>
                 </div>
               </div>
             </el-popover>
