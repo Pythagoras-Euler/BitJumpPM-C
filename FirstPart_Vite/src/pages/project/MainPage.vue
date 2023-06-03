@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div v-if="isLoading" class="spinner">
+    <BaseSpinner></BaseSpinner>
+  </div>
+  <div v-else class="container">
     <div class="greeting-box">
       <span class="greeting">{{ greeting }}</span>
     </div>
@@ -73,6 +76,8 @@ export default {
   components: {
     MessageTag,
   },
+
+  props: ["isLoading"],
   setup() {
     const calendar = ref();
     const selectDate = (val) => {
@@ -175,7 +180,7 @@ export default {
         const timeDiff = dateA.getTime() - dateB.getTime();
         // 计算天数差值
         const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        console.log(dateA);
+        //console.log(dateA);
         if (dayDiff < 0) {
           return "info";
         } else if (dayDiff <= 10) {
@@ -216,6 +221,11 @@ export default {
 </style>
 
 <style scoped>
+.spinner {
+  /* margin-top: 3.2rem; */
+  margin-top: 20vh;
+}
+
 .container {
   display: flex;
   flex-direction: column;

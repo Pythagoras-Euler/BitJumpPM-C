@@ -94,7 +94,10 @@ export default {
 
   background: linear-gradient(to right, #c3fae8, #a5d8ff);
 }
-
+.message-button {
+  border-radius: 6px;
+  font-size: 1vw;
+}
 .btn-router {
   width: 7vw;
   height: 3vw;

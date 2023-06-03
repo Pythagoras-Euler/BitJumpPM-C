@@ -44,8 +44,9 @@ export default {
 
   actions: {
     async loadProjects(context, payload) {
+      //console.log(payload);
       try {
-        const response = await getProjList("1");
+        const response = await getProjList(payload.mode);
         //  console.log(response);
         context.commit("setProjects", response);
       } catch (error) {

@@ -1,15 +1,28 @@
 <template>
-  <MainBackground>
+  <MainBackground @toggleLoading="handleLoad">
     <router-view v-slot="slotProps">
       <transition name="project" mode="out-in">
-        <component :is="slotProps.Component"> </component>
+        <component :is="slotProps.Component" :isLoading="isLoading">
+        </component>
       </transition>
     </router-view>
   </MainBackground>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+  methods: {
+    handleLoad() {
+      this.isLoading = !this.isLoading;
+      //  console.log("projectPage", this.isLoading);
+    },
+  },
+};
 </script>
 
 <style scoped>
