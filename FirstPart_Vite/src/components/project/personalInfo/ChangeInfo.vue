@@ -629,7 +629,7 @@ function cancelSub() {
   email.value = "";
   phone.value = "";
 }
-function submitSimpleForm() {
+function submitFullForm() {
   // 处理表单提交逻辑
   console.log(
     "提交表单",
@@ -658,11 +658,10 @@ function submitSimpleForm() {
     photo.value
   );
 }
-function submitFullForm() {
+function submitSimpleForm() {
   // 处理表单提交逻辑
   console.log(
     "提交表单",
-
     UserName.value,
     workID.value,
     email.value,

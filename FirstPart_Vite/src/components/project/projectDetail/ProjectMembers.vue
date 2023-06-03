@@ -52,7 +52,7 @@ export default {
     }
 
     function gotoProjectMember(userId) {
-      //todo 跳转到项目人员页面
+      // 跳转到项目人员页面
       const rpath = "/project/personalInfo" + `/${userId}`;
       router.push(rpath);
     }

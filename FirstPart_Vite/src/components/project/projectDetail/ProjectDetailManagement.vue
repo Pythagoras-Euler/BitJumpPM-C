@@ -6,7 +6,7 @@ import ProjectMembers from "./ProjectMembers.vue";
 
 import { onBeforeMount, onMounted, reactive } from "vue";
 
-//todo 通信，这部分需要替换为通信取到的特定项目信息
+//todo 通信，这部分需要替换为通信取到的特定项目信息  getProjInfo
 
 //方便调试，把项目信息拆为三部分
 //特定项目信息的第一部分
@@ -16,7 +16,6 @@ let data = reactive({
   membersData: null,
 });
 
-//todo 通信
 //path参数
 const proid = 0;
 //query参数
@@ -57,7 +56,7 @@ try {
 }
 
 // function returnArrow() {
-//   //todo 返回项目预览页
+//   // 返回项目预览页
 //   this.$router.go(-1);
 // }
 </script>

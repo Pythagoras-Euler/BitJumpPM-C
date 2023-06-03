@@ -22,7 +22,7 @@ export default {
     function cardClicked(member) {
       if (data.memberClicked !== member) {
         data.memberClicked = member;
-          data.postInput = null
+        data.postInput = null;
       } else {
         data.memberClicked = null;
       }
@@ -46,6 +46,7 @@ export default {
     function confirm() {
       data.isPopupConfirmOpen = false;
       context.emit("cancel");
+
       //todo 通信
       console.log(
         //项目id
@@ -67,26 +68,26 @@ export default {
         alert("请输入信息后搜索！");
         return;
       }
-        //todo 通信
-        //query参数
-        const name = data.searchName
-//无payload参数
-        try {
-            const response = await fetch(
-                "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
-            );
-            const responseData = await response.json();
+      //todo 通信
+      //query参数
+      const name = data.searchName;
+      //无payload参数
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
+        );
+        const responseData = await response.json();
 
-            if (!response.ok) {
-                const error = new Error( "Failed to fetch");
-                throw error;
-            } else {
-                console.log(responseData)
-                data.members = responseData.data
-            }
-        } catch {
-            this.error = "抱歉，加载出错，请重试";
+        if (!response.ok) {
+          const error = new Error("Failed to fetch");
+          throw error;
+        } else {
+          console.log(responseData);
+          data.members = responseData.data;
         }
+      } catch {
+        this.error = "抱歉，加载出错，请重试";
+      }
     }
 
     return {
@@ -131,11 +132,18 @@ export default {
             <div class="align-inline">
               <img
                 :src="member.photo"
-                style="border-radius: 50%; margin: 5px; max-height: 30px; max-width: 30px"
+                style="
+                  border-radius: 50%;
+                  margin: 5px;
+                  max-height: 30px;
+                  max-width: 30px;
+                "
                 alt="crack"
               />
               <div>
-                <p style="margin-bottom: 5px; margin-top: 5px">工号：{{ member.userId }}</p>
+                <p style="margin-bottom: 5px; margin-top: 5px">
+                  工号：{{ member.userId }}
+                </p>
                 <p>姓名：{{ member.name }}</p>
               </div>
             </div>
@@ -174,7 +182,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 textarea {
@@ -196,7 +203,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-    transition: opacity 0.7s;
+  transition: opacity 0.7s;
 }
 
 .modal-dialog {
@@ -285,7 +292,7 @@ button {
   margin: 10px;
   transition: background-color 0.5s ease;
   cursor: pointer;
-    box-shadow: 3px 3px 3px #888888
+  box-shadow: 3px 3px 3px #888888;
 }
 
 .card-light {

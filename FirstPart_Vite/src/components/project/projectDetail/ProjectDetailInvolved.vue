@@ -5,7 +5,7 @@ import ProcessBar from "./ProcessBar.vue";
 import { reactive } from "vue";
 import ProjectMembers from "./ProjectMembers.vue";
 
-//todo 通信，这部分需要替换为通信取到的特定项目信息
+//todo 通信，这部分需要替换为通信取到的特定项目信息  getProjInfo
 let data = reactive({
   introductionData: null,
   processData: null,
@@ -13,7 +13,7 @@ let data = reactive({
 });
 //path参数
 const proid = 0;
-//todo 通信
+
 //query参数
 const order = 0;
 //无payload参数
@@ -52,7 +52,7 @@ try {
 }
 
 // function returnArrow() {
-//   //todo 返回项目预览页
+//   // 返回项目预览页
 // }
 </script>
 
