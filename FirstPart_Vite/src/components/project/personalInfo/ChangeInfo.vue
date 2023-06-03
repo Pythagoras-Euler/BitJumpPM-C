@@ -12,6 +12,7 @@
             ref="fileInput"
             accept="image/*"
             @change="handleFileChange"
+            :disabled="props.isDisabled"
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
