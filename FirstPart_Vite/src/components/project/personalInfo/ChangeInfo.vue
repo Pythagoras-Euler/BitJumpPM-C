@@ -2,6 +2,33 @@
   <div class="form-container">
     <h2 class="title">{{ props.isDisabled ? "个人详情" : "本人详情" }}</h2>
     <form>
+      <div class="img-container">
+        <div class="img-box">
+          <img class="img-preview" :src="photo" v-if="photo" alt="头像" />
+        </div>
+        <label class="custom-file-upload">
+          <input
+            type="file"
+            ref="fileInput"
+            accept="image/*"
+            @change="handleFileChange"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="icon-img"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+            />
+          </svg>
+        </label>
+      </div>
       <div class="form-group">
         <label for="name">姓名:</label>
         <input
@@ -414,6 +441,9 @@ let department = ref(!userData ? "" : userData.department);
 let projectTeam = ref(!userData ? "" : userData.projectTeam);
 let priv = ref(!userData ? "" : userData.priv);
 
+let photo = ref(!userData ? "" : userData.photo);
+const fileInputRef = ref<HTMLInputElement | null>(null);
+
 const marriageOpts = [
   {
     value: "未婚",
@@ -559,6 +589,39 @@ const eduOpts = [
 //   }
 // }
 
+const handleFileChange = (event: Event) => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const fileSize = file.size; // 获取文件大小，单位为字节
+    const maxSize = 200 * 1024; // 200KB，将字节转换为KB
+    if (fileSize <= maxSize) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        photo.value = event.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // 文件大小超过限制，进行相应处理
+      alert("上传的文件大小不能超过200KB");
+      // 清空文件选择框的值
+      if (fileInputRef.value) {
+        fileInputRef.value.value = "";
+      }
+    }
+  }
+};
+
+// const handleFileChange = (event: Event) => {
+//   const file = (event.target as HTMLInputElement).files?.[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = (event) => {
+//       photo.value = event.target?.result as string;
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
+
 function cancelSub() {
   UserName.value = "";
   workID.value = "";
@@ -590,17 +653,20 @@ function submitSimpleForm() {
     workExp.value,
     Exp.value,
     workLmt.value,
-    seniority.value
+    seniority.value,
+    photo.value
   );
 }
 function submitFullForm() {
   // 处理表单提交逻辑
   console.log(
     "提交表单",
+
     UserName.value,
     workID.value,
     email.value,
-    phone.value
+    phone.value,
+    photo.value
   );
 }
 
@@ -704,5 +770,49 @@ button:hover {
 .divider {
   border: 2px solid rgb(109, 192, 192);
   margin-top: 4vw;
+}
+
+.img-container {
+  display: flex;
+  height: 22vh;
+  max-width: 25%;
+  gap: 1vw;
+  margin-bottom: 2vw;
+}
+.img-box {
+  flex: 8 8 80%;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+.img-preview {
+  width: 100%;
+  height: 100%;
+}
+.custom-file-upload {
+  flex: 2 2 20%;
+  align-self: flex-end;
+  height: fit-content;
+
+  /* border: 1px solid black; */
+
+  cursor: pointer;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+.custom-file-upload span {
+  font-size: 1vw;
+}
+.icon-img {
+  width: 24px;
+  stroke: rgb(109, 192, 192);
 }
 </style>
