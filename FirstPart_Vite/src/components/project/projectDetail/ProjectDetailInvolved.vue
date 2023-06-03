@@ -57,19 +57,23 @@ try {
 </script>
 
 <template>
-  <div style="margin: 50px">
+  <div class="content-box">
     <!--    返回按钮-->
     <router-link class="arrow-button" to="/project/joined"></router-link>
-    <ProjectIntroduction :data="data.introductionData"></ProjectIntroduction>
-    <br />
-    <ProjectProcess
-      :project-id="data.introductionData.projectId"
-      :processData="data.processData"
-      :members-data="data.membersData"
-      :is-manager="false"
-    ></ProjectProcess>
-    <br />
-    <ProcessBar :process="data.introductionData.process"></ProcessBar>
+    <div class="intro-box">
+      <ProjectIntroduction :data="data.introductionData"></ProjectIntroduction>
+    </div>
+    <div class="table-box">
+      <ProjectProcess
+        :project-id="data.introductionData.projectId"
+        :processData="data.processData"
+        :members-data="data.membersData"
+        :is-manager="false"
+      ></ProjectProcess>
+    </div>
+    <div class="process-box">
+      <ProcessBar :process="data.introductionData.process"></ProcessBar>
+    </div>
     <ProjectMembers
       :members="data.membersData"
       :isManager="false"
@@ -78,19 +82,48 @@ try {
 </template>
 
 <style scoped>
+.content-box {
+  position: fixed;
+  height: 100vh;
+  overflow: auto;
+
+  /* padding: 50px; */
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 5vw;
+}
+
+.intro-box {
+  flex: 3 3 30%;
+
+  /* border: 1px solid black; */
+}
+.table-box {
+  flex: 5 5 50%;
+  /* border: 1px solid black; */
+}
+
+.process-box {
+  flex: 2 2 20%;
+  /* border: 1px solid black; */
+}
+
+/* -------------------------------------------------------------------------- */
 .arrow-button {
   width: 50px;
   height: 50px;
   background-image: url(@/assets/arrow.svg);
   background-size: contain;
   background-repeat: no-repeat;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 5px;
   position: fixed;
   top: 10px;
   left: 10px;
   transition: background-color 0.5s ease;
   cursor: pointer;
+  border: none;
 }
 
 .arrow-button:hover {

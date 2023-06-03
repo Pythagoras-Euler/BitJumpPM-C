@@ -92,7 +92,7 @@ export default {
   height: 100vh;
   width: 100vw;
 
-  background-color: rgba(109, 192, 192);
+  background: linear-gradient(to right, #c3fae8, #a5d8ff);
 }
 
 .btn-router {
@@ -101,7 +101,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  color: #e9ecef;
+  color: #555;
   display: flex;
   align-items: center;
 }
