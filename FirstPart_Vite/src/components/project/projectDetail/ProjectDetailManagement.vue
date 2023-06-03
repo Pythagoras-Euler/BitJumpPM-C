@@ -80,7 +80,7 @@ try {
     </div>
     <!-- <br /> -->
     <div class="process-box">
-      <ProcessBar :process="data.introductionData"></ProcessBar>
+      <ProcessBar :process="data.introductionData.process"></ProcessBar>
     </div>
     <ProjectMembers
       :project-id="data.introductionData.projectId"

@@ -59,7 +59,7 @@ export default {
     async saveData(data) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("signup", data);
+        await this.$store.dispatch("vxSignup", data);
         this.submitSuccess = true;
       } catch (error) {
         this.error = new Error(error.message);
