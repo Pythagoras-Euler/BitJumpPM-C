@@ -65,7 +65,10 @@ export default {
     async saveData(data) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("login", data);
+        //console.log(data);
+        // console.log("111", this.$store.getters.token);
+        await this.$store.dispatch("vxLogin", data);
+
         this.submitSuccess = true;
       } catch (error) {
         this.error = new Error(error.message);
@@ -77,7 +80,7 @@ export default {
     },
     confirmSuccess() {
       this.submitSuccess = false;
-      this.$router.replace("/main");
+      this.$router.replace("/project");
     },
   },
 };
