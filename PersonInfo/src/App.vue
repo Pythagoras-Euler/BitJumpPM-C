@@ -3,13 +3,15 @@ import HelloWorld from "./components/HelloWorld.vue";
 import TheWelcome from "./components/TheWelcome.vue";
 import ChangeInfo from "./components/ChangeInfo.vue";
 import ChangeWork from "@/components/ChangeWork.vue";
+
+import MainDatePage from "./components/mainDatePage.vue";
 // import InfoCards from "@/components/InfoCards.vue";
 </script>
 
 <template>
   <main>
     <!--    <TheWelcome />-->
-    <change-info />
+    <main-date-page></main-date-page>
   </main>
 </template>
 

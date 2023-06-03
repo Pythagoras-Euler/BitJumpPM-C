@@ -110,12 +110,29 @@ export default {
   methods: {
     handleFileChange() {
       const file = this.$refs.fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.projectUrl = event.target.result;
-      };
-      reader.readAsDataURL(file);
+      const maxSize = 200 * 1024; // 200KB，将字节转换为KB
+      if (file.size <= maxSize) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.projectUrl = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // 文件大小超过限制，进行相应处理
+        alert("上传的文件大小不能超过200KB");
+        // 清空文件选择框的值
+        this.$refs.fileInput.value = "";
+      }
     },
+
+    // handleFileChange() {
+    //   const file = this.$refs.fileInput.files[0];
+    //   const reader = new FileReader();
+    //   reader.onload = (event) => {
+    //     this.projectUrl = event.target.result;
+    //   };
+    //   reader.readAsDataURL(file);
+    // },
     submitData() {
       if (this.validateForm()) {
         const fromData = {

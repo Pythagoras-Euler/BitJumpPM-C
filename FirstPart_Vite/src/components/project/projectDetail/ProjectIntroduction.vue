@@ -1,97 +1,113 @@
 <script>
 export default {
-  props: ["projectUrl", "projectName", "leaderName", "budget", "introduction"],
-  data() {
-    return {
-      data: {
-        projectUrl: this.projectUrl,
-        projectName: this.projectName,
-        leaderName: this.leaderName,
-        introduction: this.introduction,
-        budget: this.budget,
-      },
-    };
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
   },
 };
 </script>
 
 <template>
-  <div class="align-inline align-center div-style">
-    <div style="margin: 50px">
+  <div class="intro-content">
+    <div class="img-box">
       <img class="img-round" :src="data.projectUrl" alt="无法加载图片" />
     </div>
-    <div class="div-style" style="background-color: rgba(109,192,192,0.82)">
-      <div class="align-inline">
-        <h2>&emsp;项目名：</h2>
-        <textarea readonly v-model="data.projectName"></textarea>
-      </div>
-      <br />
-      <div class="align-inline">
-        <h2>&emsp;负责人：</h2>
-        <textarea readonly v-model="data.leaderName"></textarea>
-      </div>
-      <br />
-      <div class="align-inline">
-        <h2>项目预算：</h2>
-        <textarea readonly v-model="data.budget"></textarea>
-      </div>
-      <br />
-      <div class="align-inline">
-        <h2>项目简介：</h2>
-        <textarea
-          readonly
-          v-model="data.introduction"
-          style="width: 400px; height: 100px"
-        ></textarea>
-      </div>
+    <div class="info-box">
+      <h2>&emsp;项目名：</h2>
+      <input readonly v-model="data.projectName" />
+
+      <!-- <br /> -->
+
+      <h2>&emsp;负责人：</h2>
+      <input readonly v-model="data.leaderName" />
+
+      <!-- <br /> -->
+
+      <h2>项目预算：</h2>
+      <input readonly v-model="data.budget" class="normal-text" />
+      <!-- <br /> -->
+
+      <h2 class="textarea-label">项目简介：</h2>
+      <textarea rows="3" readonly v-model="data.introduction"></textarea>
     </div>
   </div>
 </template>
 
 <style scoped>
-.img-round {
-    border: 2px solid #beffff; /* 添加圆形边框 */
-    box-shadow: 1px 1px 1px #888888;
-}
-
-.align-inline {
+.intro-content {
+  width: 60%;
   display: flex;
-}
+  /* background-color: #fff; */
+  gap: 3vw;
+  padding: 1vw;
+  padding-left: 0;
+  margin-top: 1vw;
 
-.align-center {
+  /* border-radius: 15px;
+  box-shadow: 1px 1px 1px #888888; */
+}
+.img-box {
+  flex: 2 2 20%;
   display: flex;
   align-items: center;
-    width: fit-content;
+  /* padding-left: 3vw; */
 }
 
+.info-box {
+  padding: 1vw;
+  flex: 8 8 80%;
+  background-color: rgba(109, 192, 192, 0.82);
+  display: grid;
+  grid-template-columns: 6vw 1fr;
+  row-gap: 1vw;
+  align-items: center;
+
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px #888888;
+}
+
+/* .normal-entry {
+  width: 60%;
+} */
+.img-round {
+  border: 2px solid rgba(109, 192, 192, 0.82); /* 添加圆形边框 */
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px #888888;
+  height: 15vw;
+  width: 15vw;
+}
+
+.textarea-label {
+  align-self: self-start;
+  padding-top: 0.5vw;
+}
+
+input {
+  height: 100%;
+  padding: 5px;
+  color: black;
+  font-size: 1.2vw;
+  border: 1px solid #ccc;
+  width: 60%;
+}
 textarea {
-  border-radius: 0;
   resize: none;
   padding: 5px;
   border: 1px solid #ccc;
-  font-size: 20px;
-  height: 40px;
-    overflow-y: auto;
+  font-size: 1.2vw;
+  height: 100%;
+  overflow-y: auto;
 }
 
 textarea::-webkit-scrollbar {
-    width: 0; /* 隐藏滚动条的宽度 */
-    height: 0; /* 隐藏滚动条的高度 */
-}
-
-.div-style {
-    border: 2px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    max-width: 80%;
-    background-color: #dbffff;
-    box-shadow: 2px 2px 2px #888888;
-    padding: 20px;
+  width: 0; /* 隐藏滚动条的宽度 */
+  height: 0; /* 隐藏滚动条的高度 */
 }
 
 h2 {
-    color: white;
+  flex: 2 2 20%;
+  color: white;
 }
-
-
 </style>

@@ -262,7 +262,7 @@ export default {
   },
   created() {
     this.loadOpenning("1");
-    console.log(this.messages);
+    //console.log(this.messages);
   },
 };
 </script>

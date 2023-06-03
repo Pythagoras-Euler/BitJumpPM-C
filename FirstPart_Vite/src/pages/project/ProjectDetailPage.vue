@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <component :is="activePage"></component>
+    <Suspense>
+      <component :is="activePage"></component>
+    </Suspense>
   </div>
 </template>
 
@@ -34,10 +36,11 @@ export default {
 <style scoped>
 .container {
   position: fixed;
-  overflow: auto;
+  /* overflow: auto; */
   height: 100vh;
   width: 100vw;
-
-  background-color: white;
+  /* background-color: rgb(245, 245, 245); */
+  /* background-color: #99e9f2; */
+  background: linear-gradient(to right, #c3fae8, #a5d8ff);
 }
 </style>

@@ -9,6 +9,7 @@ import BaseSpinner from "./components/ui/BaseSpinner.vue";
 import InitialBackground from "./components/ui/InitialBackground.vue";
 import MainBackground from "./components/ui/MainBackground.vue";
 import ProgressBar from "./components/ui/ProgressBar.vue";
+
 const app = createApp(App);
 
 app.use(store);

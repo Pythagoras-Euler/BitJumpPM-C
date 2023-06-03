@@ -87,7 +87,9 @@ export default {
 
 <template>
   <div class="card-container">
-    <button class="card" style="height: 50px; color: white">项目成员</button>
+    <button class="card" style="height: 50px; color: white; font-size: 1vw">
+      项目成员
+    </button>
     <div class="divider"></div>
     <div class="card-list">
       <div
@@ -107,7 +109,7 @@ export default {
         >
           <button
             class="user-btn"
-            style="font-weight: bold"
+            style="font-weight: bold; font-size: 1vw; color: #555"
             @click="gotoProjectMember(member.userId)"
           >
             项目角色
@@ -115,8 +117,10 @@ export default {
           <div
             style="height: 1px; background-color: #cccccc; margin: 5px"
           ></div>
-          <p>岗位：{{ member.post }}</p>
-          <p>进度：{{ member.process }}%</p>
+          <div class="member-info-box">
+            <p class="member-info">岗位：{{ member.post }}</p>
+            <p class="member-info">进度：{{ member.process }}%</p>
+          </div>
           <img
             v-if="this.isManager"
             class="img-button"
@@ -210,6 +214,8 @@ export default {
   cursor: pointer;
   box-shadow: 3px 3px 3px #888888;
   background-color: rgba(113, 196, 196, 0.82);
+
+  /* font-size: 1vw; */
 }
 
 .card:hover {
@@ -235,10 +241,11 @@ export default {
 .img-button {
   padding: 5px;
   color: black;
+  width: 30px;
 }
 
 .divider {
-  height: 1px;
+  height: 2px;
   background-color: #ccc;
   margin: 5px;
 }
@@ -255,5 +262,17 @@ h3 {
 .user-btn:hover {
   cursor: pointer;
   background-color: #ccc;
+}
+
+/* -------------------------------------------------------------------------- */
+.member-info-box {
+  margin-top: 1.2vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+.member-info {
+  text-align: left;
+  font-size: 1.8vh;
 }
 </style>
