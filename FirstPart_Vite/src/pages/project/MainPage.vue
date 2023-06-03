@@ -254,18 +254,18 @@ export default {
 .msg-box {
   display: flex;
   flex-direction: column;
-  gap: 0.2vw;
+  gap: 1vh;
 }
 .msg-header {
   border-bottom: 3px solid #c3fae8;
   font-weight: bold;
-  padding-top: 0.1vw;
+  padding-top: 0.2vh;
   font-size: 1vw;
 }
 .msg-content {
   display: flex;
   flex-direction: column;
-  gap: 0.1vw;
+  gap: 0.1vh;
   font-size: 1vw;
 }
 </style>
