@@ -61,13 +61,7 @@ export default {
 
         try {
             const response = await addMember(props.projectId, data.memberClicked.userId)
-
-            if (!response.ok) {
-                const error = new Error("Failed to send");
-                throw error;
-            } else {
-                console.log(response);
-            }
+                //console.log(response);
         } catch {
             this.error = "抱歉，加载出错，请重试";
         }
@@ -92,15 +86,8 @@ export default {
         const response = await fetch(
           "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
         );
-        const responseData = await response.json();
-
-        if (!response.ok) {
-          const error = new Error("Failed to fetch");
-          throw error;
-        } else {
-          console.log(responseData);
-          data.members = responseData.data;
-        }
+          //console.log(responseData);
+          data.members = response;
       } catch {
         this.error = "抱歉，加载出错，请重试";
       }

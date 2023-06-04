@@ -27,13 +27,7 @@
                 //先发送数据
                 try {
                     const response = await rejectItem(props.projectId, props.item.tableItemId, data.reason)
-
-                    if (!response.ok) {
-                        const error = new Error("Failed to send");
-                        throw error;
-                    } else {
-                        console.log(response);
-                    }
+                       // console.log(response);
                 } catch {
                     this.error = "抱歉，加载出错，请重试";
                 }

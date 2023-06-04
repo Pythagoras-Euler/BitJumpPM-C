@@ -20,11 +20,6 @@ const order = 0;
 //无payload参数
 try {
     const response = await getProjInfo(proid, order)
-
-    if (!response.ok) {
-        const error = new Error("Failed to fetch");
-        throw error;
-    } else {
         console.log(response);
         //接到了数据，这里替换掉你原来直接硬编码进去的数据
         data.introductionData = {
@@ -44,9 +39,8 @@ try {
         console.log(data.introductionData);
         console.log(data.processData);
         console.log(data.membersData);
-    }
 } catch {
-    this.error = "抱歉，加载出错，请重试";
+    alert("抱歉，加载出错，请重试");
 }
 
 // function returnArrow() {

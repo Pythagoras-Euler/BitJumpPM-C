@@ -34,13 +34,7 @@ export default {
 
         try {
             const response = await deleteMember(props.projectId, props.member.userId)
-
-            if (!response.ok) {
-                const error = new Error("Failed to send");
-                throw error;
-            } else {
-                console.log(response);
-            }
+                //console.log(response);
         } catch {
             this.error = "抱歉，加载出错，请重试";
         }

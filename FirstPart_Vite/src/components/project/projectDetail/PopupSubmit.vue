@@ -41,13 +41,7 @@ export default {
 
             try {
                 const response = await submitItem(props.projectId, props.item.tableItemId, data.finishTime, data.description)
-
-                if (!response.ok) {
-                    const error = new Error("Failed to send");
-                    throw error;
-                } else {
-                    console.log(response);
-                }
+                   // console.log(response);
             } catch {
                 this.error = "抱歉，加载出错，请重试";
             }

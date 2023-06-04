@@ -62,13 +62,7 @@ export default {
                 description: data.description
             }
             const response = await addItem(props.projectId, item)
-
-            if (!response.ok) {
-                const error = new Error("Failed to send");
-                throw error;
-            } else {
-                console.log(response);
-            }
+                //console.log(response);
         } catch {
             this.error = "抱歉，加载出错，请重试";
         }
