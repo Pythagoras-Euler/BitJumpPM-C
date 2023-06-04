@@ -44,7 +44,11 @@ function getProjInfo(proid, order = null) {
   if (order) {
     getMethod.query("order", order);
   }
-  getMethod.addQuery();
+  // todo 这里为了和apifox对接，注销了
+  /* -------------------------------------------------------------------------- */
+  // getMethod.addQuery();
+  /* -------------------------------------------------------------------------- */
+
   // getMethod.sendWith((resData) => {
   //         // TODO: to use these data
   //         return resData // transClasses.Project

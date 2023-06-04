@@ -40,8 +40,10 @@
 </template>
 
 <script>
+import { login } from "@/web/func/accountAction.js";
+import { deleteProject } from "@/web/func/project_new/projManage.js";
 export default {
-  props: ["checkDelete"],
+  props: ["checkDelete", "projectId"],
   data() {
     return {
       password: "",
@@ -49,18 +51,36 @@ export default {
     };
   },
   inject: ["cancel2Delete"],
+  // todo，二次验证+ 删除项目通信
   methods: {
-    submitData() {
+    async submitData() {
       if (this.validateForm()) {
         const fromData = {
           password: this.password,
         };
-        //todo: 通信
-        alert(fromData);
+        //先二次验证密码
+        try {
+          const response = await login(
+            this.$store.getters.userId,
+            fromData.password
+          );
+          try {
+            const response2 = await deleteProject(this.projectId);
+            alert("提交成功");
+          } catch (error) {
+            alert("请求提交失败");
+            console.log(error);
+          }
+        } catch (error) {
+          console.log(error);
+          alert("验证失败");
+        }
+
         this.clearData();
         this.cancel2Delete();
       }
     },
+
     clearData() {
       this.password = "";
     },

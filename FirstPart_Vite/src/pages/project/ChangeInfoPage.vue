@@ -91,7 +91,8 @@ export default {
   overflow: auto;
   height: 100vh;
   width: 100vw;
-
+  top: 0;
+  left: 0;
   background: linear-gradient(to right, #c3fae8, #a5d8ff);
 }
 .message-button {

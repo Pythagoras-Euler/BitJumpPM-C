@@ -1,5 +1,5 @@
 <template>
-  <BaseDialog title="确认删除" :show="confirmPassword">
+  <BaseDialog :show="confirmPassword" :title="'确认'">
     <template #default>
       <form class="form-box" @submit.prevent="submitData">
         <label for="password">请输入密码，确认操作</label>
@@ -40,6 +40,9 @@
 </template>
 
 <script>
+import { login } from "@/web/func/accountAction.js";
+import { modifyManager } from "@/web/func/project_new/projMember.js";
+
 export default {
   props: ["confirmPassword", "fromData"],
   data() {
@@ -50,15 +53,39 @@ export default {
   },
   inject: ["cancelConfirm"],
   methods: {
-    submitData() {
+    //TODO: 增删管理员通信
+    async submitData() {
       if (this.validateForm()) {
         const fromData = {
           password: this.password,
-          data: this.fromData,
+          projectId: this.fromData.projectId,
+          name: this.fromData.name,
+          isUp: this.fromData.isUp,
+          userId: this.fromData.userId,
         };
+        //先二次验证密码
+        try {
+          const response = await login(
+            this.$store.getters.userId,
+            fromData.password
+          );
+          try {
+            const response2 = await modifyManager(
+              fromData.projectId,
+              fromData.userId,
+              fromData.name,
+              fromData.isUp
+            );
+            alert("提交成功");
+          } catch (error) {
+            alert("请求提交失败");
+            console.log(error);
+          }
+        } catch (error) {
+          console.log(error);
+          alert("验证失败");
+        }
         //console.log(this.fromData);
-        //TODO: 通信
-        alert(fromData);
         this.clearData();
         this.cancelConfirm();
       }

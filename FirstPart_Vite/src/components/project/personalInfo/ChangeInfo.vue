@@ -390,6 +390,7 @@
 
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { modifyPersonInfo } from "../../../web/func/personInfo.js";
 
 const props = defineProps({
   // 声明父组件传递的参数
@@ -401,6 +402,7 @@ const props = defineProps({
 
 const store = useStore();
 const userData = store.getters["projects/personalData"];
+const userId = store.getters.userId;
 console.log(userData);
 
 let size = ref<"default" | "large" | "small">("default");
@@ -629,37 +631,85 @@ function cancelSub() {
   email.value = "";
   phone.value = "";
 }
-function submitFullForm() {
-  // 处理表单提交逻辑
-  console.log(
-    "提交表单",
-    UserName.value,
-    workID.value,
-    email.value,
-    phone.value,
-    age.value,
-    birthday.value,
-    education.value,
-    major.value,
-    graduation.value,
-    local.value,
-    graduation.value,
-    politicStatus.value,
-    marriage.value,
-    blood.value,
-    QQNum.value,
-    WeiXin.value,
-    PersonEmail.value,
-    address.value,
-    workExp.value,
-    Exp.value,
-    workLmt.value,
-    seniority.value,
-    photo.value
-  );
+async function submitFullForm() {
+  // TODO 个人信息修改通信
+  const fromData = {
+    name: UserName.value,
+    // workID.value, ??? 这个工号到底交不交
+    // gender没有
+    email: email.value,
+    phoneNumber: phone.value,
+    age: age.value,
+    birthDate: birthday.value,
+    education: education.value,
+    major: major.value,
+    school: graduation.value,
+    censusRegister: local.value,
+
+    politicalStatus: politicStatus.value,
+    marriage: marriage.value,
+    bloodType: blood.value,
+    qqNumber: QQNum.value,
+    wechatNumber: WeiXin.value,
+    // PersonEmail.value,
+    address: address.value,
+    previousCompany: workExp.value,
+    jobTitle: Exp.value,
+    limitation: workLmt.value,
+    seniority: seniority.value,
+    photo: photo.value,
+  };
+  try {
+    const response = await modifyPersonInfo(userId, fromData);
+    alert("提交成功");
+  } catch (error) {
+    console.log(error);
+    alert("提交失败");
+  }
+
+  // console.log(
+  //   "提交表单",
+  //   UserName.value,
+  //   workID.value,
+  //   email.value,
+  //   phone.value,
+  //   age.value,
+  //   birthday.value,
+  //   education.value,
+  //   major.value,
+  //   graduation.value,
+  //   local.value,
+  //   graduation.value,
+  //   politicStatus.value,
+  //   marriage.value,
+  //   blood.value,
+  //   QQNum.value,
+  //   WeiXin.value,
+  //   PersonEmail.value,
+  //   address.value,
+  //   workExp.value,
+  //   Exp.value,
+  //   workLmt.value,
+  //   seniority.value,
+  //   photo.value
+  // );
 }
-function submitSimpleForm() {
-  // 处理表单提交逻辑
+async function submitSimpleForm() {
+  // TODO
+  const fromData = {
+    name: UserName.value,
+    //  workID.value,
+    email: email.value,
+    phone: phone.value,
+    photo: photo.value,
+  };
+  try {
+    const response = await modifyPersonInfo(userId, fromData);
+    alert("提交成功");
+  } catch (error) {
+    console.log(error);
+    alert("提交失败");
+  }
   console.log(
     "提交表单",
     UserName.value,

@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import { createNewProject } from "@/web/func/project_new/projManage.js";
 export default {
   props: ["isAdding"],
   data() {
@@ -125,23 +126,25 @@ export default {
       }
     },
 
-    // handleFileChange() {
-    //   const file = this.$refs.fileInput.files[0];
-    //   const reader = new FileReader();
-    //   reader.onload = (event) => {
-    //     this.projectUrl = event.target.result;
-    //   };
-    //   reader.readAsDataURL(file);
-    // },
-    submitData() {
+    // todo，增加项目通信
+    async submitData() {
       if (this.validateForm()) {
         const fromData = {
           projectName: this.projectName,
           Introduction: this.introduction,
           projectUrl: this.projectUrl,
         };
-        //todo: 通信
-        alert(fromData);
+
+        // try{
+        // const response = await createNewProject(
+        //   fromData.projectName,
+        //   fromData.projectUrl,
+        //   fromData.Introduction
+        // );
+        // }catch (error){
+        //   console.log(error);
+        // }
+        alert("提交成功");
         this.clearData();
         this.cancelAdd();
       }

@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { applyCreatePerm } from "@/web/func/project_new/projManage.js";
 export default {
   props: ["isApplying"],
   data() {
@@ -68,14 +69,22 @@ export default {
   },
   inject: ["cancelApply"],
   methods: {
-    submitData() {
+    // TODO，申请成员管理员权限通信
+    async submitData() {
       if (this.validateForm()) {
         const fromData = {
           userId: this.userId,
           description: this.description,
         };
-        //todo: 通信
-        alert(fromData);
+
+        try {
+          const response = await applyCreatePerm(fromData.description);
+          console.log(response);
+          alert("提交成功");
+        } catch (error) {
+          console.log(error);
+        }
+
         this.clearData();
         this.cancelApply();
       }

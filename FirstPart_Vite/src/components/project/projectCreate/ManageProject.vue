@@ -66,7 +66,7 @@
 <script>
 import ConfirmManage from "./ConfirmManage.vue";
 export default {
-  props: ["isManaging"],
+  props: ["isManaging", "projectId"],
   components: {
     ConfirmManage,
   },
@@ -89,6 +89,7 @@ export default {
     submitData(isUp) {
       if (this.validateForm()) {
         const fromData = {
+          projectId: this.projectId,
           name: this.name,
           userId: this.userId,
           isUp: isUp,
