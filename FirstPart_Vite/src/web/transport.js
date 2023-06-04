@@ -91,13 +91,14 @@ class WebAction {
       }
       fetchArgs.headers["'Content-Type'"] = "application/json";
     }
+    console.log("URL:" + this._generalUrl)
     const response = await fetch(this._generalUrl, fetchArgs);
     const responseData = await response.json();
     if (!response.ok) {
       const error = new Error(responseData.message || WebAction.defaultErrMsg);
       throw error;
     }
-    return responseData;
+    return responseData.data;
     // fetch(this._generalUrl, fetchArgs)
     //     .then(response => {
     //         const responseData = response.json()

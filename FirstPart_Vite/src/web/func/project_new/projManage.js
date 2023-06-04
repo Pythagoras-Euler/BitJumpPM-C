@@ -1,10 +1,10 @@
-import auth from "@/store/modules/auth";
 import { Delete, Get, Post } from "@/web/transport";
+import store from "../../../store";
 
-function getProjList(type) {
+function getProjList(type=null) {
     return new Get()
         .url("project", "list")
-        .query("type", type).addQuery()
+        // .query("type", type).addQuery()
         // .sendWith((resData) => {
         //     // TODO: to use these data
         //     return resData // transClasses.BriefProject
@@ -25,7 +25,7 @@ function applyCreatePerm(description) {
     return new Post()
         .url("project", "apply")
         .bodyObject({
-            userId: String(auth.getters.userId()),
+            userId: String(store.getters.userId),
             description: description
         })
         .send()
@@ -54,6 +54,7 @@ function getProjInfo(proid, order=null) {
 function getProjMember(proid,
     pageNum=null, pageSize=null, name=null,
     project=null, post=null) {
+        // Deprecated
         let getMethod = new Get()
         getMethod
             .url("project", String(proid))

@@ -1,11 +1,11 @@
 import store from "../../store";
-import { encrypt } from "../rsa";
+import { digestSHA256, encrypt } from "../rsa";
 import { Post, Put } from "../transport";
-import { styleType } from "element-plus/es/components/table-v2/src/common";
 
-function signup(userId, Password, email) {
+async function signup(userId, Password, email) {
   let userid = String(userId);
   let password = String(Password);
+  password = await digestSHA256(password);
   let cipherPw = encrypt(password);
   return new Post()
     .url("register", userid, cipherPw)
@@ -13,9 +13,10 @@ function signup(userId, Password, email) {
     .bodyObject({ email: email })
     .send();
 }
-function login(userId, Password) {
+async function login(userId, Password) {
   let userid = String(userId);
   let password = String(Password);
+  password = await digestSHA256(password)
   let cipherPw = encrypt(password);
   return (
     new Post()
@@ -34,8 +35,10 @@ function logout() {
   return new Post().url("logout").bodyObject(null).send();
   // // TODO:在这里删除token
 }
-function newPassword(oldpw, newpw) {
+async function newPassword(oldpw, newpw) {
   let userid = String(store.getters.userId);
+  oldpw = await digestSHA256(String(oldpw));
+  newpw = await digestSHA256(String(newpw));
   let cipherOldPw = encrypt(oldpw);
   let cipherNewPw = encrypt(newpw);
   return new Put()

@@ -1,3 +1,6 @@
+import { getProjList } from "../../web/func/project_new/projManage";
+import { getSchedule } from "../../web/func/schedule";
+
 export default {
   namespaced: true,
   state: {
@@ -41,6 +44,11 @@ export default {
 
   actions: {
     async loadProjects(context, payload) {
+
+      const resData = await getProjList()
+      context.commit("setProjects", resData)
+      return;
+
       //获取项目列表
       console.log(payload);
       const response = await fetch(
@@ -58,6 +66,24 @@ export default {
     },
 
     async loadOpenning(context, payload) {
+      const resData = getSchedule()
+      context.commit("setGreeting", resData.greeting)
+      const schedule = resData.schedule;
+      const messages = [];
+      //console.log(schedule);
+      schedule.forEach((item) => {
+        item.names.forEach((name) => {
+          messages.push({
+            name: name,
+            endTime: item.endTime,
+          });
+        });
+      });
+      context.commit("setMessages", messages);
+      return;
+
+      context.commit("setMessages", messages);
+
       //获取项目列表
       console.log(payload);
       const response = await fetch(
