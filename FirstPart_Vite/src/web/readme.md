@@ -150,7 +150,7 @@ getProjList返回值为 BriefProject类，getProjInfo返回值为 Project类， 
 
  \- **apifox-人员信息管理**
 
-函数：**getPersonInfo（获取特定人员信息）** ， **getAllPersonInfo（获取所有人员信息）** ， *modifyPersonInfo（修改特定人的信息）*
+函数：**getPersonInfo（获取特定人员信息）** ， **getAllPersonInfo（获取所有人员列表）** ， *modifyPersonInfo（修改特定人的信息）*
 
 getPersonInfo返回值为User类，getAllPersonInfo返回值为list\[BriefPersonInfo类\]
 
