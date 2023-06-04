@@ -135,16 +135,18 @@ export default {
           projectUrl: this.projectUrl,
         };
 
-        // try{
-        // const response = await createNewProject(
-        //   fromData.projectName,
-        //   fromData.projectUrl,
-        //   fromData.Introduction
-        // );
-        // }catch (error){
-        //   console.log(error);
-        // }
-        alert("提交成功");
+        try {
+          const response = await createNewProject(
+            fromData.projectName,
+            fromData.projectUrl,
+            fromData.Introduction
+          );
+          alert("提交成功");
+        } catch (error) {
+          alert("请求提交失败");
+          console.log(error);
+        }
+
         this.clearData();
         this.cancelAdd();
       }

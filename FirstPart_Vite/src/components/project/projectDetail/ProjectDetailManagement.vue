@@ -52,8 +52,10 @@ try {
   console.log(data.introductionData);
   console.log(data.processData);
   console.log(data.membersData);
+  console.log("提交成功");
 } catch {
-  alert("抱歉，加载出错，请重试");
+  console.log(error);
+  alert("请求提交失败");
 }
 
 // function returnArrow() {

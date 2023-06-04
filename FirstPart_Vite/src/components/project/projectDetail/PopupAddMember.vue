@@ -1,8 +1,8 @@
 <script>
 import { reactive } from "vue";
 import PopupConfirm from "./PopupConfirm.vue";
-import {addItem} from "../../../web/func/project_new/projContent.js";
-import {addMember} from "../../../web/func/project_new/projMember.js";
+import { addItem } from "../../../web/func/project_new/projContent.js";
+import { addMember } from "../../../web/func/project_new/projMember.js";
 
 export default {
   components: { PopupConfirm },
@@ -46,26 +46,30 @@ export default {
     }
 
     async function confirm() {
-        data.isPopupConfirmOpen = false;
-        context.emit("cancel");
+      data.isPopupConfirmOpen = false;
+      context.emit("cancel");
 
-        //todo 通信 error
-        console.log(
-            //项目id
-            props.projectId,
-            //账号
-            data.memberClicked.userId,
-            //岗位
-            data.postInput
+      //todo 通信 error
+      console.log(
+        //项目id
+        props.projectId,
+        //账号
+        data.memberClicked.userId,
+        //岗位
+        data.postInput
+      );
+
+      try {
+        const response = await addMember(
+          props.projectId,
+          data.memberClicked.userId
         );
-
-        try {
-            const response = await addMember(props.projectId, data.memberClicked.userId)
-                //console.log(response);
-        } catch {
-            this.error = "抱歉，加载出错，请重试";
-        }
-
+        alert("提交成功");
+        //console.log(response);
+      } catch (error) {
+        console.log(error);
+        alert("请求提交失败");
+      }
     }
 
     function notConfirm() {
@@ -86,10 +90,13 @@ export default {
         const response = await fetch(
           "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
         );
-          //console.log(responseData);
-          data.members = response;
-      } catch {
-        this.error = "抱歉，加载出错，请重试";
+        //console.log(responseData);
+        data.members = response;
+        alert("提交成功");
+      } catch (error) {
+        console.log(error);
+
+        alert("请求提交失败");
       }
     }
 

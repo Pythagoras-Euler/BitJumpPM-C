@@ -1,190 +1,206 @@
 <script>
-import 'flatpickr/dist/flatpickr.css'
-import FlatPickr from 'vue-flatpickr-component';
-import {reactive} from "vue";
-import {addItem, submitItem} from "../../../web/func/project_new/projContent.js";
+import "flatpickr/dist/flatpickr.css";
+import FlatPickr from "vue-flatpickr-component";
+import { reactive } from "vue";
+import {
+  addItem,
+  submitItem,
+} from "../../../web/func/project_new/projContent.js";
 export default {
-    components: {
-        FlatPickr
-    },
+  components: {
+    FlatPickr,
+  },
 
-    props: {
-        projectId: Number,
-        isPopupOpen: Boolean,
-        membersData: Array,
-        item: null
-    },
+  props: {
+    projectId: Number,
+    isPopupOpen: Boolean,
+    membersData: Array,
+    item: null,
+  },
 
-    setup(props, context) {
-        let data = reactive({
-            finishTime: null,
-            flatpickrConfig: {
-                enableTime: true, // Enable time picker
-                dateFormat: 'Y-m-d H:i', // Date and time format
-            },
+  setup(props, context) {
+    let data = reactive({
+      finishTime: null,
+      flatpickrConfig: {
+        enableTime: true, // Enable time picker
+        dateFormat: "Y-m-d H:i", // Date and time format
+      },
 
-            description: null
-        })
+      description: null,
+    });
 
-        async function submit() {
-            //todo 通信
-            console.log(
-                //项目id
-                props.projectId,
-                //表项id
-                props.item.tableItemId,
-                //提交时间
-                data.finishTime,
-                //说明
-                data.description
-            )
+    async function submit() {
+      //todo 通信
+      console.log(
+        //项目id
+        props.projectId,
+        //表项id
+        props.item.tableItemId,
+        //提交时间
+        data.finishTime,
+        //说明
+        data.description
+      );
 
-            try {
-                const response = await submitItem(props.projectId, props.item.tableItemId, data.finishTime, data.description)
-                   // console.log(response);
-            } catch {
-                this.error = "抱歉，加载出错，请重试";
-            }
+      try {
+        const response = await submitItem(
+          props.projectId,
+          props.item.tableItemId,
+          data.finishTime,
+          data.description
+        );
+        // console.log(response);
+        alert("提交成功");
+      } catch (error) {
+        console.log(error);
+        alert("请求提交失败");
+      }
 
-            context.emit('cancel')
-        }
-
-        return {
-            data,
-            submit
-        }
+      context.emit("cancel");
     }
-}
+
+    return {
+      data,
+      submit,
+    };
+  },
+};
 </script>
 
 <template>
-    <transition name="modal" style="z-index: 999">
-        <div v-if="isPopupOpen" class="modal-overlay">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="container">
-                        <h2 style="margin-right: 100px; margin-left: 50px">完成任务</h2>
-                        <h3 style="color: #cccccc">填写辅助信息</h3>
-                    </div>
-                    <div class="divider"></div>
-                    <div>
-                        <div class="align-inline">
-                            <h3>完成时间：</h3>
-                            <flat-pickr v-model="data.finishTime" :config="data.flatpickrConfig"></flat-pickr>
-                        </div>
-                        <div class="align-inline">
-                            <h3>提交说明：</h3>
-                            <textarea style="width: 400px; height: 200px" v-model="data.description"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-actions">
-                        <button class="cancel-button" @click="$emit('cancel')">取消</button>
-                        <button class="submit-button" @click="submit">提交</button>
-                    </div>
-                </div>
+  <transition name="modal" style="z-index: 999">
+    <div v-if="isPopupOpen" class="modal-overlay">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="container">
+            <h2 style="margin-right: 100px; margin-left: 50px">完成任务</h2>
+            <h3 style="color: #cccccc">填写辅助信息</h3>
+          </div>
+          <div class="divider"></div>
+          <div>
+            <div class="align-inline">
+              <h3>完成时间：</h3>
+              <flat-pickr
+                v-model="data.finishTime"
+                :config="data.flatpickrConfig"
+              ></flat-pickr>
             </div>
+            <div class="align-inline">
+              <h3>提交说明：</h3>
+              <textarea
+                style="width: 400px; height: 200px"
+                v-model="data.description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="cancel-button" @click="$emit('cancel')">取消</button>
+            <button class="submit-button" @click="submit">提交</button>
+          </div>
         </div>
-    </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
 .container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 textarea {
-    padding: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    height: 100px;
-    width: 300px;
-    resize: none;
+  padding: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  height: 100px;
+  width: 300px;
+  resize: none;
 }
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-dialog {
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .modal-content {
-    padding: 20px;
+  padding: 20px;
 }
 
 button {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .modal-enter-active,
 .modal-leave-active {
-    transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-enter-from,
 .modal-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .cancel-button {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px 16px;
-    margin-right: 10px;
-    cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .submit-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
 button {
-    transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease;
 }
 
 .cancel-button:hover {
-    background-color: darkgray;
+  background-color: darkgray;
 }
 
 .submit-button:hover {
-    background-color: darkblue;
+  background-color: darkblue;
 }
 
 .divider {
-    height: 1px;
-    background-color: #ccc;
-    width: 800px;
-    margin: 20px;
+  height: 1px;
+  background-color: #ccc;
+  width: 800px;
+  margin: 20px;
 }
 
 .align-inline {
-    display: flex;
-    align-content: center;
-    margin: 20px;
+  display: flex;
+  align-content: center;
+  margin: 20px;
 }
 </style>

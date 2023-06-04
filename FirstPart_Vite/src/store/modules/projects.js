@@ -89,7 +89,6 @@ export default {
           });
         });
         //console.log(messages);
-
         context.commit("setMessages", messages);
       } catch (error) {
         console.log(error);

@@ -84,11 +84,11 @@ export default {
       this.error = null;
     },
     refresh() {
-      this.loadProjects("1");
+      this.loadProjects("2");
     },
   },
   created() {
-    this.loadProjects("1");
+    this.loadProjects("2");
   },
 };
 </script>

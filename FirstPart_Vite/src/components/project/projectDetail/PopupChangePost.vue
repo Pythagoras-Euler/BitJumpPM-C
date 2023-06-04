@@ -1,8 +1,8 @@
 <script>
 import { reactive } from "vue";
 import PopupConfirm from "./PopupConfirm.vue";
-import {addItem} from "../../../web/func/project_new/projContent.js";
-import {removeMember} from "../../../web/func/project_new/projMember.js";
+import { addItem } from "../../../web/func/project_new/projContent.js";
+import { removeMember } from "../../../web/func/project_new/projMember.js";
 
 export default {
   components: { PopupConfirm },
@@ -29,24 +29,31 @@ export default {
     }
 
     async function confirm() {
-        data.isPopupConfirmOpen = false;
-        context.emit("cancel");
-        //todo 通信 调岗
-        console.log(
-            //项目id
-            props.projectId,
-            //工号
-            props.member.userId,
-            //岗位
-            data.postInput
-        );
+      data.isPopupConfirmOpen = false;
+      context.emit("cancel");
+      //todo 通信 调岗
+      console.log(
+        //项目id
+        props.projectId,
+        //工号
+        props.member.userId,
+        //岗位
+        data.postInput
+      );
 
-        try {
-            const response = await removeMember(props.projectId, props.member.userId, data.postInput)
-                //console.log(response);
-        } catch {
-            this.error = "抱歉，加载出错，请重试";
-        }
+      try {
+        const response = await removeMember(
+          props.projectId,
+          props.member.userId,
+          data.postInput
+        );
+        //console.log(response);
+        alert("提交成功");
+      } catch (error) {
+        console.log(error);
+
+        alert("请求提交失败");
+      }
     }
 
     function notConfirm() {
@@ -74,7 +81,7 @@ export default {
           <p class="label">
             请为{{ member.name }}（目前岗位是{{ member.post }}）选择新岗位
           </p>
-            <br>
+          <br />
           <input
             placeholder="输入岗位"
             style="height: 30px"

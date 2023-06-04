@@ -9,7 +9,7 @@ export default {
   state() {
     return {
       //当前登录用户id,可以判断当前用户是否登录
-      userId: null,
+      userId: 1,
       //如果服务器有针对用户访问权限的限制数据，可通过登录时返回对应的token来进行认证
       token: "111",
     };

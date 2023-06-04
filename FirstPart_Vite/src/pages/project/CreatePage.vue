@@ -179,11 +179,12 @@ export default {
       this.error = null;
     },
     refresh() {
-      this.loadProjects("1");
+      this.loadProjects("0");
     },
   },
   created() {
-    this.loadProjects("1");
+    console.log(this.$store.getters.token);
+    this.loadProjects("0");
   },
 };
 </script>

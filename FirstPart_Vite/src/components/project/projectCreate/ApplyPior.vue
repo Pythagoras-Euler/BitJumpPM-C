@@ -89,6 +89,7 @@ export default {
           alert("提交成功");
         } catch (error) {
           console.log(error);
+          alert("请求提交失败");
         }
 
         this.clearData();
@@ -100,7 +101,7 @@ export default {
       this.description = "";
     },
     validateForm() {
-      if (this.validateId() && this.validateDes()) {
+      if (this.validateDes()) {
         return true;
       } else {
         this.formIsValid = false;
@@ -110,9 +111,10 @@ export default {
     confirmError() {
       this.formIsValid = true;
     },
-    validateId() {
-      return this.userId.length > 0;
-    },
+    // validateId() {
+    //   console.log(this.userId);
+    //   return this.userId !== null;
+    // },
     validateDes() {
       return this.description.length > 0;
     },
