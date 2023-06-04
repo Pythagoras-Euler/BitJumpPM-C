@@ -146,6 +146,11 @@ export default {
   margin-top: 3vw;
 }
 
+.message-button {
+  border-radius: 6px;
+  font-size: 1vw;
+}
+
 .projects-enter-from {
   opacity: 0;
   transform: translateY(-30px);

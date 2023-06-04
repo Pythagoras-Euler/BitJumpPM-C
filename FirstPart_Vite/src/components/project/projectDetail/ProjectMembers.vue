@@ -52,7 +52,7 @@ export default {
     }
 
     function gotoProjectMember(userId) {
-      //todo 跳转到项目人员页面
+      // 跳转到项目人员页面
       const rpath = "/project/personalInfo" + `/${userId}`;
       router.push(rpath);
     }
@@ -186,7 +186,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 20px;
+  top: 50px;
   right: 20px;
   box-shadow: 2px 2px 2px #888888;
 }

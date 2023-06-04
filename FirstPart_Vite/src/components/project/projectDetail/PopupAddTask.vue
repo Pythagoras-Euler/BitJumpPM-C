@@ -2,6 +2,7 @@
 import 'flatpickr/dist/flatpickr.css'
 import FlatPickr from "vue-flatpickr-component";
 import { reactive } from "vue";
+import {addItem, rejectItem} from "../../../web/func/project_new/projContent.js";
 export default {
   components: {
     FlatPickr,
@@ -26,33 +27,47 @@ export default {
       description: null,
     });
 
-    function submit() {
-      if (
-        data.startTime === null ||
-        data.endTime === null ||
-        data.owner === null ||
-        data.description === null
-      ) {
-        alert("请输入完整信息！");
-        return;
-      }
-      //todo 通信
-      console.log(
-        //项目id
-        props.projectId,
-        //开始时间
-        data.startTime,
-        //结束时间
-        data.endTime,
-        //负责人名字
-        data.owner.userId,
-        //负责人名字
-        data.owner.name,
-        //说明
-        data.description
-      );
+    async function submit() {
+        if (
+            data.startTime === null ||
+            data.endTime === null ||
+            data.owner === null ||
+            data.description === null
+        ) {
+            alert("请输入完整信息！");
+            return;
+        }
+        //todo 通信
+        console.log(
+            //项目id
+            props.projectId,
+            //开始时间
+            data.startTime,
+            //结束时间
+            data.endTime,
+            //负责人名字
+            data.owner.userId,
+            //负责人名字
+            data.owner.name,
+            //说明
+            data.description
+        );
 
-      context.emit("cancel");
+        try {
+            let item = {
+                beginTime: data.startTime,
+                endTime: data.endTime,
+                ownerId: data.owner.userId,
+                ownerName: data.owner.name,
+                description: data.description
+            }
+            const response = await addItem(props.projectId, item)
+                //console.log(response);
+        } catch {
+            this.error = "抱歉，加载出错，请重试";
+        }
+
+        context.emit("cancel");
     }
 
     return {

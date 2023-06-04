@@ -3,7 +3,7 @@
 import store from "../store";
 
 class WebAction {
-  static baseUrl = "";
+  static baseUrl = "http://127.0.0.1:4523/m1/2693357-0-default";
   static defaultErrMsg = "抱歉，操作失败，请重试";
   init() {
     this._generalUrl = WebAction.baseUrl;
@@ -97,7 +97,7 @@ class WebAction {
       const error = new Error(responseData.message || WebAction.defaultErrMsg);
       throw error;
     }
-    return responseData;
+    return responseData.data;
     // fetch(this._generalUrl, fetchArgs)
     //     .then(response => {
     //         const responseData = response.json()

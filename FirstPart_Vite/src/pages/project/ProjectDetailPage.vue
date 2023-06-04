@@ -36,7 +36,8 @@ export default {
 <style scoped>
 .container {
   position: fixed;
-  /* overflow: auto; */
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
   /* background-color: rgb(245, 245, 245); */

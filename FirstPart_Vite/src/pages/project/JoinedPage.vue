@@ -168,4 +168,8 @@ export default {
 .projects-leave-active {
   transition: all 0.3s ease-in;
 }
+.message-button {
+  border-radius: 6px;
+  font-size: 1vw;
+}
 </style>
