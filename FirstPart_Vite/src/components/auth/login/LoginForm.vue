@@ -177,7 +177,7 @@ form {
   grid-column: 2/-1;
   /* margin-bottom: 2.5rem; */
   color: #e6fcf5;
-
+  /* font-size: 1vw; */
   /* -------------------------------------------------------------------------- */
   margin-bottom: auto;
 }

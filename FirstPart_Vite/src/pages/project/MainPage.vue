@@ -147,7 +147,6 @@ export default {
       );
     },
     showTag(selectedDay) {
-      // 现在apifox发送的日期太随机，只对应日期(08)
       //console.log(selectedDay);
       const currentday = selectedDay.split("-").slice(2).join("-");
       // console.log(currentday);
@@ -160,12 +159,7 @@ export default {
       });
 
       if (sameDay.length > 0) {
-        // console.log(currentday);
-
-        //  console.log(this.value);
-
         const today = new Date(this.value);
-
         const month = (today.getMonth() + 1).toString().padStart(2, "0");
         const day = today.getDate().toString().padStart(2, "0");
         const formattedToday = `2023-${month}-${day}`;

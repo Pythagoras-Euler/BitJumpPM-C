@@ -304,6 +304,6 @@ label {
   /* -------------------------------------------------------------------------- */
   padding-bottom: auto;
   align-self: start;
-  font-size: 0.05rem;
+  /* font-size: 0.5rem; */
 }
 </style>
