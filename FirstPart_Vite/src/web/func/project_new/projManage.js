@@ -1,4 +1,3 @@
-import store from "@/store";
 import { Delete, Get, Post } from "@/web/transport";
 import store from "../../../store";
 
