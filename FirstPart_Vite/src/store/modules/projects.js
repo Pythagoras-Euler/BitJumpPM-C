@@ -90,6 +90,7 @@ export default {
         });
         //console.log(messages);
         context.commit("setMessages", messages);
+        console.log(messages);
       } catch (error) {
         console.log(error);
         throw error;
@@ -126,8 +127,9 @@ export default {
       try {
         //console.log(payload);
         const response = await getPersonInfo(payload.userId);
-        //console.log(response);
         context.commit("setPersonalData", response);
+        //console.log(response);
+        //console.log(response);
       } catch (error) {
         console.log(error);
         throw error;

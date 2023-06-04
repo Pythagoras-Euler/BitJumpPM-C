@@ -3,6 +3,7 @@ import { reactive } from "vue";
 import PopupConfirm from "./PopupConfirm.vue";
 import { addItem } from "../../../web/func/project_new/projContent.js";
 import { addMember } from "../../../web/func/project_new/projMember.js";
+import { getAllPersonInfo } from "../../../web/func/personInfo";
 
 export default {
   components: { PopupConfirm },
@@ -87,9 +88,7 @@ export default {
       const name = data.searchName;
       //无payload参数
       try {
-        const response = await fetch(
-          "http://127.0.0.1:4523/m1/2693357-0-default/user/list"
-        );
+        const response = await getAllPersonInfo(data.searchName);
         //console.log(responseData);
         data.members = response;
         alert("提交成功");

@@ -65,11 +65,10 @@ export default {
           description: data.description,
         };
         const response = await addItem(props.projectId, item);
-        alert(提交成功);
+        alert("提交成功");
         //console.log(response);
       } catch (error) {
         console.log(error);
-
         alert("请求提交失败");
       }
 

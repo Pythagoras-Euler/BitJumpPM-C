@@ -221,8 +221,10 @@ export default {
     GotoPersonalInfo() {
       this.$router.push("/project/personalInfo/" + this.userId);
     },
-    logout() {
-      this.$store.dispatch("logout");
+    async logout() {
+      // console.log(logout);
+
+      await this.$store.dispatch("vxLogout");
       this.$router.push("/auth");
     },
     showMessageBox() {

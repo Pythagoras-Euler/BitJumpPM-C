@@ -31,7 +31,7 @@ try {
   // const response = await getProjInfo(proid, order);
   // 和apifox对接修改
   /* -------------------------------------------------------------------------- */
-  const response = await getProjInfo("1");
+  const response = await getProjInfo(proid);
   /* -------------------------------------------------------------------------- */
   console.log("response" + response);
   //接到了数据，这里替换掉你原来直接硬编码进去的数据
@@ -52,10 +52,9 @@ try {
   console.log(data.introductionData);
   console.log(data.processData);
   console.log(data.membersData);
-  console.log("提交成功");
 } catch {
   console.log(error);
-  alert("请求提交失败");
+  alert("Fail to fetch");
 }
 
 // function returnArrow() {

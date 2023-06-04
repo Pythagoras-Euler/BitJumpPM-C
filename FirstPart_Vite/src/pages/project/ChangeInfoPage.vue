@@ -16,7 +16,8 @@
     <BaseButton link mode="flat" to="/project" class="btn-router"
       >返回主页</BaseButton
     >
-    <ChangeInfo :isDisabled="isDisabled"></ChangeInfo>
+
+    <ChangeInfo :isDisabled="isDisabled" v-if="showInfo"></ChangeInfo>
   </div>
 </template>
 
@@ -34,6 +35,7 @@ export default {
       isLoading: false,
       error: "",
       isDisabled: true,
+      showInfo: false,
     };
   },
   computed: {
@@ -56,8 +58,9 @@ export default {
       try {
         await this.$store.dispatch("projects/loadPersonalData", {
           token: this.token,
-          userId: this.currentUserId,
+          userId: this.userId,
         });
+        console.log("currentPageId", this.userId);
       } catch (error) {
         this.error = error.message || "抱歉，加载出错，请重试";
       }
@@ -76,9 +79,11 @@ export default {
       this.error = null;
     },
   },
-  created() {
-    this.loadPersonalData();
+  async created() {
+    await this.loadPersonalData();
+    console.log(this.$store.getters["projects/personalData"]);
     this.setReadMode();
+    this.showInfo = true;
     //   console.log(this.personalData);
   },
 };

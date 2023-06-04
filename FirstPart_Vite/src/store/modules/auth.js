@@ -9,9 +9,9 @@ export default {
   state() {
     return {
       //当前登录用户id,可以判断当前用户是否登录
-      userId: 1,
+      userId: null,
       //如果服务器有针对用户访问权限的限制数据，可通过登录时返回对应的token来进行认证
-      token: "111",
+      token: null,
     };
   },
   getters: {
@@ -34,10 +34,10 @@ export default {
     },
   },
   actions: {
-    async logout(context) {
+    async vxLogout(context) {
       try {
         const response = await logout();
-        alert("退出成功");
+        // alert("退出成功");
         context.commit("setUser", {
           userId: null,
           token: null,
@@ -64,7 +64,7 @@ export default {
       // console.log(payload);
     },
     async vxSignup(_context, payload) {
-      与前端通信代码对接;
+      //与前端通信代码对接;
       try {
         const response = await signup(
           payload.id,
@@ -111,7 +111,8 @@ export default {
         const response = await login(payload.id, payload.password);
         // 处理返回的响应数据
         //   console.log(response);
-        设置用户登录信息;
+        // 设置用户登录信息;
+        console.log(response);
         context.commit("setUser", {
           token: response,
           userId: payload.id,

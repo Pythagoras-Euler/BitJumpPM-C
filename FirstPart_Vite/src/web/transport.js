@@ -3,7 +3,7 @@
 import store from "../store";
 
 class WebAction {
-  static baseUrl = "http://127.0.0.1:8080";
+  static baseUrl = "http://127.0.0.1:4523/m1/2693357-0-default";
   static defaultErrMsg = "抱歉，操作失败，请重试";
   init() {
     this._generalUrl = WebAction.baseUrl;
@@ -24,11 +24,13 @@ class WebAction {
   // }
   constructor() {
     this.init();
-    // console.log(store.getters.token);
+    console.log("token:" + store.getters.token);
     if (store.getters.token) {
       this.headers({
         token: store.getters.token,
       });
+    } else {
+      this.headers(null);
     }
   }
 
@@ -98,6 +100,9 @@ class WebAction {
       const error = new Error(responseData.message || WebAction.defaultErrMsg);
       throw error;
     }
+    console.log("response data:");
+    console.log(responseData);
+    console.log("res end");
     return responseData.data;
     // fetch(this._generalUrl, fetchArgs)
     //     .then(response => {
@@ -155,7 +160,7 @@ class Get extends WebAction {
   // addQuery是保存操作，但不检查url是否已填写完成
   // 虽然实现上可以在addQurey后再添加再保存，但...
   query(name, value) {
-    queryPairStr = String(name) + "=" + String(value);
+    let queryPairStr = String(name) + "=" + String(value);
     if (this.queryUrl || this.queryAdded) {
       this.queryUrl += "&";
     } else {
@@ -165,7 +170,7 @@ class Get extends WebAction {
     return this;
   }
   addQuery() {
-    super.url(this.queryUrl);
+    this._generalUrl += this.queryUrl;
     this.queryUrl = "";
     this.queryAdded = true;
     return this;

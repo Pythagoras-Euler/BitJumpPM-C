@@ -5,8 +5,9 @@ import { Post, Put } from "../transport";
 async function signup(userId, Password, email) {
   let userid = String(userId);
   let password = String(Password);
-  password = await digestSHA256(password);
-  let cipherPw = encrypt(password);
+  // password = await digestSHA256(password);
+  // let cipherPw = await encrypt(password);
+  let cipherPw = password;
   return new Post()
     .url("register", userid, cipherPw)
     .headers(null)
@@ -16,8 +17,9 @@ async function signup(userId, Password, email) {
 async function login(userId, Password) {
   let userid = String(userId);
   let password = String(Password);
-  password = await digestSHA256(password)
-  let cipherPw = encrypt(password);
+  // password = await digestSHA256(password);
+  // let cipherPw = await encrypt(password);
+  let cipherPw = password;
   return (
     new Post()
       .url("login", userid, cipherPw)
@@ -37,10 +39,12 @@ function logout() {
 }
 async function newPassword(oldpw, newpw) {
   let userid = String(store.getters.userId);
-  oldpw = await digestSHA256(String(oldpw));
-  newpw = await digestSHA256(String(newpw));
-  let cipherOldPw = encrypt(oldpw);
-  let cipherNewPw = encrypt(newpw);
+  // oldpw = await digestSHA256(String(oldpw));
+  // newpw = await digestSHA256(String(newpw));
+  // let cipherOldPw = await encrypt(oldpw);
+  // let cipherNewPw = await encrypt(newpw);
+  let cipherOldPw = oldpw;
+  let cipherNewPw = newpw;
   return new Put()
     .url("password", userid, cipherOldPw, cipherNewPw)
     .bodyObject(null)

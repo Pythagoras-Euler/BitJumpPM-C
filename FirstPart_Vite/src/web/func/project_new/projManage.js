@@ -5,7 +5,8 @@ function getProjList(type) {
   return (
     new Get()
       .url("project", "list")
-      // .query("type", type).addQuery()
+      .query("type", type)
+      .addQuery()
       // .sendWith((resData) => {
       //     // TODO: to use these data
       //     return resData // transClasses.BriefProject
@@ -45,7 +46,7 @@ function getProjInfo(proid, order = null) {
   }
   // todo 这里为了和apifox对接，注销了
   /* -------------------------------------------------------------------------- */
-  // getMethod.addQuery();
+  getMethod.addQuery();
   /* -------------------------------------------------------------------------- */
 
   // getMethod.sendWith((resData) => {

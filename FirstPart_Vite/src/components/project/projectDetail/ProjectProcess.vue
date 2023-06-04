@@ -146,7 +146,7 @@ export default {
             </button>
             <!--                    todo 这里还应该有个判断条件：责任人必须是自己才显示提交按钮(已完成)-->
             <button
-              v-if="!isManager && data.isFinish && data.ownerId === userId"
+              v-if="!isManager && !data.isFinish && data.ownerId === userId"
               class="submit-button"
               @click="submit(data)"
             >

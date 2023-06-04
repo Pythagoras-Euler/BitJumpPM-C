@@ -663,7 +663,7 @@ async function submitFullForm() {
     alert("提交成功");
   } catch (error) {
     console.log(error);
-    alert("提交失败");
+    alert("请求提交失败");
   }
 
   // console.log(
@@ -707,7 +707,7 @@ async function submitSimpleForm() {
     alert("提交成功");
   } catch (error) {
     console.log(error);
-    alert("提交失败");
+    alert("请求提交失败");
   }
   // console.log(
   //   "提交表单",
