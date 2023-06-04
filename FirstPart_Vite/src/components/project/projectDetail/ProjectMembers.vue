@@ -186,7 +186,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 20px;
+  top: 50px;
   right: 20px;
   box-shadow: 2px 2px 2px #888888;
 }

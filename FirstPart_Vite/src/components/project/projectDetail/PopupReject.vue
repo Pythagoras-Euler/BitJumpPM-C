@@ -1,6 +1,8 @@
 <script>
 
     import {reactive} from "vue";
+    import {getProjInfo} from "../../../web/func/project_new/projManage.js";
+    import {rejectItem} from "../../../web/func/project_new/projContent.js";
 
     export default {
         props: {
@@ -13,7 +15,7 @@
             let data = reactive({
                 reason: null
             })
-            function submit() {
+            async function submit() {
                 console.log(
                     //项目id
                     props.projectId,
@@ -23,6 +25,19 @@
                     data.reason
                 )
                 //先发送数据
+                try {
+                    const response = await rejectItem(props.projectId, props.item.tableItemId, data.reason)
+
+                    if (!response.ok) {
+                        const error = new Error("Failed to send");
+                        throw error;
+                    } else {
+                        console.log(response);
+                    }
+                } catch {
+                    this.error = "抱歉，加载出错，请重试";
+                }
+
                 context.emit('cancel')
             }
 

@@ -4,6 +4,7 @@ import ProjectProcess from "./ProjectProcess.vue";
 import ProcessBar from "./ProcessBar.vue";
 import { reactive } from "vue";
 import ProjectMembers from "./ProjectMembers.vue";
+import {getProjInfo} from "../../../web/func/project_new/projManage.js";
 
 //todo 通信，这部分需要替换为通信取到的特定项目信息  getProjInfo
 let data = reactive({
@@ -11,44 +12,41 @@ let data = reactive({
   processData: null,
   membersData: null,
 });
-//path参数
-const proid = 0;
 
+//path参数 todo 请在这里替换项目id
+const proid = 0;
 //query参数
 const order = 0;
 //无payload参数
 try {
-  const response = await fetch(
-    "http://127.0.0.1:4523/m1/2693357-0-default/project/1"
-  );
-  const responseData = await response.json();
+    const response = await getProjInfo(proid, order)
 
-  if (!response.ok) {
-    const error = new Error(responseData.message || "Failed to fetch");
-    throw error;
-  } else {
-    console.log(responseData);
-    //接到了数据，这里替换掉你原来直接硬编码进去的数据
-    data.introductionData = {
-      budget: responseData.data.budget,
-      introduction: responseData.data.introduction,
-      leaderName: responseData.data.leaderName,
-      process: responseData.data.process,
-      projectId: responseData.data.projectId,
-      projectName: responseData.data.projectName,
-      projectUrl: responseData.data.projectPhoto,
-    };
+    if (!response.ok) {
+        const error = new Error("Failed to fetch");
+        throw error;
+    } else {
+        console.log(response);
+        //接到了数据，这里替换掉你原来直接硬编码进去的数据
+        data.introductionData = {
+            budget: response.budget,
+            introduction: response.introduction,
+            leaderName: response.leaderName,
+            process: response.process,
+            projectId: response.projectId,
+            projectName: response.projectName,
+            projectUrl: response.projectPhoto,
+        };
 
-    data.processData = responseData.data.table;
+        data.processData = response.table;
 
-    data.membersData = responseData.data.members;
+        data.membersData = response.members;
 
-    console.log(data.introductionData);
-    console.log(data.processData);
-    console.log(data.membersData);
-  }
+        console.log(data.introductionData);
+        console.log(data.processData);
+        console.log(data.membersData);
+    }
 } catch {
-  this.error = "抱歉，加载出错，请重试";
+    this.error = "抱歉，加载出错，请重试";
 }
 
 // function returnArrow() {

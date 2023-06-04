@@ -2,6 +2,7 @@
 import 'flatpickr/dist/flatpickr.css'
 import FlatPickr from 'vue-flatpickr-component';
 import {reactive} from "vue";
+import {addItem, submitItem} from "../../../web/func/project_new/projContent.js";
 export default {
     components: {
         FlatPickr
@@ -25,7 +26,7 @@ export default {
             description: null
         })
 
-        function submit() {
+        async function submit() {
             //todo 通信
             console.log(
                 //项目id
@@ -37,6 +38,20 @@ export default {
                 //说明
                 data.description
             )
+
+            try {
+                const response = await submitItem(props.projectId, props.item.tableItemId, data.finishTime, data.description)
+
+                if (!response.ok) {
+                    const error = new Error("Failed to send");
+                    throw error;
+                } else {
+                    console.log(response);
+                }
+            } catch {
+                this.error = "抱歉，加载出错，请重试";
+            }
+
             context.emit('cancel')
         }
 
