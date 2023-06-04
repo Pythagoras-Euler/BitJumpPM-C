@@ -1,18 +1,16 @@
 import store from "@/store";
 import { Delete, Get, Post } from "@/web/transport";
+import store from "../../../store";
 
 function getProjList(type) {
-  return (
-    new Get()
-      .url("project", "list")
-      //   .query("type", type)
-      //   .addQuery()
-      // .sendWith((resData) => {
-      //     // TODO: to use these data
-      //     return resData // transClasses.BriefProject
-      // })
-      .send()
-  ); // transClasses.BriefProject
+    return new Get()
+        .url("project", "list")
+        .query("type", type).addQuery()
+        // .sendWith((resData) => {
+        //     // TODO: to use these data
+        //     return resData // transClasses.BriefProject
+        // })
+        .send()// transClasses.BriefProject
 }
 function createNewProject(projName, projUrl, projIntro) {
   return new Post()
@@ -55,36 +53,34 @@ function getProjInfo(proid, order = null) {
   //     })
   return getMethod.send(); // transClasses.Project
 }
-function getProjMember(
-  proid,
-  pageNum = null,
-  pageSize = null,
-  name = null,
-  project = null,
-  post = null
-) {
-  let getMethod = new Get();
-  getMethod.url("project", String(proid)).url("user", "list");
-  if (pageNum) {
-    getMethod.query("pageNum", pageNum);
-  }
-  if (pageSize) {
-    getMethod.query("pageSize", pageSize);
-  }
-  if (name) {
-    getMethod.query("name", name);
-  }
-  if (project) {
-    getMethod.query("project", project);
-  }
-  if (post) {
-    getMethod.query("post", post);
-  }
-  getMethod.addQuery();
-  // getMethod.sendWith((resData) => {
-  //     // TODO: to use these data
-  //     return resData//transClasses.BriefMember
-  // })
-  return getMethod.send(); //transClasses.BriefMember
+function getProjMember(proid,
+    pageNum=null, pageSize=null, name=null,
+    project=null, post=null) {
+        // Deprecated
+        let getMethod = new Get()
+        getMethod
+            .url("project", String(proid))
+            .url("user", "list")
+        if (pageNum) {
+            getMethod.query("pageNum", pageNum)
+        }
+        if (pageSize) {
+            getMethod.query("pageSize", pageSize)
+        }
+        if (name) {
+            getMethod.query("name", name)
+        }
+        if (project) {
+            getMethod.query("project", project)
+        }
+        if (post) {
+            getMethod.query("post", post)
+        }
+        getMethod.addQuery()
+        // getMethod.sendWith((resData) => {
+        //     // TODO: to use these data
+        //     return resData//transClasses.BriefMember
+        // })
+        return getMethod.send()//transClasses.BriefMember
 }
 export { getProjInfo, getProjMember };
