@@ -17,7 +17,13 @@
     <template #default>
       <form class="form-box" @submit.prevent="submitData">
         <label for="id">用户账号</label>
-        <input id="id" name="id" class="input-id-box" v-model.trim="userId" />
+        <input
+          id="id"
+          disabled="true"
+          name="id"
+          class="input-id-box"
+          v-model.trim="userId"
+        />
         <label for="description" class="des-label">申请说明</label>
         <textarea
           id="description"
@@ -61,7 +67,7 @@ export default {
   props: ["isApplying"],
   data() {
     return {
-      userId: "",
+      userId: this.$store.getters.userId,
       description: "",
 
       formIsValid: true,
@@ -73,7 +79,7 @@ export default {
     async submitData() {
       if (this.validateForm()) {
         const fromData = {
-          userId: this.userId,
+          // userId: this.userId,
           description: this.description,
         };
 

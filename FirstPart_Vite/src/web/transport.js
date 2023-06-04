@@ -91,7 +91,7 @@ class WebAction {
       }
       fetchArgs.headers["'Content-Type'"] = "application/json";
     }
-    console.log("URL:" + this._generalUrl)
+    console.log("URL:" + this._generalUrl);
     const response = await fetch(this._generalUrl, fetchArgs);
     const responseData = await response.json();
     if (!response.ok) {
