@@ -46,8 +46,8 @@
           type="text"
           id="workID"
           v-model="workID"
-          placeholder="请输入工号"
-          :disabled="props.isDisabled"
+          placeholder=""
+          :disabled="true"
         />
       </div>
       <div class="form-group">
@@ -627,7 +627,6 @@ const handleFileChange = (event: Event) => {
 
 function cancelSub() {
   UserName.value = "";
-  workID.value = "";
   email.value = "";
   phone.value = "";
 }
@@ -636,7 +635,7 @@ async function submitFullForm() {
   const fromData = {
     name: UserName.value,
     // workID.value, ??? 这个工号到底交不交
-    // gender没有
+    gender: "1",
     email: email.value,
     phoneNumber: phone.value,
     age: age.value,
@@ -710,14 +709,14 @@ async function submitSimpleForm() {
     console.log(error);
     alert("提交失败");
   }
-  console.log(
-    "提交表单",
-    UserName.value,
-    workID.value,
-    email.value,
-    phone.value,
-    photo.value
-  );
+  // console.log(
+  //   "提交表单",
+  //   UserName.value,
+  //   workID.value,
+  //   email.value,
+  //   phone.value,
+  //   photo.value
+  // );
 }
 
 /* -------------------------------------------------------------------------- */
