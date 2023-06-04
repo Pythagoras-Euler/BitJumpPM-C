@@ -1,10 +1,11 @@
+import store from "@/store";
 import { Delete, Get, Post } from "@/web/transport";
 import store from "../../../store";
 
-function getProjList(type=null) {
+function getProjList(type) {
     return new Get()
         .url("project", "list")
-        // .query("type", type).addQuery()
+        .query("type", type).addQuery()
         // .sendWith((resData) => {
         //     // TODO: to use these data
         //     return resData // transClasses.BriefProject
@@ -12,44 +13,45 @@ function getProjList(type=null) {
         .send()// transClasses.BriefProject
 }
 function createNewProject(projName, projUrl, projIntro) {
-    return new Post()
-        .url("project", "create")
-        .bodyObject({
-            projectName: projName,
-            projectUrl: projUrl,
-            introduction: projIntro
-        })
-        .send()
+  return new Post()
+    .url("project", "create")
+    .bodyObject({
+      projectName: projName,
+      projectUrl: projUrl,
+      introduction: projIntro,
+    })
+    .send();
 }
 function applyCreatePerm(description) {
-    return new Post()
-        .url("project", "apply")
-        .bodyObject({
-            userId: String(store.getters.userId),
-            description: description
-        })
-        .send()
+  return new Post()
+    .url("project", "apply")
+    .bodyObject({
+      userId: String(store.getters.userId),
+      description: description,
+    })
+    .send();
 }
 function deleteProject(proid) {
-    return new Delete()
-        .url("project", String(proid))
-        .bodyObject(null)
-        .send()
+  return new Delete().url("project", String(proid)).bodyObject(null).send();
 }
-export {getProjList, createNewProject, applyCreatePerm, deleteProject}
+export { getProjList, createNewProject, applyCreatePerm, deleteProject };
 
-function getProjInfo(proid, order=null) {
-    let getMethod = new Get()
-    getMethod.url("project", String(proid))
-    if (order) {
-        getMethod.query("order", order)
-    }
-    getMethod.addQuery()
-    // getMethod.sendWith((resData) => {
-    //         // TODO: to use these data
-    //         return resData // transClasses.Project
-    //     })
-    return getMethod.send()// transClasses.Project
+function getProjInfo(proid, order = null) {
+  let getMethod = new Get();
+  getMethod.url("project", String(proid));
+  if (order) {
+    getMethod.query("order", order);
+  }
+  // todo 这里为了和apifox对接，注销了
+  /* -------------------------------------------------------------------------- */
+  // getMethod.addQuery();
+  /* -------------------------------------------------------------------------- */
+
+  // getMethod.sendWith((resData) => {
+  //         // TODO: to use these data
+  //         return resData // transClasses.Project
+  //     })
+  return getMethod.send(); // transClasses.Project
 }
 function getProjMember(proid,
     pageNum=null, pageSize=null, name=null,
@@ -81,4 +83,4 @@ function getProjMember(proid,
         // })
         return getMethod.send()//transClasses.BriefMember
 }
-export { getProjInfo, getProjMember }
+export { getProjInfo, getProjMember };

@@ -3,7 +3,7 @@
 import store from "../store";
 
 class WebAction {
-  static baseUrl = "";
+  static baseUrl = "http://127.0.0.1:4523/m1/2693357-0-default";
   static defaultErrMsg = "抱歉，操作失败，请重试";
   init() {
     this._generalUrl = WebAction.baseUrl;

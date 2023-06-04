@@ -29,8 +29,14 @@
         </div>
       </template>
     </base-dialog>
-    <ManageProject :isManaging="isManaging"></ManageProject>
-    <CheckDelete :checkDelete="checkDelete"></CheckDelete>
+    <ManageProject
+      :isManaging="isManaging"
+      :projectId="manageProjectId"
+    ></ManageProject>
+    <CheckDelete
+      :checkDelete="checkDelete"
+      :projectId="deleteProjectId"
+    ></CheckDelete>
     <AddProject :isAdding="isAdding"></AddProject>
     <ApplyPior :isApplying="isApplying"></ApplyPior>
     <div class="content-box">
@@ -87,6 +93,8 @@ export default {
       isDeleting: false,
       isManaging: false,
       checkDelete: false,
+      deleteProjectId: null,
+      manageProjectId: null,
     };
   },
   provide() {
@@ -126,11 +134,13 @@ export default {
     },
 
     handleDelete(projectId) {
-      console.log(projectId);
+      //console.log(projectId);
+      this.deleteProjectId = projectId;
       this.isDeleting = true;
     },
     handleManage(projectId) {
-      console.log(projectId);
+      this.manageProjectId = projectId;
+      //console.log(projectId);
       this.isManaging = true;
     },
     cancelManage() {

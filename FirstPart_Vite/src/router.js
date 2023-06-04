@@ -88,7 +88,7 @@ router.beforeEach(function (to, from, next) {
   } else if (to.meta.requiredUnAuth && store.getters.isLoggedin) {
     next("/project");
   } else {
-    console.log(store.getters.userId);
+    //console.log(store.getters.userId);
     next();
   }
 });

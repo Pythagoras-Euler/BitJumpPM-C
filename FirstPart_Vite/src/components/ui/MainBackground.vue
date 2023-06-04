@@ -140,6 +140,7 @@
               />
             </svg>
           </button>
+
           <div class="user-btn-box">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -166,12 +167,29 @@
         </div>
       </div>
     </div>
-    <slot></slot>
+    <div>
+      <base-dialog :show="!!error" title="加载错误" @close="confirmError">
+        <template #default>
+          <p>{{ error }}</p>
+        </template>
+        <template #action>
+          <BaseButton
+            mode="outline"
+            class="message-button"
+            @click="confirmError"
+            >确定</BaseButton
+          >
+        </template>
+      </base-dialog>
+
+      <slot> </slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  emits: ["toggleLoading"],
   data() {
     return {
       isMessageBoxVisible: false,
@@ -179,7 +197,7 @@ export default {
       isUserBoxVisible: false,
       userBoxStyle: {},
       error: "",
-      isLoading: false,
+      // isLoading: true,
     };
   },
   computed: {
@@ -194,6 +212,9 @@ export default {
     },
   },
   methods: {
+    confirmError() {
+      this.error = null;
+    },
     changePassword() {
       this.$router.push("/changePassword");
     },
@@ -205,7 +226,7 @@ export default {
       this.$router.push("/auth");
     },
     showMessageBox() {
-      console.log(this.messages);
+      //console.log(this.messages);
       this.isMessageBoxVisible = true;
       const button = this.$refs.messagesBtn;
 
@@ -249,7 +270,9 @@ export default {
 
     async loadOpenning() {
       //获取开场语和消息
-      this.isLoading = true;
+      // this.isLoading = true;
+      this.$emit("toggleLoading");
+      console.log("begin");
       try {
         await this.$store.dispatch("projects/loadOpenning", {
           token: this.token,
@@ -257,7 +280,9 @@ export default {
       } catch (error) {
         this.error = error.message || "抱歉，加载出错，请重试";
       }
-      this.isLoading = false;
+      this.$emit("toggleLoading");
+      console.log("end");
+      // this.isLoading = false;
     },
   },
   created() {
@@ -268,6 +293,11 @@ export default {
 </script>
 
 <style scoped>
+.message-button {
+  border-radius: 6px;
+  font-size: 1vw;
+}
+
 .container {
   display: grid;
   grid-template-columns: 8vw 1fr;

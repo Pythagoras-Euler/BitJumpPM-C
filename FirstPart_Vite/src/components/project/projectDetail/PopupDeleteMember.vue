@@ -1,6 +1,7 @@
 <script>
 import { reactive } from "vue";
 import PopupConfirm from "./PopupConfirm.vue";
+import {addMember, deleteMember} from "../../../web/func/project_new/projMember.js";
 
 export default {
   components: { PopupConfirm },
@@ -20,16 +21,23 @@ export default {
       context.emit("cancel");
     }
 
-    function confirm() {
-      data.isPopupConfirmOpen = false;
-      context.emit("cancel");
-      //todo 通信
-      console.log(
-        //项目id
-        props.projectId,
-        //工号
-        props.member.userId
-      );
+    async function confirm() {
+        data.isPopupConfirmOpen = false;
+        context.emit("cancel");
+        //todo 通信
+        console.log(
+            //项目id
+            props.projectId,
+            //工号
+            props.member.userId
+        );
+
+        try {
+            const response = await deleteMember(props.projectId, props.member.userId)
+                //console.log(response);
+        } catch {
+            this.error = "抱歉，加载出错，请重试";
+        }
     }
 
     function notConfirm() {

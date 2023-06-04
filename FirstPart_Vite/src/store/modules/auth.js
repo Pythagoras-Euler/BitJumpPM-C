@@ -4,9 +4,9 @@ export default {
   state() {
     return {
       //当前登录用户id,可以判断当前用户是否登录
-      userId: null,
+      userId: "111",
       //如果服务器有针对用户访问权限的限制数据，可通过登录时返回对应的token来进行认证
-      token: null,
+      token: "111",
     };
   },
   getters: {
@@ -42,6 +42,18 @@ export default {
       console.log(payload);
     },
     async vxSignup(_context, payload) {
+      // 与前端通信代码对接
+      // try {
+      //   const response = await login(payload.id, payload.password,payload.email);
+      //   // 处理返回的响应数据
+      //   //   console.log(response);
+      // } catch (error) {
+      //   // 捕获并处理错误
+      //   console.error(error);
+      //   // 抛出错误信息，以便前端页面显示
+      //   throw error;
+      // }
+
       //TODO:注册服务通信
       const url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAvQfseAowXnTM8ZLKWdE4t9Z2QuWEAKEI";
@@ -68,22 +80,24 @@ export default {
       }
     },
     async vxLogin(context, payload) {
-      // 与前端通信代码对接
+      // //与前端通信代码对接;
       // try {
-      //   const response = await login(payload.id, payload.password);
+      //   const response = await login("1", "1");
       //   // 处理返回的响应数据
       //   //   console.log(response);
       //   设置用户登录信息;
       //   context.commit("setUser", {
-      //     token: response.data,
+      //     token: "111",
       //     userId: payload.id,
       //   });
+      //   console.log(response.data);
       // } catch (error) {
       //   // 捕获并处理错误
       //   console.error(error);
       //   // 抛出错误信息，以便前端页面显示
       //   throw error;
       // }
+
       //TODO: 假接口对接代码，登录服务通信,由于用的是firebase的验证测试，登录方式是邮箱，所以先暂时硬编码，只是为了测试前端页面显示
       const url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAvQfseAowXnTM8ZLKWdE4t9Z2QuWEAKEI";
